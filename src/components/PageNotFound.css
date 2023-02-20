@@ -1,0 +1,39 @@
+.not-found {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-align: center;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    color: #FFFFFF;
+    background-color: #202020;
+}
+
+.not-found__title {
+    margin-top: 246px;
+    margin-bottom: 184px;
+    font-size: 16px;
+    line-height: 19px;
+   
+}
+
+.not-found__title span {
+    display: block;
+    font-size: 140px;
+    line-height: 169px;
+}
+
+.not-found__button {
+    background-color: transparent;
+    color: #4285F4;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.not-found__button:hover {
+    opacity: 0.6;
+}

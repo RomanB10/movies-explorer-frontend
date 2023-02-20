@@ -1,0 +1,87 @@
+.student {
+    display: flex;
+    flex-direction: column;
+    max-width: 1140px;
+    /* надо делать динамично*/
+    width: 100%;
+    min-height: 625px;
+    background-color: #202020;
+    border: rgb(171, 42, 61) solid 1px;
+}
+
+.text-subtitle {
+    padding-top: 110px;
+    margin-bottom: 23px;
+    text-align: left;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 27px;
+    color: #FFFFFF;
+}
+
+.student__container-wrap{
+    display: block;
+}
+.student__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 70px;
+    margin-bottom: 110px;
+    border-top: #DADADA solid 1px;
+    width: 100%;
+    align-items: center;
+}
+
+.student__container-wrap__title {
+    min-width: 60%;
+    margin: 0;
+    text-align: left;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 50px;
+    line-height: 58px;
+    color: #FFFFFF;
+}
+
+.student__container-wrap__subtitle {
+    margin: 18px 0 0;
+    max-width: 600px;
+    text-align: left;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.student__container-wrap__text {
+    margin: 26px 0 0;
+    max-width: 600px;
+    text-align: left;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.student__container-wrap__link {
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #FFFFFF;
+    margin: 99px 0 0;
+}
+
+.container__ava{
+    width: 270px;
+    height: 327px;
+    background-image: url('../../images/photoAva.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

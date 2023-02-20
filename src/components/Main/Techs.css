@@ -1,0 +1,87 @@
+.techs {
+    display: flex;
+    flex-direction: column;
+    max-width: 1140px;
+    /* надо делать динамично*/
+    width: 100%;
+    min-height: 625px;
+    background-color: #272727;
+    border: rgb(179, 0, 255) solid 1px;
+}
+
+.text-subtitle {
+    padding-top: 110px;
+    margin-bottom: 23px;
+    text-align: left;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 27px;
+    color: #FFFFFF;
+}
+
+.container {
+    display: block;
+    padding-top: 70px;
+    margin-bottom: 110px;
+    border-top: #DADADA solid 1px;
+    width: 100%;
+    align-items: center;
+}
+
+.container__title {
+    min-width: 60%;
+    margin: 90 auto 26px;
+    text-align: center;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 50px;
+    line-height: 58px;
+    color: #FFFFFF;
+}
+
+.container__subtitle {
+    margin: 0 auto 100px;
+    max-width: 460px;
+    text-align: center;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.stack {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.stack__cell {
+    background-color: #303030;
+    width: 90px;
+    height: 60px;
+    margin: auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.stack__cell:hover {
+    transform: scale(1.3, 1.3);
+    cursor: pointer;
+}
+
+.stack__text {
+    text-align: center;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}

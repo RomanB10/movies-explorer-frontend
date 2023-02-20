@@ -1,0 +1,234 @@
+.popup__container {
+    max-width: 1280px;
+    background-color: #202020;
+    margin: 0;
+    padding: 0;
+}
+
+.popup__container_type_register {
+    background-color: #202020;
+}
+
+/*@media (max-width: 510px) {
+    .popup__container {
+      min-width: 282px;
+    }
+  }*/
+
+/* Остается*/
+.popup__form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/*добро пожаловать*/
+.popup__title {
+    min-width: 396px;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    padding-top: 40px;
+    margin: 0;
+}
+
+/*
+  @media (max-width: 510px) {
+    .popup__title {
+      min-width: 238px;
+      font-size: 18px;
+      line-height: 22px;
+      padding-top: 25px;
+    }
+  }*/
+
+.popup__title_type_register {
+    color: #ffffff;
+    text-align: left;
+}
+
+/*
+@media (max-width: 510px) {
+    .popup__title_type_register {
+      min-width: 238px;
+      font-size: 20px;
+      line-height: 24px;
+      padding-top: 40px;
+    }
+  }*/
+
+/*форма*/
+.popup__form-items {
+    min-width: 396px;
+    padding: 40px 0 69px;
+    border: none;
+    margin: 0;
+}
+
+/*
+  @media (max-width: 510px) {
+    .popup__form-items {
+      padding: 75px 0 5px;
+    }
+  }*/
+
+.popup__form-items_type_register {
+    padding: 40px 0 73px;
+}
+
+/*
+@media (max-width: 510px) {
+    .popup__form-items_type_register {
+      min-width: 260px;
+      padding-top: 40px;
+    }
+  }*/
+
+
+/*Контейнер с ПОЛЕМ можно убрать*/
+/*.popup__form-item {
+    margin: 0 0 40px;
+}*/
+
+.popup__form-item_type_register {
+    color: #ffffff;
+    margin: 0 0 20px;
+}
+/*___________________________*/
+.form__label {
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 10px;
+    line-height: 12px;
+    display: block;
+    margin: 0 0 10px;
+    color: #8B8B8B;
+
+}
+
+/*ПОЛЕ*/
+.popup__input {
+    box-sizing: border-box;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #ffffff;
+    min-width: 396px;
+    min-height: 46px;
+    border: red solid 1px;
+    padding: 0 0 10px 0;
+    background-color: #2F2F2F;
+    border-radius: 8px;
+    padding-left: 18px;
+    padding-top: 18px;
+}
+
+/*
+@media (max-width: 510px) {
+    .popup__input {
+        min-width: 238px;
+    }
+}*/
+
+.popup__input:focus {
+   /* outline-color: #00f;*/
+    color:#EE3465;
+}
+
+/*
+.popup__input_type_register {
+    color: #ffffff;
+    border-bottom: 2px solid rgb(204, 204, 204);
+    padding: 0 0 6px 0;
+}*/
+/*
+@media (max-width: 510px) {
+    .popup__input_type_register {
+        min-width: 260px;
+    }
+}*/
+
+
+.popup__submit-btn {
+    background: #4285F4;
+    border-radius: 3px;
+    min-width: 396px;
+    min-height: 45px;
+    border: 0;
+    padding: 0;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: opacity .4s;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style:normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.popup__submit-btn:hover {
+    opacity: .8;
+}
+
+.popup__submit-btn:focus {
+    border: 4px solid #00f;
+}
+
+/*
+@media (max-width: 510px) {
+    .popup__submit-btn {
+        min-width: 260px;
+        min-height: 46px;
+        font-size: 14px;
+        line-height: 17px;
+        margin-left: 22px;
+        margin-right: 22px;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 320px) {
+    .popup__submit-btn {
+        min-width: 238px;
+    }
+}*/
+
+/*
+@media (max-width: 510px) {
+    .popup__submit-btn_type_register {
+        margin-top: 143px;
+        min-width: 260px;
+        font-size: 16px;
+        line-height: 19px;
+    }
+}*/
+
+.popup__question {
+    color: #8B8B8B;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.popup__question-enter{
+    color: #4285F4
+}
+/*
+@media (max-width: 510px) {
+    .popup__question {
+        margin-top: 5px;
+    }
+}*/

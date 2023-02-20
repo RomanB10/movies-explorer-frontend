@@ -1,0 +1,23 @@
+.navtab{
+    max-width: 1140px;/* надо делать динамично*/
+    width: 100%;
+    display: flex;
+    min-height: 66px;
+    align-items: center;
+    justify-content: center;
+    background-color: #272727;
+}
+
+.navtab__link {
+    margin: auto 40px auto 0;
+    text-align: center;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.navtab__link:hover {
+    color:hotpink;
+}
