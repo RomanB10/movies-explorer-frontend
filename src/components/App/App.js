@@ -19,7 +19,7 @@ const [cards, setCards] = useState;*/
 function App() {
   return (
     <div className="root">
-      <div className="page root__section">
+      <div className="page">
         <Header></Header>
         <Routes>
           <Route exact path="/" element={<Main/>}/>

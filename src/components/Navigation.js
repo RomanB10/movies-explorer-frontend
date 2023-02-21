@@ -1,22 +1,58 @@
 import "./Navigation.css";
+import { Link, Route, Routes } from "react-router-dom";
 
 function Navigation() {
   return (
-    <ul className="header__nav">
-      <li>
-        {" "}
-        <p className="header__link">Фильмы</p>
-      </li>
-      <li>
-        {" "}
-        <p className="header__link">Сохраненные фильмы</p>
-      </li>
-      <li>
-        <div className="header__profile">
-          <p className="header__link">Аккаунт</p>
-          <button className="header__link header__button"></button>
-        </div>
-      </li>
+    <ul className="navigation">
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <li>
+                <Link to="/signup" className="navigation__link navigation__link_text_small-size">
+                  Регистрация
+                </Link>
+              </li>
+              <li>
+                <Link to="/signin" className="navigation__link navigation__link_text_small-size navigation__link_type_enter">
+                  Войти
+                </Link>
+              </li>
+            </>
+          }
+        ></Route>
+
+        <Route
+          exact
+          path="/movies"
+          element={
+            <>
+              <li>
+                <Link to="/movies" className="navigation__link">
+                  Фильмы
+                </Link>
+              </li>
+              <li>
+                <Link to="/signin" className="navigation__link">
+                  Сохраненные фильмы
+                </Link>
+              </li>
+              <li>
+              <Link to="/profile" className="navigation__link">
+                <div className="navigation__accaunt">
+                  
+                    <p className="navigation__link">Аккаунт</p>
+                    <button className="navigation__link navigation__button"></button>
+                  </div>
+                  </Link>
+                
+              </li>
+            </>
+          }
+        ></Route>
+      </Routes>
     </ul>
   );
 }
