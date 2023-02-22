@@ -1,75 +1,52 @@
 .student {
     display: flex;
-    flex-direction: column;
-    max-width: 1140px;
-    /* надо делать динамично*/
-    width: 100%;
-    min-height: 625px;
-    background-color: #202020;
-    border: rgb(171, 42, 61) solid 1px;
-}
-
-.text-subtitle {
-    padding-top: 110px;
-    margin-bottom: 23px;
-    text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
-    font-size: 22px;
-    line-height: 27px;
-    color: #FFFFFF;
-}
-
-.student__container-wrap{
-    display: block;
-}
-.student__container {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 70px;
-    margin-bottom: 110px;
+    padding-top: 65px;
+    margin-bottom: 100px;
     border-top: #DADADA solid 1px;
     width: 100%;
     align-items: center;
 }
 
-.student__container-wrap__title {
+.student__container{
+    display: block;
+}
+
+.student__title {
     min-width: 60%;
     margin: 0;
     text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 50px;
     line-height: 58px;
     color: #FFFFFF;
+    letter-spacing: -0.04em;
 }
 
-.student__container-wrap__subtitle {
+.student__subtitle {
     margin: 18px 0 0;
     max-width: 600px;
     text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 18px;
     line-height: 20px;
     color: #FFFFFF;
 }
 
-.student__container-wrap__text {
+.student__text {
     margin: 26px 0 0;
+    padding: 0;
     max-width: 600px;
     text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 22px;
     color: #FFFFFF;
 }
 
-.student__container-wrap__link {
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+.student__link {
+    font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     text-decoration: none;
@@ -77,9 +54,10 @@
     margin: 99px 0 0;
 }
 
-.container__ava{
+.student__ava{
     width: 270px;
     height: 327px;
+    border-radius: 10px;
     background-image: url('../../images/photoAva.jpg');
     background-repeat: no-repeat;
     background-size: cover;

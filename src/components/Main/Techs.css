@@ -1,54 +1,36 @@
-.techs {
-    display: flex;
-    flex-direction: column;
-    max-width: 1140px;
-    /* надо делать динамично*/
-    width: 100%;
-    min-height: 625px;
+.conteiner-point_theme_light {
     background-color: #272727;
-    border: rgb(179, 0, 255) solid 1px;
 }
 
-.text-subtitle {
-    padding-top: 110px;
-    margin-bottom: 23px;
-    text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
-    font-size: 22px;
-    line-height: 27px;
-    color: #FFFFFF;
-}
-
-.container {
+.techs {
     display: block;
-    padding-top: 70px;
+    padding-top: 90px;
     margin-bottom: 110px;
     border-top: #DADADA solid 1px;
     width: 100%;
     align-items: center;
 }
 
-.container__title {
+.techs__title {
     min-width: 60%;
-    margin: 90 auto 26px;
+    margin: 0 0 26px;
     text-align: center;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 50px;
     line-height: 58px;
     color: #FFFFFF;
+    letter-spacing: -0.04em;
 }
 
-.container__subtitle {
+.techs__subtitle {
     margin: 0 auto 100px;
     max-width: 460px;
     text-align: center;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     color: #FFFFFF;
+    letter-spacing: -0.04em;
 }
 
 .stack {
@@ -65,7 +47,7 @@
     background-color: #303030;
     width: 90px;
     height: 60px;
-    margin: auto 10px;
+    margin: 0 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,9 +61,9 @@
 
 .stack__text {
     text-align: center;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
+    letter-spacing: -0.04em;
 }

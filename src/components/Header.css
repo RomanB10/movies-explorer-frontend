@@ -1,13 +1,17 @@
 .header {
-    border: red solid 1px;
     box-sizing: border-box;
-    max-width: 1140px;
     min-height: 74px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #202020;
+    /*background-color: #202020;*/
+    background-color: #073042;
+}
+
+.conteiner-padding{
+  padding-left: 70px;
+  padding-right: 70px;
 }
 
 /*

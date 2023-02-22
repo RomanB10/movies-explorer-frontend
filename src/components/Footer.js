@@ -2,13 +2,13 @@ import './Footer.css'
 
 function Footer() {
     return (
-      <footer className="footer root__section">
-       <p className="footer__text-black">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+      <footer className="footer conteiner-padding">
+       <p className="footer__text footer__text_black">Учебный проект Яндекс.Практикум х BeatFilm.</p>
        <section className = "footer__nav">
-          <p className="footer__author">&copy;2023</p>
+          <p className="footer__text">&copy;2020</p>
           <ul className='navigation'>
-             <li><p className='navigation__link'>Яндекс.Практикум</p></li>
-             <li><p className='navigation__link'>Github</p></li>
+             <li><p className='navigation__link footer__text'>Яндекс.Практикум</p></li>
+             <li><p className='navigation__link footer__text'>Github</p></li>
           </ul>
       </section>
       </footer>

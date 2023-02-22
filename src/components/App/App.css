@@ -22,6 +22,10 @@
     url(../../vendor/fonts/Inter-Black.woff) format("woff");
 }
 
+body{
+  margin: 0;
+}
+
 .root {
   width: 100%;
   background: #202020;
@@ -29,16 +33,13 @@
 
 .page {
   min-height: 100vh;
+  width: 100%;
   box-sizing: border-box;
   font-family: 'Inter', 'Arial', 'Helvetica', 'sans-serif';
   font-style: normal;
   color:#FFFFFF;
-  padding-left: 70px;
-  padding-right: 70px;
   max-width: 1280px;
   position: relative;
-
-  border: red solid 1px;
 }
 
 /*__________________________*/

@@ -1,90 +1,81 @@
-.project{
-    display: flex;
-    flex-direction: column;
-    max-width: 1140px;/* надо делать динамично*/
-    width: 100%;
-    min-height: 608px;
+.conteiner-point_theme_dark{
     background-color: #202020;
-    border: yellow solid 1px;
+    margin-top:10px;
 }
-
-.text-subtitle{
-    padding-top: 110px;
+.conteiner-point__title {
+    margin: 0;
+    padding-top: 100px;
     margin-bottom: 23px;
     text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 22px;
     line-height: 27px;
     color: #FFFFFF;
+    letter-spacing: -0.04em;
 }
 
-.two-columns{
-padding-top: 70px;   
-margin-bottom: 110px; 
-border-top: #DADADA solid 1px ;    
-grid-template-columns: 550px 550px;
-grid-template-rows: minmax(min-content, max-content);
-display: grid;
-width: 100%;
-row-gap: 26px;
-column-gap: 40px;
-align-items: center;
+.plan {
+    padding-top: 70px;
+    margin-bottom: 110px;
+    border-top: #DADADA solid 1px;
+    grid-template-columns: 550px 550px;
+    grid-template-rows: minmax(min-content, max-content);
+    display: grid;
+    width: 100%;
+    row-gap: 26px;
+    column-gap: 40px;
+    align-items: center;
 }
 
-.two-columns__title{
+.plan__text-main {
     margin: 0;
     text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     color: #FFFFFF;
+    letter-spacing: -0.04em;
 }
 
-.two-columns__subtitle{
+.plan__text-secondary {
     margin: 0;
-    text-align: left;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     color: #FFFFFF;
 }
 
-.plan{
+.figure {
     margin: 0;
-    padding: 0;   
-    margin-bottom: 110px; 
+    padding: 0;
+    margin-bottom: 110px;
     grid-template-columns: 228px auto;
     grid-template-rows: minmax(36px, max-content);
     display: grid;
     width: 100%;
 }
 
-.plan__weeks{
+.figure__weeks {
     margin: 0;
     padding-top: 9px;
     text-align: center;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
     background-color: #303030;
 }
 
-.plan__weeks-active{
-background-color: #3DDC84;
-color:#000000;
+.figure__weeks-active {
+    background-color: #3DDC84;
+    color: #000000;
 }
 
-.plan__program{
+.figure__program {
     margin: 0;
-    padding-top: 9px;
+    padding-top: 15px;
     text-align: center;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     color: #8B8B8B;

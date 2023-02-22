@@ -1,5 +1,4 @@
 .navtab{
-    max-width: 1140px;/* надо делать динамично*/
     width: 100%;
     display: flex;
     min-height: 66px;
@@ -9,13 +8,14 @@
 }
 
 .navtab__link {
-    margin: auto 40px auto 0;
+    margin: 0 21px;
     text-align: center;
-    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-style: normal;
+    font-weight: 500;
     font-size: 13px;
     line-height: 16px;
     color: #FFFFFF;
+    text-align: left;
+    text-decoration-line: underline;
 }
 
 .navtab__link:hover {
