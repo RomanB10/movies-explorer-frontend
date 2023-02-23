@@ -46,12 +46,17 @@
 }
 
 .student__link {
+    display: block;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     text-decoration: none;
     color: #FFFFFF;
     margin: 99px 0 0;
+}
+
+.student__link:hover {
+    opacity: 0.5;
 }
 
 .student__ava{

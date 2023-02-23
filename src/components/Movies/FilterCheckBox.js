@@ -12,21 +12,3 @@ function FilterCheckBox() {
 }
 
 export default FilterCheckBox;
-/*
-<div className='checkbox'>
-<input className='custom-checkbox' type="checkbox" name="checkbox" value="yes"></input>
-<label for="checkbox">Короткометражки</label>
-</div>*/
-
-/*
-
-
-<div className="checkbox-conteiner">
-<input
-  className="checkbox"
-  type="checkbox"
-  name="checkbox"
-  value="yes"
-></input>
-<label for="checkbox-ios">Короткометражки</label>
-</div>*/
