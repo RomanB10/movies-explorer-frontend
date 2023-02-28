@@ -70,3 +70,31 @@
 .portfolio__btn:hover {
     opacity: .6;
 }
+
+@media (max-width: 768px) {
+    .portfolio__text {
+        font-size: 28px;
+    }
+
+    .portfolio__btn {
+        width: 27px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .portfolio__title {
+        font-size: 14px;
+    }
+
+    .portfolio__text {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .portfolio__btn {
+        width: 18px;
+        height: 28px;
+    }
+}

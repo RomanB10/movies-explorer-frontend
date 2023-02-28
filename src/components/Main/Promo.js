@@ -7,7 +7,7 @@ function Promo() {
       <h1 className="promo__title">
         Учебный проект студента факультета Веб-разработки.
       </h1>
-      <img className="promo__image" src={promoLogo}/>
+      <img className="promo__image" src={promoLogo} alt="Здесь должен быть логотип"/>
     </section>
   );
 }

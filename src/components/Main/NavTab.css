@@ -21,3 +21,11 @@
 .navtab__link:hover {
     color:hotpink;
 }
+
+@media (max-width: 320px) {
+    .navtab__link {
+        margin: 0 11px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

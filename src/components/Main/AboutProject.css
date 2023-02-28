@@ -1,7 +1,13 @@
-.conteiner-point_theme_dark{
-    background-color: #202020;
-    margin-top:10px;
+.conteiner-padding {
+    padding-left: 70px;
+    padding-right: 70px;
 }
+
+.conteiner-point_theme_dark {
+    background-color: #202020;
+    margin-top: 10px;
+}
+
 .conteiner-point__title {
     margin: 0;
     padding-top: 100px;
@@ -12,19 +18,21 @@
     line-height: 27px;
     color: #FFFFFF;
     letter-spacing: -0.04em;
+    width: 100%;
 }
 
 .plan {
     padding-top: 70px;
     margin-bottom: 110px;
     border-top: #DADADA solid 1px;
-    grid-template-columns: 550px 550px;
-    grid-template-rows: minmax(min-content, max-content);
-    display: grid;
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    row-gap: 26px;
-    column-gap: 40px;
     align-items: center;
+}
+
+.plan__item-conteiner {
+    max-width: 570px;
 }
 
 .plan__text-main {
@@ -38,7 +46,7 @@
 }
 
 .plan__text-secondary {
-    margin: 0;
+    margin: 26px 0 0;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -80,4 +88,89 @@
     line-height: 17px;
     color: #8B8B8B;
     background-color: #202020;
+}
+
+@media (max-width: 768px) {
+    .conteiner-padding {
+        padding-left: 50px;
+        padding-right: 50px;
+        max-width: 768px;
+    }
+
+    .conteiner-point__title {
+        padding-top: 80px;
+    }
+
+    .plan {
+        margin-bottom: 93px;
+    }
+
+    .plan__item-conteiner {
+        max-width: 334px;
+        width: 100%;
+    }
+
+    .plan__text-secondary {
+        margin: 22px 0 0;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .figure {
+        grid-template-columns: 140px auto;
+        margin-bottom: 99px;
+    }
+}
+
+@media (max-width: 320px) {
+    .conteiner-padding {
+        padding-left: 14px;
+        padding-right: 14px;
+        max-width: 320px;
+    }
+
+    .conteiner-point__title {
+        padding-top: 59px;
+        margin-bottom: 26px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .plan {
+        padding-top: 14px;
+        flex-direction: column;
+        margin-bottom: 60px;
+    }
+
+    .plan__text-main {
+        margin-top: 56px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .plan__text-secondary {
+        margin-top: 16px;
+        max-width: 284px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .figure {
+        grid-template-columns: 100px auto;
+        grid-template-rows: minmax(35px, max-content);
+        margin-bottom: 79px;
+
+    }
+
+    .figure__weeks {
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .figure__program {
+        padding-top: 8px;
+        font-size: 11px;
+        line-height: 13px;
+    }
 }

@@ -4,25 +4,25 @@ import { Link } from "react-router-dom";
 function Register() {
   return (
     <div className="registerContainer">
-      <div className={`popup__container popup__container_type_register`}>
+      <div className={`form__container`}>
         <form
-          className={`popup__form`}
+          className={`form__auth`}
           action="./scripts/script.js"
           method="post"
           name={`_type_auth`}
           tabIndex="0"
         >
-          <h3 className={`popup__title popup__title_type_register`}>
+          <h3 className={`form__heading`}>
             Добро пожаловать!
           </h3>
 
           <fieldset
-            className={`popup__form-items popup__form-items_type_register`}
+            className={`form__items form__items_type_register`}
           >
-            <div className="popup__form-item popup__form-item_type_register">
+            <div className="form__item-conteiner">
               <label for='name' className="form__label">Имя</label>
               <input
-                className="popup__input popup__input_type_register"
+                className="form__input"
                 type="text"
                 name="name"
                 id="name"
@@ -31,13 +31,14 @@ function Register() {
                 minLength="2"
                 maxLength="40"
                 tabIndex="1"
+                title="Введите Имя"
               />
-              <span className="name-error popup__input-error" />
+              <span className="form__input-error">Что-то пошло не так...</span>
             </div>
-            <div className="popup__form-item popup__form-item_type_register">
+            <div className="form__item-conteiner">
               <label for='email' className="form__label">E-mail</label>  
               <input
-                className="popup__input popup__input_type_register"
+                className="form__input"
                 type="text"
                 name="email"
                 id="email"
@@ -46,13 +47,14 @@ function Register() {
                 minLength="2"
                 maxLength="40"
                 tabIndex="2"
+                title="Введите почту"
               />
-              <span className="name-error popup__input-error" />
+              <span className="form__input-error">Что-то пошло не так...</span>
             </div>
-            <div className="popup__form-item popup__form-item_type_register">
+            <div className="form__item-conteiner">
               <label for='password' className="form__label">Пароль</label>  
               <input
-                className="popup__input popup__input_type_register"
+                className="form__input"
                 type="password"
                 name="password"
                 id="password"
@@ -61,23 +63,24 @@ function Register() {
                 minLength="2"
                 maxLength="200"
                 tabIndex="3"
+                title="Введите пароль"
               />
-              <span className="job-error popup__input-error" />
+              <span className="form__input-error" >Что-то пошло не так...</span>
             </div>
           </fieldset>
 
           <button
             type="submit"
             name="submit"
-            className={`popup__submit-btn`}
+            className={`form__submit-btn`}
             tabIndex="3"
           >
             Зарегистрироваться
           </button>
 
-          <p className="popup__question">
+          <p className="form__suggestion">
             Уже зарегистрированы?
-            <Link className="popup__question popup__question-enter" to="/signin">
+            <Link className="form__suggestion form__suggestion-enter" to="/signin">
               {" "}
               Войти
             </Link>

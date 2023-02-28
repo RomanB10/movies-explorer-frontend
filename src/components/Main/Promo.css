@@ -21,8 +21,35 @@
 }
 
 .promo__image {
+    margin: auto;
     position: absolute;
-    top: 82px;
-    left: 480px;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background-position: center;
 }
 
+@media (max-width: 768px) {
+    .promo {
+        min-height: 784px;
+        max-width: 768px;
+    }
+    .promo__title{
+        margin-top: 326px;
+    }
+}
+
+@media (max-width: 320px) {
+    .promo {
+        max-width: 320px;
+        min-height: 570px;
+    }
+    .promo__title{
+        margin-top: 207px;
+        font-size: 31px;
+        line-height: 39px;
+    }
+    .promo__image {
+    margin-top: 144px;
+       width: 248px;
+        height: 248px;
+    }
+}

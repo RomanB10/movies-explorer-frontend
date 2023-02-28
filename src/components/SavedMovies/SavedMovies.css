@@ -1,0 +1,10 @@
+.movie-card__btn_type_deleted {
+    background-color: #313131;
+    background-image: url(../../images/buttons/deletedFilmBtn.svg);
+}
+
+.movie-grid__btn_type_hidden{
+    margin-top: 110px;
+    background-color: #202020;
+    color: #202020;
+}

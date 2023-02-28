@@ -12,7 +12,7 @@ function MoviesCard(){
                 src={movieImage}
             />
             <button
-              className='movie-card__btn movie-card__btn_saved'
+              className='movie-card__btn movie-card__btn_type_saved'
               type="button"
               aria-label="Сохранить"
             />

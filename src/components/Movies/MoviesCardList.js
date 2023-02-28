@@ -26,7 +26,7 @@ function MoviesCardList(){
                 src={image2}
             />
             <button
-              className='movie-card__btn movie-card__btn_saved'
+              className='movie-card__btn movie-card__btn_type_saved'
               type="button"
               aria-label="Сохранить"
             />
@@ -82,7 +82,7 @@ function MoviesCardList(){
                 src={image6}
             />
             <button
-              className='movie-card__btn movie-card__btn_saved'
+              className='movie-card__btn movie-card__btn_type_saved'
               type="button"
               aria-label="Сохранить"
             />
@@ -96,7 +96,7 @@ function MoviesCardList(){
                 src={image7}
             />
             <button
-              className='movie-card__btn movie-card__btn_saved'
+              className='movie-card__btn movie-card__btn_type_saved'
               type="button"
               aria-label="Сохранить"
             />
@@ -152,7 +152,7 @@ function MoviesCardList(){
                 src={image11}
             />
             <button
-              className='movie-card__btn movie-card__btn_saved'
+              className='movie-card__btn movie-card__btn_type_saved'
               type="button"
               aria-label="Сохранить"
             />

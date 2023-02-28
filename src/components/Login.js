@@ -1,7 +1,15 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
+import {useState} from 'react'
 
 function Login() {
+
+/*const [password, setPassword] = useState('');
+
+function handleChangePassword(event){
+  event.preventDefault();
+  setPassword(event.target.value)
+}*/
   return (
     <div className="loginContainer">
       <div className={`form__container`}>
@@ -11,10 +19,11 @@ function Login() {
           method="post"
           name={`_type_auth`}
           tabIndex="0"
+         /* onSubmit={handleChangePassword}*/
         >
           <h3 className={`form__heading`}>Рады видеть!</h3>
 
-          <fieldset className={`form__items`}>
+          <fieldset className={`form__items form__items_type_login`}>
             <div className="form__item-conteiner">
               <label for="email" className="form__label">
                 E-mail
@@ -52,17 +61,17 @@ function Login() {
           <button
             type="submit"
             name="submit"
-            className={`popup__submit-btn`}
+            className={`form__submit-btn`}
             tabIndex="3"
           >
             Войти
           </button>
 
-          <p className="popup__question">
+          <p className="form__suggestion">
             Ещё не зарегистрированы?
             <Link
-              className="popup__question popup__question-enter"
-              to="/signin"
+              className="form__suggestion form__suggestion-enter"
+              to="/signup"
             >
               {" "}
               Регистрация

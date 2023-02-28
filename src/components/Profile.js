@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Profile(){
     return(
         <div className="profileContainer">
-        <div className={`form__container`}>
+        <div className={`form__container form__container_type_profile`}>
           <form
             className={`form__auth`}
             action="./scripts/script.js"
@@ -19,7 +19,7 @@ function Profile(){
             <fieldset
               className={`form__items form__items_type_profile`}
             >
-              <div className="form__item-conteiner form__item-conteiner_type_profile">
+              <div className="form__item-conteiner">
                 <label for="name" className="form__label form__label_type_profile">
                   Имя 
                 </label>
@@ -53,7 +53,6 @@ function Profile(){
               </div>
             </fieldset>
  
-
               <Link className="form__suggestion" to="/signin">
               Редактировать
               </Link>
