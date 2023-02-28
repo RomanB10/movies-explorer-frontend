@@ -19,5 +19,5 @@ https://disk.yandex.ru/d/mFtShmJT1diyAA
 **Ссылка на макет Figma**
 * [https://disk.yandex.ru/d/mFtShmJT1diyAA](https://disk.yandex.ru/d/mFtShmJT1diyAA)
 
-**Ссылка на макет Figma**
+**Ссылка на Pull requests**
 * [https://github.com/RomanB10/movies-explorer-frontend/pull/5](https://github.com/RomanB10/movies-explorer-frontend/pull/5)
