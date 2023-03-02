@@ -43,6 +43,7 @@
     max-height: 200px;
     object-fit: cover;
     width: 100%;
+    /* max-width: 360px;*/
 }
 
 .movie-card__btn {
@@ -73,21 +74,19 @@
 }
 
 
-@media ( max-width: 768px) {
-    .movie-card{
+@media (max-width: 768px) {
+    .movie-card {
         max-height: 309px;
     }
+
     .movie-card__image {
         max-height: 190px;
-  }
+    }
 
 }
 
-
-
-  
-  @media ( max-width: 320px) {
-    .movie-card{
+@media (max-width: 320px) {
+    .movie-card {
         max-height: 271px;
     }
 
@@ -108,9 +107,10 @@
 
     .movie-card__image {
         max-height: 168px;
-  }
-  .movie-card__btn {
-      margin-top: 14px;
-      margin-bottom: 14px;
+    }
+
+    .movie-card__btn {
+        margin-top: 14px;
+        margin-bottom: 14px;
+    }
 }
-  }

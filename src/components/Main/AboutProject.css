@@ -123,6 +123,13 @@
     }
 }
 
+@media (max-width: 540px) {
+    .conteiner-padding {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 @media (max-width: 320px) {
     .conteiner-padding {
         padding-left: 14px;

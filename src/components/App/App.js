@@ -1,5 +1,6 @@
 import { Route, Switch, useLocation } from "react-router-dom"; // подключение библиотеки React Router
 import { useEffect, useState } from "react";
+import '../../vendor/fonts/fonts.css'
 
 import "./App.css";
 import Header from "../Header";
@@ -12,12 +13,24 @@ import Profile from "../Profile";
 import PageNotFound from "../PageNotFound";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import MenuPopup from "../MenuPopup";
 
 function App() {
-  const [currentPath, setCurrentPath] = useState("");
+//переменная состояния, отвечающая за видимость меню
+ const [isMenuPopupOpen, setMenuPopupOpen] = useState(false);
+
+  const [currentPath, setCurrentPath] = useState("");// стейт текущего роута
   const location = useLocation();
 
   console.log("pathname:", location.pathname);
+
+ function handleMenuClick(){
+  setMenuPopupOpen(true);
+ }
+
+ function closeMenuPopup(){
+  setMenuPopupOpen(false)
+ }
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -25,20 +38,20 @@ function App() {
 
   console.log("currentPath:", currentPath);
   return (
-    <div className="root">
+    <div className="app">
       <div className="page">
         {currentPath === "/" ? (
-          <Header currentPath={currentPath} />
+          <Header currentPath={currentPath} onMenuClick={handleMenuClick}/>
         ) : currentPath === "/movies" ? (
-          <Header currentPath={currentPath} />
+          <Header currentPath={currentPath} onMenuClick={handleMenuClick}/>
         ) : currentPath === "/saved-movies" ? (
-          <Header currentPath={currentPath} />
+          <Header currentPath={currentPath} onMenuClick={handleMenuClick}/>
         ) : currentPath === "/signin" ? (
-          <Header currentPath={currentPath} />
+          <Header currentPath={currentPath} onMenuClick={handleMenuClick}/>
         ) : currentPath === "/signup" ? (
-          <Header currentPath={currentPath} />
+          <Header currentPath={currentPath} onMenuClick={handleMenuClick}/>
         ) : currentPath === "/profile" ? (
-          <Header currentPath={currentPath} />
+          <Header currentPath={currentPath} onMenuClick={handleMenuClick}/>
         ) : (
           <></>
         )}
@@ -74,6 +87,7 @@ function App() {
         ) : (
           <></>
         )}
+        <MenuPopup isMenuPopupOpen={isMenuPopupOpen} onClose ={closeMenuPopup} currentPath={currentPath}/>
       </div>
     </div>
   );

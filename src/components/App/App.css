@@ -1,32 +1,8 @@
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../../vendor/fonts/Inter-Regular.woff2) format("woff2"),
-    url(../../vendor/fonts/Inter-Regular.woff) format("woff");
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url(../../vendor/fonts/Inter-Medium.woff2) format("woff2"),
-    url(../../vendor/fonts/Inter-Medium.woff) format("woff");
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 900;
-  src: url(../../vendor/fonts/Inter-Black.woff2) format("woff2"),
-    url(../../vendor/fonts/Inter-Black.woff) format("woff");
-}
-
 body{
   margin: 0;
 }
 
-.root {
+.app {
   width: 100%;
   background: #202020;
 }
@@ -38,7 +14,7 @@ body{
   font-family: 'Inter', 'Arial', 'Helvetica', 'sans-serif';
   font-style: normal;
   color:#FFFFFF;
-  max-width: 1280px;
+ /* max-width: 1280px;*/
   position: relative;
   
 }

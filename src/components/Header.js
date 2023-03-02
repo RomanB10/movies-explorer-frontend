@@ -1,10 +1,23 @@
 import "./Header.css";
 import headerLogo from "../images/logo.svg";
 import Navigation from "./Navigation";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import {SCREEN_SM, SCREEN_MD, SCREEN_LG} from '../components/const-breakpoints';
+import {useEffect,useState} from 'react';
 
-function Header({ currentPath }) {
+function Header({ currentPath, onMenuClick }) {
+  const [width, setWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = (event) => {
+      setWidth(event.target.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+console.log('width',width)
   return (
     <header
       className={
@@ -15,13 +28,13 @@ function Header({ currentPath }) {
           : currentPath === "/saved-movies"
           ? `header header_type_dark`
           : currentPath === "/profile"
-          ? `header header_type_dark`
+          ? `header header_type_dark header_type_profile`
           : currentPath === "/signin"
-          ? `header header_type_dark header_type_padding-left`
+          ? `header header_type_dark header_type_auth`
           : currentPath === "/signup"
-          ? `header header_type_dark header_type_padding-left`
+          ? `header header_type_dark header_type_auth`
           : ""
-      }
+      } 
     >
       <Link to="/">
         <img
@@ -31,13 +44,28 @@ function Header({ currentPath }) {
         />
       </Link>
       {currentPath === "/" ? (
-        <Navigation />
+        <Navigation currentPath ={currentPath} width={width}/>
       ) : currentPath === "/movies" ? (
-        <Navigation />
+        <>
+        { width > SCREEN_MD?
+          <Navigation currentPath ={currentPath} width={width}/>:
+          <button className="button-open-menu" onClick={onMenuClick}/>
+        }
+        </>
       ) : currentPath === "/saved-movies" ? (
-        <Navigation />
+        <>
+        { width > SCREEN_MD?
+          <Navigation currentPath ={currentPath} width={width}/>:
+          <button className="button-open-menu" onClick={onMenuClick}/>
+        }
+        </>
       ) : currentPath === "/profile" ? (
-        <Navigation />
+        <>
+        { width > SCREEN_MD?
+          <Navigation currentPath ={currentPath}/>:
+          <button className="button-open-menu" onClick={onMenuClick}/>
+        }
+        </>
       ) : (
         <></>
       )}

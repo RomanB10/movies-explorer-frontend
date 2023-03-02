@@ -1,10 +1,12 @@
 import "./Navigation.css";
 import { Link, Route, Switch } from "react-router-dom";
+import {SCREEN_SM, SCREEN_MD, SCREEN_LG} from '../components/const-breakpoints';
 
-function Navigation() {
+function Navigation({currentPath,width}) {
+  console.log('currentPath in navigation',currentPath)
   return (
-    <ul className="navigation">
-
+  <div className={width < SCREEN_MD || currentPath==='/'? `navigation navigation-lead`:`navigation navigation-second`} >
+    <ul className={width < SCREEN_MD || currentPath==='/'? `navigation__list navigation__list-lead`:`navigation__list navigation__list-second`}>
       <Switch>
         <Route exact path="/">
           <li>
@@ -27,6 +29,14 @@ function Navigation() {
 
         <Route exact path="/movies">
           <li>
+            <Link
+              to="/"
+              className="navigation__link  navigation__link_disabled"
+            >
+              Главная
+            </Link>
+          </li>
+          <li>
             <Link to="/movies" className="navigation__link">
               Фильмы
             </Link>
@@ -34,20 +44,20 @@ function Navigation() {
           <li>
             <Link to="/saved-movies" className="navigation__link">
               Сохраненные фильмы
-            </Link>
-          </li>
-          <li>
-            <Link to="/profile" className="navigation__link">
-              <div className="navigation__accaunt">
-                <p className="navigation__link">Аккаунт</p>
-                <button className="navigation__link navigation__button"></button>
-              </div>
             </Link>
           </li>
         </Route>
 
         <Route exact path="/saved-movies">
           <li>
+            <Link
+              to="/"
+              className="navigation__link navigation__link_disabled"
+            >
+              Главная
+            </Link>
+          </li>
+          <li>
             <Link to="/movies" className="navigation__link">
               Фильмы
             </Link>
@@ -55,20 +65,20 @@ function Navigation() {
           <li>
             <Link to="/saved-movies" className="navigation__link">
               Сохраненные фильмы
-            </Link>
-          </li>
-          <li>
-            <Link to="/profile" className="navigation__link">
-              <div className="navigation__accaunt">
-                <p className="navigation__link">Аккаунт</p>
-                <button className="navigation__link navigation__button"></button>
-              </div>
             </Link>
           </li>
         </Route>
 
         <Route exact path="/profile">
           <li>
+            <Link
+              to="/"
+              className="navigation__link  navigation__link_disabled"
+            >
+              Главная
+            </Link>
+          </li>
+          <li>
             <Link to="/movies" className="navigation__link">
               Фильмы
             </Link>
@@ -78,17 +88,34 @@ function Navigation() {
               Сохраненные фильмы
             </Link>
           </li>
-          <li>
-            <Link to="/profile" className="navigation__link">
-              <div className="navigation__accaunt">
-                <p className="navigation__link">Аккаунт</p>
-                <button className="navigation__link navigation__button"></button>
-              </div>
-            </Link>
-          </li>
         </Route>
       </Switch>
     </ul>
+    {currentPath === "/movies" ? (
+      <Link to="/profile" className="navigation__link">
+      <div className="navigation__accaunt">
+        <p className="navigation__link">Аккаунт</p>
+        <button className="navigation__button"></button>
+      </div>
+    </Link>
+    ) : currentPath === "/saved-movies" ? (
+      <Link to="/profile" className="navigation__link">
+              <div className="navigation__accaunt">
+                <p className="navigation__link">Аккаунт</p>
+                <button className="navigation__button"></button>
+              </div>
+            </Link>
+    ) : currentPath === "/profile" ? (
+      <Link to="/profile" className="navigation__link">
+              <div className="navigation__accaunt">
+                <p className="navigation__link">Аккаунт</p>
+                <button className="navigation__button"></button>
+              </div>
+            </Link>
+    ) : (
+      <></>
+    )}
+    </div>
   );
 }
 
