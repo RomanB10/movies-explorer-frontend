@@ -1,3 +1,17 @@
 .movies-container{
-    margin: 0;
+    margin: 0 70px;
+}
+
+@media (max-width: 768px) {
+    .movies-container{
+     margin-right: 30px;
+     margin-left: 30px;
+    }
+}
+
+@media (max-width: 320px) {
+    .movies-container{
+     margin-right: 10px;
+     margin-left: 10px;
+    }
 }

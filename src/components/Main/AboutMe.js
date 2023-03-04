@@ -3,7 +3,7 @@ import Portfolio from "./Portfolio";
 
 function AboutMe() {
   return (
-    <section className="conteiner-point conteiner-point_theme_dark conteiner-padding" >
+    <section className="conteiner-point conteiner-point_type_student" >
       <h2 className="conteiner-point__title">Студент</h2>
       <div className="student" id="student">
         <div className="student__container">

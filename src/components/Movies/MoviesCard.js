@@ -11,11 +11,13 @@ function MoviesCard(){
             <img className="movie-card__image" alt={`Здесь должно быть изображение постера к фильму`}
                 src={movieImage}
             />
+            <div className='movie-card__ending-container'>
             <button
               className='movie-card__btn movie-card__btn_type_saved'
               type="button"
               aria-label="Сохранить"
             />
+            </div>
       </li>
     )
 }

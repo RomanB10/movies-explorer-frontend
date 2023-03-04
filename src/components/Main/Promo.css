@@ -23,7 +23,7 @@
 .promo__image {
     margin: auto;
     position: absolute;
-    top: 0;
+    top: -40px;
     left: 0;
     bottom: 0;
     right: 0;
@@ -38,6 +38,10 @@
 
     .promo__title {
         margin-top: 326px;
+    }
+
+    .promo__image {
+        top: -19px;
     }
 }
 
@@ -80,8 +84,6 @@
     }
 
     .promo__image {
-        margin-top: 144px;
-        width: 248px;
-        height: 248px;
+        margin-top: 162px;
     }
 }

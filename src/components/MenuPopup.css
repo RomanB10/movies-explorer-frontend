@@ -25,7 +25,6 @@
   max-width: 520px;
   background-color: #202020;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  /* border-radius: 10px;*/
   margin: 0;
   padding: 0;
 }
@@ -34,15 +33,15 @@
   vertical-align: bottom;
   background-color: transparent;
   border: 0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background-image: url('../images/buttons/menuCloseBtn.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
-  top: 30px;
-  right: 30px;
+  top: 21px;
+  right: 23px;
   margin: 0;
   padding: 0;
   cursor: pointer;
@@ -56,6 +55,7 @@
   .popup__container {
     max-width: 100%;
   }
+
   .popup__close-btn {
     top: 20px;
     right: 20px;

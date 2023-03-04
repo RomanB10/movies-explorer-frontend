@@ -20,11 +20,13 @@ function SavedMovies() {
               alt={`Здесь должно быть изображение постера к фильму`}
               src={image1}
             />
+            <div className='movie-card__ending-container'>
             <button
               className="movie-card__btn movie-card__btn_type_deleted"
               type="button"
               aria-label="Сохранить"
             />
+            </div>
           </li>
           <li className="movie-card">
             <div className="movie-card__heading-container">
@@ -36,11 +38,13 @@ function SavedMovies() {
               alt={`Здесь должно быть изображение постера к фильму`}
               src={image2}
             />
+            <div className='movie-card__ending-container'>
             <button
               className="movie-card__btn movie-card__btn_type_deleted"
               type="button"
               aria-label="Сохранить"
             />
+            </div>
           </li>
           <li className="movie-card">
             <div className="movie-card__heading-container">
@@ -52,13 +56,14 @@ function SavedMovies() {
               alt={`Здесь должно быть изображение постера к фильму`}
               src={image3}
             />
+            <div className='movie-card__ending-container'>
             <button
               className="movie-card__btn movie-card__btn_type_deleted"
               type="button"
               aria-label="Сохранить"
             >
-              Сохранить
             </button>
+            </div>
           </li>
         </ul>
         <button className='movie-grid__btn movie-grid__btn_type_hidden' type="button"

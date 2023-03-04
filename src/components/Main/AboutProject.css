@@ -1,16 +1,10 @@
-.conteiner-padding {
-    padding-left: 70px;
-    padding-right: 70px;
-}
-
-.conteiner-point_theme_dark {
+.conteiner-point {
     background-color: #202020;
-    margin-top: 10px;
+    padding: 110px 70px;
 }
 
 .conteiner-point__title {
     margin: 0;
-    padding-top: 100px;
     margin-bottom: 23px;
     text-align: left;
     font-weight: 400;
@@ -29,10 +23,11 @@
     flex-direction: row;
     width: 100%;
     align-items: center;
+    column-gap: 40px;
 }
 
 .plan__item-conteiner {
-    max-width: 570px;
+    max-width: 550px;
 }
 
 .plan__text-main {
@@ -56,7 +51,6 @@
 .figure {
     margin: 0;
     padding: 0;
-    margin-bottom: 110px;
     grid-template-columns: 228px auto;
     grid-template-rows: minmax(36px, max-content);
     display: grid;
@@ -91,18 +85,14 @@
 }
 
 @media (max-width: 768px) {
-    .conteiner-padding {
-        padding-left: 50px;
-        padding-right: 50px;
+    .conteiner-point {
+        padding: 90px 50px;
         max-width: 768px;
-    }
-
-    .conteiner-point__title {
-        padding-top: 80px;
     }
 
     .plan {
         margin-bottom: 93px;
+        column-gap: 32px;
     }
 
     .plan__item-conteiner {
@@ -119,27 +109,30 @@
 
     .figure {
         grid-template-columns: 140px auto;
-        margin-bottom: 99px;
+        margin-bottom: 3px;
+    }
+
+    .figure__program {
+        margin: 0;
+        padding-top: 11px;
     }
 }
 
 @media (max-width: 540px) {
-    .conteiner-padding {
+    .conteiner-point {
         padding-left: 20px;
         padding-right: 20px;
     }
 }
 
 @media (max-width: 320px) {
-    .conteiner-padding {
-        padding-left: 14px;
-        padding-right: 14px;
+    .conteiner-point {
+        padding: 70px 18px;
         max-width: 320px;
     }
 
     .conteiner-point__title {
-        padding-top: 59px;
-        margin-bottom: 26px;
+        margin-bottom: 27px;
         font-size: 18px;
         line-height: 22px;
     }
@@ -148,10 +141,11 @@
         padding-top: 14px;
         flex-direction: column;
         margin-bottom: 60px;
+        row-gap: 8px;
     }
 
     .plan__text-main {
-        margin-top: 56px;
+        margin-top: 47px;
         font-size: 18px;
         line-height: 22px;
     }
@@ -166,17 +160,16 @@
     .figure {
         grid-template-columns: 100px auto;
         grid-template-rows: minmax(35px, max-content);
-        margin-bottom: 79px;
-
     }
 
     .figure__weeks {
         font-size: 11px;
         line-height: 13px;
+        padding-top: 12px;
     }
 
     .figure__program {
-        padding-top: 8px;
+        padding-top: 10px;
         font-size: 11px;
         line-height: 13px;
     }

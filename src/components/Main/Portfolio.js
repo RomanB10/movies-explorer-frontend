@@ -13,7 +13,7 @@ function Portfolio() {
           <p className="portfolio__text">Адаптивный сайт</p>
           <button className="portfolio__btn"></button>
         </a>
-        <a className="portfolio__item" href="https://github.com/RomanB10/react-mesto-api-full" target='_blank' rel="noopener noreferrer">
+        <a className="portfolio__item" href="https://mesto.romanb10.nomoredomains.club" target='_blank' rel="noopener noreferrer">
           <p className="portfolio__text">Одностраничное приложение</p>
           <button className="portfolio__btn"></button>
         </a>

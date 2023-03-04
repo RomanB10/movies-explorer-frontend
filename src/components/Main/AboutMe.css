@@ -28,7 +28,6 @@
 
 .student__subtitle {
     margin: 18px 0 0;
-    /*max-width: 600px;*/
     text-align: left;
     font-weight: 500;
     font-size: 18px;
@@ -76,7 +75,6 @@
 
 @media (max-width: 768px) {
     .student {
-        padding-top: 66px;
         margin-bottom: 91px;
     }
 
@@ -86,6 +84,7 @@
     }
 
     .student__subtitle {
+        margin-top: 16px;
         font-size: 12px;
         line-height: 18px;
     }
@@ -103,8 +102,8 @@
     }
 
     .student__ava {
+        min-height: 307px;
         width: 255px;
-        height: 307px;
     }
 }
 
@@ -121,10 +120,21 @@
 }
 
 @media (max-width: 320px) {
+    .conteiner-point_type_student{
+        padding-left:0;
+        padding-right: 0;
+        margin-left: 14px;
+        margin-right: 14px;
+
+     }
     .student {
         flex-direction: column-reverse;
         padding-top: 60px;
         margin-bottom: 70px;
+    }
+
+    .student__container {
+        padding-right: 0;
     }
 
     .student__title {
@@ -133,6 +143,7 @@
     }
 
     .student__subtitle {
+        margin-top: 20px;
         font-size: 11px;
         line-height: 16px;
     }
@@ -148,8 +159,9 @@
     }
 
     .student__ava {
+        width: 100%;
         max-width: 292px;
-        height: 352px;
+        min-height: 352px;
         margin-bottom: 41px;
     }
 }

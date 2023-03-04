@@ -1,7 +1,3 @@
-body{
-  margin: 0;
-}
-
 .app {
   width: 100%;
   background: #202020;
@@ -14,8 +10,8 @@ body{
   font-family: 'Inter', 'Arial', 'Helvetica', 'sans-serif';
   font-style: normal;
   color:#FFFFFF;
- /* max-width: 1280px;*/
+  max-width: 1280px;
   position: relative;
-  
+  margin: 0 auto;
 }
 

@@ -35,7 +35,7 @@ function Profile(){
                   tabIndex="2"
                 />
               </div>
-              <div className="form__item-conteiner form__item-conteiner_type_profile">
+              <div className="form__item-conteiner">
                 <label for="email" className="form__label form__label_type_profile">
                   E-mail
                 </label>
@@ -53,10 +53,10 @@ function Profile(){
               </div>
             </fieldset>
  
-              <Link className="form__suggestion" to="/signin">
+              <Link className="form__suggestion form__suggestion_type_edit" to="/signin">
               Редактировать
               </Link>
-              <Link className="form__suggestion form__suggestion-signout" to="/signin">
+              <Link className="form__suggestion form__suggestion_type_signout" to="/signin">
                 Выйти из аккаунта
               </Link>
           </form>
