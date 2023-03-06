@@ -1,0 +1,31 @@
+.navtab{
+    width: 100%;
+    display: flex;
+    min-height: 66px;
+    align-items: center;
+    justify-content: center;
+    background-color: #272727;
+}
+
+.navtab__link {
+    margin: 0 21px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    text-align: left;
+    text-decoration-line: underline;
+}
+
+.navtab__link:hover {
+    color:hotpink;
+}
+
+@media (max-width: 320px) {
+    .navtab__link {
+        margin: 0 11px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}
