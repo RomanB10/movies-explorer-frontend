@@ -41,8 +41,8 @@
 
 .preloader {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
     width: 100%;
     height: 100%;
     z-index: 10;
@@ -50,26 +50,26 @@
 }
 
 .preloader__container {
-    width: 100px;
-    height: 100px;
+    width: 38px;
+    height: 38px;
     position: relative;
 }
 
 .preloader__round {
-    width: 100px;
-    height: 100px;
+    width: 38px;
+    height: 38px;
     position: absolute;
     top: 0;
-    left: 0;
-    background: #FF6838;
+    left: 60px;
+    background: #2BE080;
     border-radius: 50px;
 }
 
 .preloader__round::after,
 .preloader__round::before {
     content: '';
-    width: 100px;
-    height: 100px;
+    width: 38px;
+    height: 38px;
     position: absolute;
     top: 0;
     left: 0;
@@ -83,6 +83,6 @@
 
 .preloader__round::before {
     z-index: 10;
-    background: #FF6838;
+    background: #2BE080;
     animation: preloader-inside-red 1s ease-in-out infinite;
 }

@@ -1,5 +1,42 @@
 import "./MoviesCardList.css";
 import MoviesCard from "./MoviesCard";
+
+function MoviesCardList({
+  allMovies,
+  savedMovies,
+  onMoviesCardSave,
+  onMoviesCardDelete,
+  currentPath,
+}) {
+  return (
+    <div className="contetn">
+      <ul className="movie-grid">
+        {allMovies.map((item) => (
+          <MoviesCard
+            key={item.id || item._id}
+            movie={item}
+            savedMovies ={savedMovies}
+            onMoviesCardSave={onMoviesCardSave}
+            onMoviesCardDelete={onMoviesCardDelete}
+            currentPath={currentPath}
+            {...item}
+          />
+        ))}
+      </ul>
+      <button
+        className="movie-grid__btn"
+        type="button"
+        aria-label="Еще показать фильмы"
+      >
+        Еще
+      </button>
+    </div>
+  );
+}
+
+export default MoviesCardList;
+
+/*
 import image2 from "../../images/cardsMovies/2.png";
 import image3 from "../../images/cardsMovies/3.png";
 import image4 from "../../images/cardsMovies/4.png";
@@ -12,11 +49,7 @@ import image10 from "../../images/cardsMovies/10.png";
 import image11 from "../../images/cardsMovies/11.png";
 import image12 from "../../images/cardsMovies/12.png";
 
-function MoviesCardList() {
-  return (
-    <div className="contetn">
-      <ul className="movie-grid">
-        <MoviesCard />
+
         <li className="movie-card">
           <div className="movie-card__heading-container">
             <h2 className="movie-card__text">В погоне за Бенкси</h2>
@@ -231,16 +264,4 @@ function MoviesCardList() {
             </button>
           </div>
         </li>
-      </ul>
-      <button
-        className="movie-grid__btn"
-        type="button"
-        aria-label="Еще показать фильмы"
-      >
-        Еще
-      </button>
-    </div>
-  );
-}
-
-export default MoviesCardList;
+        */

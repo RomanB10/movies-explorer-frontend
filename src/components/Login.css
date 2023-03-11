@@ -37,6 +37,8 @@
 }
 
 .form__item-conteiner {
+    display: flex;/*добавил*/
+    flex-direction: column;/*добавил*/
     color: #ffffff;
     margin: 0 0 20px;
 }
@@ -101,6 +103,14 @@
 .form__submit-btn:focus {
     border: 4px solid #00f;
 }
+
+.form__submit-btn_inactive {
+    opacity: .5;
+  }
+  
+  .form__submit-btn_inactive:hover {
+    opacity: .5;
+  }
 
 .form__suggestion {
     color: #8B8B8B;

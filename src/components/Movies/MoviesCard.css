@@ -74,6 +74,7 @@
 
 .movie-card__btn_type_saved {
     background-color: #EE3465;
+    color: transparent;
     background-image: url(../../images/buttons/selectedFilmBtn.svg);
 }
 

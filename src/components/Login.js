@@ -1,25 +1,45 @@
 import "./Login.css";
-import { Link } from "react-router-dom";
-import {useState} from 'react'
+import { Link, Redirect } from "react-router-dom";
+import { useEffect } from "react";
+import useFormWithValidation from "../useFormWithValidation";
 
-function Login() {
+function Login({ handleLogin, isLoggedIn }) {
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
-/*const [password, setPassword] = useState('');
+  const errorEmail =
+    errors.email === ""
+      ? `form__input-error`
+      : `form__input-error form__input-error_visible`;
+  const errorPassword =
+    errors.password === ""
+      ? `form__input-error`
+      : `form__input-error form__input-error_visible`;
 
-function handleChangePassword(event){
-  event.preventDefault();
-  setPassword(event.target.value)
-}*/
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    handleLogin(values.email, values.password);
+  }
+
+  //ОЧИСТКА ФОРМЫ
+  useEffect(() => {
+    resetForm({}, {}, false);
+  }, [resetForm]);
+
+  //если пользователь авторизован, рендерить маршрут '/movies'
+  if (isLoggedIn) {
+    return <Redirect to="/movies" />;
+  }
+
   return (
     <div className="loginContainer">
       <div className={`form__container`}>
         <form
           className={`form__auth`}
-          action="./scripts/script.js"
           method="post"
           name={`_type_auth`}
           tabIndex="0"
-         /* onSubmit={handleChangePassword}*/
+          onSubmit={handleSubmit}
         >
           <h3 className={`form__heading`}>Рады видеть!</h3>
 
@@ -34,11 +54,15 @@ function handleChangePassword(event){
                 name="email"
                 id="email"
                 placeholder="pochta@yandex.ru"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 required
                 minLength="2"
-                maxLength="40"
-                tabIndex="2"
+                maxLength="200"
+                tabIndex="1"
+                value={values.email || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
+                onChange={handleChange}
               />
+              <span className={errorEmail}>{errors.email}</span>
             </div>
             <div className="form__item-conteiner">
               <label for="password" className="form__label">
@@ -53,16 +77,24 @@ function handleChangePassword(event){
                 required
                 minLength="2"
                 maxLength="200"
-                tabIndex="3"
+                tabIndex="2"
+                value={values.password || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
+                onChange={handleChange}
               />
+              <span className={errorPassword}>{errors.password}</span>
             </div>
           </fieldset>
 
           <button
+            className={
+              isValid
+                ? `form__submit-btn`
+                : `form__submit-btn form__submit-btn_inactive`
+            }
             type="submit"
             name="submit"
-            className={`form__submit-btn`}
             tabIndex="3"
+            disabled={!isValid}
           >
             Войти
           </button>
@@ -84,3 +116,31 @@ function handleChangePassword(event){
 }
 
 export default Login;
+
+/*
+  //переменная состояния полей формы Авторизации
+  const [formValue, setFormValue] = useState({
+    email: '',
+    password: ''
+  });
+
+  // функция записи значений полей формы 
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value
+    });
+  }
+
+  function handleSubmit(event){
+    //запрещаем браузеру переходить по адресу формы, атрибут action не указан
+    event.preventDefault();
+    if (!formValue.email || !formValue.password) {
+      return;
+    }
+    //вызов колбэка Авторизации с передачей полей ввода 
+    handleLogin(formValue.email, formValue.password)
+  }
+  */

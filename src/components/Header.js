@@ -17,7 +17,7 @@ function Header({ currentPath, onMenuClick }) {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-console.log('width',width)
+/*console.log('width',width)*/
   return (
     <header
       className={
