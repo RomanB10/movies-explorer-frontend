@@ -30,7 +30,6 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import apiMain from "../../utils/MainApi";
 import apiMovies from "../../utils/MoviesApi";
-import ShortMoviesFilter from "../ShortMoviesFilter.js/ShortMoviesFilter";
 
 function App() {
   const history = useHistory();
