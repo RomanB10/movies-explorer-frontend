@@ -1,4 +1,10 @@
-import { Route, Switch, Redirect, useLocation, useHistory } from "react-router-dom"; // подключение библиотеки React Router
+import {
+  Route,
+  Switch,
+  Redirect,
+  useLocation,
+  useHistory,
+} from "react-router-dom"; // подключение библиотеки React Router
 import { useEffect, useState, useCallback } from "react";
 import "../../vendor/fonts/fonts.css";
 
@@ -24,6 +30,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import apiMain from "../../utils/MainApi";
 import apiMovies from "../../utils/MoviesApi";
+import ShortMoviesFilter from "../ShortMoviesFilter.js/ShortMoviesFilter";
 
 function App() {
   const history = useHistory();
@@ -33,7 +40,6 @@ function App() {
 
   const [currentPath, setCurrentPath] = useState(""); // стейт текущего роута
   const location = useLocation(); // возвращаем объект с нужным полем пути
-  /*console.log("pathname:", location.pathname);*/
 
   // переменные состояние Tooltip
   const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false); // открыт/закрыт Тултип
@@ -41,27 +47,19 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false); // информация о нашей авторизации (авторизован или нет)
   const [loading, setLoading] = useState(true); // информация о загрузке(идет загрузка или нет)
-  /*const [userData,setUserData] = useState({});// состояние пользователя name, email*/
 
-  const [textRequest, setTextRequest] = useState('')// ТЕКСТ ЗАПРОСА
-  const [allMovies, setAllMovies] = useState([]); // ФИЛЬМЫ c beatfilm-movies
+  const [textRequest, setTextRequest] = useState(""); // ТЕКСТ ЗАПРОСА
   const [positionCheckbox, setPositionCheckbox] = useState(false); //Состояние чекбокса
 
-
   const [currentUser, setCurrentUser] = useState({}); // ПОЛЬЗОВАТЕЛЬ
-  
-  const [savedMovieIds, setSavedMovieIds] = useState([]);// СОХРАНЕННЫЕ ФИЛЬМЫ ID
+
+  const [allMovies, setAllMovies] = useState([]); // ФИЛЬМЫ c beatfilm-movies
   const [savedMovies, setSavedMovies] = useState([]); // // СОХРАНЕННЫЕ ФИЛЬМЫ
+  const [savedMovieIds, setSavedMovieIds] = useState([]); // СОХРАНЕННЫЕ ФИЛЬМЫ ID
+  /*const [searchedMovies, setSearchedMovies] = useState([]);*/
 
-
-   //чекбокс
-   const [request, setRequest] = useState('');
-   const [checkboxStatus, setCheckboxStatus] = useState(false);
-
-
-  /*const [isLiked,setIsLiked]= useState(false); // стейт лайка*/
-   // открытие/закрытие меню dropdown
-   function handleMenuClick() {
+  // открытие/закрытие меню dropdown
+  function handleMenuClick() {
     setMenuPopupOpen(true);
   }
   function closeAllPopups() {
@@ -69,20 +67,24 @@ function App() {
     setIsInfoToolTipOpen(false);
   }
 
-  
-//ОБНОВЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ (name, email)
+  //ОБНОВЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ (name, email)
   const cbProfile = useCallback(
     async (data) => {
-      console.log(`cbProfile=`,data)
+      /*console.log(`cbProfile=`,data)*/
       try {
         setLoading(true); //состояние загрузки (идет загрузка)
-        const user = await apiMain.setUserInfo(data)
+        const user = await apiMain.setUserInfo(data);
         if (!user) {
           throw new Error("Неверные имя или email пользователя");
         }
         setIsInfoToolTipOpen(true); // стейт открытого Тултипа
         setTooltipStatus(`success update`); // установим статус Тултипа
-        setCurrentUser({ name:user.name, email:user.email, _id:user._id, ...currentUser });
+        setCurrentUser({
+          name: user.name,
+          email: user.email,
+          _id: user._id,
+          ...currentUser,
+        });
         return user;
       } catch (err) {
         setIsInfoToolTipOpen(true); // стейт открытого Тултипа
@@ -96,7 +98,7 @@ function App() {
         setLoading(false); // состояние загрузки (загрузка завершена)
       }
     },
-    [setLoading, setTooltipStatus, setIsInfoToolTipOpen,setCurrentUser]
+    [setLoading, setTooltipStatus, setIsInfoToolTipOpen, setCurrentUser]
   );
 
   // ДОБАВЛЕНИЕ СОХР.ФИЛЬМА В ОСНОВНОЙ API //РАБОТАЕТ
@@ -120,28 +122,33 @@ function App() {
         const newMovie = dataFromServer;
         setSavedMovies([newMovie, ...savedMovies]); //при сеттере необходимо создавать новый массив, клонируя предыдущий ...spread
         setSavedMovieIds([newMovie.movieId, ...savedMovieIds]);
-        /*closeAllPopups();*/
+        /* setSearchedMovies([newMovie, ...savedMovies])*/
+        /* localStorage.setItem("savedMovies", JSON.stringify(savedMovies));*/
       })
       .catch((err) => {
         console.log(err);
       });
   }
   //УДАЛЕНИЕ СОХР.ФИЛЬМА С ОСНОВНОГО API
-  function handleMoviesCardDelete(idCardMovie) {
-    console.log(idCardMovie);
+  function handleMoviesDelete(movies) {
     apiMain
-      .removeMoviesCard(idCardMovie)
+      .removeMoviesCard(movies._id || movies.id)
       .then(() => {
-        const updatedMoviesCards = savedMovies.filter(function (item) {
-          return item.movieId !== idCardMovie;
-        }); //возвращает новый массив без карточки, в которой кликнули по корзине
+        //вариант для сохраненных фильмов
+        const updatedMoviesList = savedMovies.filter(function (savedMovie) {
+          return savedMovie._id !== movies._id;
+        });
 
-        const updatedMoviesCardsId = savedMovies.filter(function (item) {
-          return item._id !== idCardMovie;
-        }); //возвращает новый массив без карточки, в которой кликнули по корзине
+        //возвращаем массив без удаленной карточки
+        setSavedMovies(updatedMoviesList);
 
-        setSavedMovies(updatedMoviesCards); //обновляем стейт карточек локально
-        setSavedMovieIds(updatedMoviesCardsId); //обновляем стейт карточек локально
+        //вариант для  фильмов со страницы фильмы
+        const updatedMoviesIdList = savedMovieIds.filter(function (
+          savedMovieId
+        ) {
+          return savedMovieId !== movies.id;
+        });
+        setSavedMovieIds(updatedMoviesIdList);
       })
       .catch((err) => {
         console.log(err);
@@ -149,49 +156,13 @@ function App() {
   }
 
   //ПОЛУЧЕНИЕ ВСЕХ СОХР.ФИЛЬМОВ ОСНОВНОГО API
-  function handleGetAllSavedMovies() {
-    apiMain
-      .getAllMoviesMainApi()
-      .then((dataFromServer) => {
-        console.log(dataFromServer);
-        setSavedMovies([savedMovies, ...dataFromServer]); /// заносим в массив стейта сохраненных фильмов моего апи
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   useEffect(() => {
     if (loggedIn) {
-      apiMain.getAllMoviesMainApi()
+      apiMain
+        .getAllMoviesMainApi()
         .then((dataFromServer) => {
-          const findSavedMovies = dataFromServer.filter((m) => m.owner._id === currentUser._id)
-          localStorage.setItem("savedMovies", JSON.stringify(findSavedMovies));
-          setSavedMovies(findSavedMovies);
-        })
-        .catch((err) => console.log(err))
-    }
-  }, [loggedIn])
-
-
-//ПОЛУЧЕНИЕ ВСЕХ ФИЛЬМОВ ОСНОВНОГО с BeatfilmMoviesApi
-  function handleGetAllMovies() {
-    apiMovies
-      .getAllMovies()
-      .then((dataFromServer) => {
-        setAllMovies(dataFromServer); 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  //ПОЛУЧЕНИЕ ВСЕХ ФИЛЬМОВ ОСНОВНОГО с BeatfilmMoviesApi
-  useEffect(() => {
-    if (loggedIn) {
-      apiMovies
-        .getAllMovies()
-        .then((dataFromServer) => {
-          setAllMovies(dataFromServer); // заносим в массив стейта фильмы с BeatfilmMoviesApi
+          /*localStorage.setItem("savedMovies", JSON.stringify(dataFromServer));*/
+          setSavedMovies(dataFromServer);
         })
         .catch((err) => {
           console.log(err);
@@ -199,11 +170,43 @@ function App() {
     }
   }, [loggedIn]);
 
+  //ПОЛУЧЕНИЕ ВСЕХ ФИЛЬМОВ ОСНОВНОГО с BeatfilmMoviesApi
+  function handleGetAllMovies(textRequest, positionCheckbox) {
+    /*setLoading(true);*/
 
+    setTextRequest(textRequest);
+    setPositionCheckbox(positionCheckbox);
+    localStorage.setItem("textRequest", textRequest); //Запись пойска
+    localStorage.setItem("positionCheckbox", positionCheckbox); //Запись пойска
 
+    const openingMoviesStorage = JSON.parse(localStorage.getItem("AllMovies"));
+    /* const searchedFilms = ShortMoviesFilter(openingMoviesStorage ,textRequest,positionCheckbox);*/
 
+    console.log(`openingMoviesStorage`, openingMoviesStorage);
+    //если уже загружали фильмы
 
-
+    if (!openingMoviesStorage) {
+      apiMovies
+        .getAllMovies()
+        .then((dataFromServer) => {
+          setAllMovies(dataFromServer);
+          localStorage.setItem(
+            "AllMovies",
+            JSON.stringify(dataFromServer)
+          ); /*ЗАПИСЬ В СТРОКУ ПЕРВОЙ ЗАГРУЗКИ ФИЛЬМОВ*/
+        })
+        .catch((err) => {
+          console.log(
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+          );
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setAllMovies(openingMoviesStorage);
+    }
+  }
   //ЗАПРОС к моему серверу за данными текущего пользователя при каждом рендере
   useEffect(() => {
     if (loggedIn) {
@@ -228,10 +231,6 @@ function App() {
         });
     }
   }, [loggedIn]);
-
-
-
-
 
   //ЗАПРОС ПРОВЕРКИ ТОКЕНА
   const tokenCheck = useCallback(async () => {
@@ -285,7 +284,7 @@ function App() {
           localStorage.setItem("jwt", data.token); // сохраняем в ключ 'jwt' значение tokena
           setTooltipStatus(`success`); // установим статус Тултипа
           setLoggedIn(true); //статус-авторизовался
-          history.push('/signin');
+          history.push("/signin");
           return data;
         }
         return data;
@@ -308,40 +307,39 @@ function App() {
   );
 
   //ЗАПРОС НА РЕГИСТРАЦИЮ
-  const cbRegister = useCallback(
-    async (name, email, password) => {
-      try {
-        console.log('cbRegister',name, email, password)
-        setLoading(true); //состояние загрузки (идет загрузка)
-        const data = await Auth.register(name, email, password);
-        if (!data) {
-          throw new Error("Неверные имя или пароль пользователя");
-        }
-       /* setLoggedIn(true);*/ //статус-авторизовался
-        setIsInfoToolTipOpen(true); // стейт открытого Тултипа
-        setTooltipStatus(`success`); // установим статус Тултипа
-       /* history.push('/signin')*/
-        return data;
-      } catch (err) {
-        setIsInfoToolTipOpen(true); // стейт открытого Тултипа
-        setTooltipStatus(`fail`); // установим статус Тултипа
-        if (err === 400) {
-          console.log("400 - Неккоректно заполнено одно из полей");
-        } else {
-          console.log(`Оишибка:${err}`);
-        }
-      } finally {
-        setLoading(false); // состояние загрузки (загрузка завершена)
+  const cbRegister = useCallback(async (name, email, password) => {
+    try {
+      console.log("cbRegister", name, email, password);
+      setLoading(true); //состояние загрузки (идет загрузка)
+      const data = await Auth.register(name, email, password);
+      if (!data) {
+        throw new Error("Неверные имя или пароль пользователя");
       }
-    },
-    []
-  );
+      /* setLoggedIn(true);*/ //статус-авторизовался
+      setIsInfoToolTipOpen(true); // стейт открытого Тултипа
+      setTooltipStatus(`success`); // установим статус Тултипа
+      /* history.push('/signin')*/
+      return data;
+    } catch (err) {
+      setIsInfoToolTipOpen(true); // стейт открытого Тултипа
+      setTooltipStatus(`fail`); // установим статус Тултипа
+      if (err === 400) {
+        console.log("400 - Неккоректно заполнено одно из полей");
+      } else {
+        console.log(`Оишибка:${err}`);
+      }
+    } finally {
+      setLoading(false); // состояние загрузки (загрузка завершена)
+    }
+  }, []);
 
   //ВЫХОД ИЗ СИСТЕМЫ (обнудение стейт-переменных и хранилища)
   const cbLogout = useCallback(() => {
     setLoggedIn(false); // статус не авторизован
-    /*setUserData({});*/
-    localStorage.removeItem("jwt");
+    localStorage.clear();
+    setCurrentUser([]);
+    setAllMovies([]);
+    setSavedMovieIds([]);
   }, []);
 
   useEffect(() => {
@@ -352,7 +350,6 @@ function App() {
     setCurrentPath(location.pathname);
   }, [location]);
 
-  
   if (loading) {
     // на весь компонент App пока идет загрузка рендери это
     return <Preloader />;
@@ -387,20 +384,19 @@ function App() {
                 currentPath={currentPath}
                 component={Movies}
                 loggedIn={loggedIn}
-                isLoading ={loading}
+                isLoading={loading}
                 allMovies={allMovies}
-                savedMovies ={savedMovies}
+                savedMovies={savedMovies}
                 onMoviesCardSave={handleMoviesCardSave}
-                onMoviesCardDelete={handleMoviesCardDelete}
+                onMoviesCardDelete={handleMoviesDelete}
                 onGetAllMovies={handleGetAllMovies}
-                
               />
               <ProtectedRoute
                 path="/saved-movies"
                 loggedIn={loggedIn}
                 component={SavedMovies}
                 savedMovies={savedMovies}
-                onMoviesCardDelete={handleMoviesCardDelete}
+                onMoviesCardDelete={handleMoviesDelete}
                 currentPath={currentPath}
               />
               <ProtectedRoute
@@ -409,7 +405,6 @@ function App() {
                 loggedIn={loggedIn}
                 onLogout={cbLogout}
                 onUpdateUser={cbProfile}
-                
               />
               <Route path="/signin">
                 <Login handleLogin={cbLogin} isLoggedIn={loggedIn} />
@@ -457,35 +452,3 @@ function App() {
 }
 
 export default App;
-
-
-
-/*
-
-
-
-
-
-  //ОБНОВЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ (name, email)
-  function handleUpdateUser(data) {
-    console.log('вызвали запрос apiMain.setUserInfo и передали',data)
-    apiMain
-      .setUserInfo(data)
-      .then((dataFromServer) => {
-        const refreshUser = dataFromServer;
-        console.log('dataFromServer',dataFromServer)
-        setCurrentUser({
-          name: refreshUser.name,
-          email: refreshUser.email,
-          ...currentUser,
-        });
-        
-        //обновление стейта с данными пользователя
-        console.log('обновили', currentUser)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  */

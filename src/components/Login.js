@@ -1,7 +1,7 @@
 import "./Login.css";
 import { Link, Redirect } from "react-router-dom";
 import { useEffect } from "react";
-import useFormWithValidation from "../useFormWithValidation";
+import useFormWithValidation from "../utils/useFormWithValidation";//Валидация по диплому 
 
 function Login({ handleLogin, isLoggedIn }) {
   const { values, handleChange, errors, isValid, resetForm } =
@@ -75,7 +75,7 @@ function Login({ handleLogin, isLoggedIn }) {
                 id="password"
                 placeholder="Пароль"
                 required
-                minLength="2"
+                minLength="8"
                 maxLength="200"
                 tabIndex="2"
                 value={values.password || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
@@ -117,30 +117,3 @@ function Login({ handleLogin, isLoggedIn }) {
 
 export default Login;
 
-/*
-  //переменная состояния полей формы Авторизации
-  const [formValue, setFormValue] = useState({
-    email: '',
-    password: ''
-  });
-
-  // функция записи значений полей формы 
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
-
-  function handleSubmit(event){
-    //запрещаем браузеру переходить по адресу формы, атрибут action не указан
-    event.preventDefault();
-    if (!formValue.email || !formValue.password) {
-      return;
-    }
-    //вызов колбэка Авторизации с передачей полей ввода 
-    handleLogin(formValue.email, formValue.password)
-  }
-  */

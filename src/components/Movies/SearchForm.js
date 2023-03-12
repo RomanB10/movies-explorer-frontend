@@ -1,22 +1,39 @@
 import "./SearchForm.css";
 import FilterCheckBox from "./FilterCheckBox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function SearchForm({onGetAllMovies}) {
-  // переменная состояния пойска
-  const [search, setSearch] = useState("");
 
-  function handleChangeSearch(event) {
-    console.log('нажимаю инпут')
-    setSearch(event.target.value);
-    console.log('search',search)
-  }
+  const [textRequest, setTextRequest] = useState('')// ТЕКСТ ЗАПРОСА
+  const [positionCheckbox, setPositionCheckbox] = useState(false); //Состояние чекбокса
+  
+
+   // вносим данные поля
+  function handleChangeTextRequest(evt) {
+    setTextRequest(evt.target.value);
+}
 
   function handleSubmit(event) {
-      console.log('нажимаю')
+    console.log('нажимаю')
     event.preventDefault();
-    onGetAllMovies();
-  }
+    /*передаю запрос в BeatfilmMoviesApi с текстом запроса и состоянием чекбокса*/
+    onGetAllMovies(textRequest,positionCheckbox);
+}
+
+  function toggleCheckbox(evt) {
+    console.log('evt.target.checked',evt.target.checked)
+    setPositionCheckbox(evt.target.checked);
+    onGetAllMovies(textRequest,positionCheckbox);// выполнение запроса с изменным статусом короткометражки
+}
+
+
+useEffect(()=>{
+  const textRequest = localStorage.getItem('textRequest');
+  const positionCheckbox = localStorage.getItem('positionCheckbox');
+  setTextRequest(textRequest);
+  setPositionCheckbox(positionCheckbox);
+},[])
+
 
   return (
     <form className="form__search"  onSubmit={handleSubmit}>
@@ -29,12 +46,14 @@ function SearchForm({onGetAllMovies}) {
             name="movie"
             id="movie"
             tabIndex="1"
-            value={search || ""}
-            onChange={handleChangeSearch}
+            value={textRequest || " "}
+            onChange={ handleChangeTextRequest}
           ></input>
-          <button className="form__search_btn" type="button"></button>
+          <button className="form__search_btn" type='submit'></button>
         </fildset>
-        <FilterCheckBox 
+        <FilterCheckBox
+         positionCheckbox ={positionCheckbox}
+         onToggleCheckbox ={toggleCheckbox}
     />
       </>
     </form>

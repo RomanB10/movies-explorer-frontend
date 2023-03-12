@@ -1,8 +1,9 @@
-import "./Profile.css";
-import { useEffect, useState, useContext } from "react";
+import { useEffect,useContext } from "react";
 import CurrentUserContext from "./contexts/CurrentUserContext"; // Подписали компонент на контекст
 import { Link } from "react-router-dom";
-import useFormWithValidation from "../useFormWithValidation";
+import useFormWithValidation from "../utils/useFormWithValidation";//Валидация по диплому 
+/*import "./Profile.css";*/
+import './Login.css';
 
 function Profile({ onLogout, onUpdateUser }) {
   //Хук возвращает значение контекста, которое было передано в прорс value провайдера
@@ -51,6 +52,7 @@ function Profile({ onLogout, onUpdateUser }) {
       });
       console.log(errors);
     } else {
+      //общий случай
       handleChange(event);
     }
   }
@@ -155,29 +157,3 @@ function Profile({ onLogout, onUpdateUser }) {
 }
 
 export default Profile;
-
-/*
- //Переменные состояния профайла
-  const [name, setName]= useState('');
-  const [email, setEmail] = useState('');
-
-  function handleChangeName(e){
-    setName(e.target.value);
-  };
-  function handleChangeEmail(e){
-    setEmail(e.target.value);
-  };
-
-  function handleSubmit(e){
-    e.preventDefault();
-    //передаем значения во внешний обработчик для передачи в apiMain.setUserInfo(data) 
-    onUpdateUser({name:name, email:email})
-  };
-
-// Используем даные контекста, чтобы при рендере поля были заполнены текущим пользователем
-  useEffect(()=>{
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-  },[currentUser])
-
-  */

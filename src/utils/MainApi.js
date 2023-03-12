@@ -4,7 +4,6 @@ class MainApi {
         /*this._headers = config._headers;*/
     }
 
-
 //ВОЗВРАЩАЕТ информацию о пользователе с сервера (email и имя)
  // сработает при GET-запросе на URL '/users/me' - получить информацию о текущем пользователе
 getUserInfo(){
@@ -36,10 +35,6 @@ getUserInfo(){
       res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
     );
   }
-
-
-
-
 
 //ЗАГРУЗКА фильмов с сервера
   // сработает при GET-запросе на URL '/movies' - возвращает все фильмы
@@ -85,32 +80,12 @@ getUserInfo(){
     );
   }
 
-  //Установка и снятие лайка (PUT,DELETE) https://localhost:3000/cards/cardId/likes
-  changeLikeCardStatus(idCard, isLiked) {
-    const token = localStorage.getItem('jwt')
-    const addLike = { 
-      method: "PUT", 
-      headers: {authorization: `Bearer ${token}`}
-    };
-    const deleteLike = { 
-      method: "DELETE", 
-      headers: {authorization: `Bearer ${token}`}
-    };
-
-    return fetch(
-      `${this._url}/cards/${idCard}/likes`,
-      isLiked ? deleteLike : addLike
-    ).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
-  }
-
 }
 //Прямо внутри api.js создайте экземпляр класса Api 
 //и экспортируйте этот экземпляр вместо самого класса.
 const apiMain = new MainApi({
-    url: "http://localhost:3005",
-    /*url: "https://api.mesto.romanb10.nomoredomains.rocks"*/
+    /*url: "http://localhost:3005",*/
+    url: "https://api.movies-explorer.romb.nomoredomains.rocks"
    });
    
    export default apiMain;

@@ -1,7 +1,7 @@
 import "./Register.css";
 import { useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
-import useFormWithValidation from "../useFormWithValidation";
+import useFormWithValidation from "../utils/useFormWithValidation";//Валидация по диплому 
 
 function Register({ onRegister, isLoggedIn }) {
   const { values, handleChange, errors, isValid, resetForm } =
@@ -30,6 +30,7 @@ function Register({ onRegister, isLoggedIn }) {
     resetForm({}, {}, false);
   }, [resetForm]);
 console.log('isLoggedIn=',isLoggedIn)
+
   //если пользователь авторизован, рендерить маршрут '/movies'
   if (isLoggedIn) {
     return <Redirect to="/movies" />;

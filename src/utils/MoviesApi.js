@@ -13,13 +13,7 @@ class MoviesApi {
       res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
     );
   }
-
-
-
 }
-
-
-
 //Прямо внутри api.js создайте экземпляр класса Api 
 //и экспортируйте этот экземпляр вместо самого класса.
 const apiMovies = new MoviesApi({
