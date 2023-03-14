@@ -1,12 +1,17 @@
 import "./FilterCheckBox.css";
 
-function FilterCheckBox() {
+function FilterCheckBox({ positionCheckbox, onToggleCheckbox }) {
   return (
     <div className="checkbox-conteiner">
-    <label class="checkbox-ios">
-      <input type="checkbox" />
-      <span class="checkbox-ios-switch"></span>Короткометражки
-    </label>
+      <label className="checkbox-ios">
+        <input
+          type="checkbox"
+          name="checkbox"
+          value={positionCheckbox}
+          onChange={onToggleCheckbox}
+        />
+        <span className="checkbox-ios-switch"></span>Короткометражки
+      </label>
     </div>
   );
 }

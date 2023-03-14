@@ -62,12 +62,23 @@
     color: #FFFFFF;
     font-size: 13px;
     line-height: 16px;
+    border: none;
+    background: transparent;
+    padding: 0;
 }
 
 .form__suggestion_type_edit:hover {
     cursor: pointer;
     opacity: .5;
 }
+
+.form__suggestion_type_inactive {
+    opacity: .5;
+  }
+  
+  .form__suggestion_type_inactive:hover {
+    opacity: .5;
+  }
 
 
 @media (max-width: 768px) {

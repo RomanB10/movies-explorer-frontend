@@ -19,8 +19,11 @@ https://disk.yandex.ru/d/mFtShmJT1diyAA
 **Ссылка на макет Figma**
 * [https://disk.yandex.ru/d/mFtShmJT1diyAA](https://disk.yandex.ru/d/mFtShmJT1diyAA)
 
-**Ссылка на Pull requests**
+**Ссылка на Pull requests level-2-frontend**
 * [https://github.com/RomanB10/movies-explorer-frontend/pull/5](https://github.com/RomanB10/movies-explorer-frontend/pull/5)
+
+**Ссылка на Pull requests level-3-frontend ИТОГОВАЯ**
+* [https://github.com/RomanB10/movies-explorer-frontend/pull/6](https://github.com/RomanB10/movies-explorer-frontend/pull/6)
 
 **Ссылка на cайт**
 * [https://movies-explorer.romb.nomoredomains.work/movies](https://movies-explorer.romb.nomoredomains.work/movies)
