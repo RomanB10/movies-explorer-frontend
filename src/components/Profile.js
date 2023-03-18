@@ -145,7 +145,7 @@ function Profile({ onLogout, onUpdateUser }) {
           </button>
           <Link
             className="form__suggestion form__suggestion_type_signout"
-            to="/signin"
+            to="/"
             onClick={onLogout}
           >
             Выйти из аккаунта

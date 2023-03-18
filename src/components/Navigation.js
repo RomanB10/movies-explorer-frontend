@@ -3,7 +3,6 @@ import { Link, Route, Switch } from "react-router-dom";
 import { SCREEN_MD } from "../components/const-breakpoints";
 
 function Navigation({ currentPath, width, loggedIn }) {
-  console.log("currentPath in navigation", currentPath);
   return (
     <div
       className={

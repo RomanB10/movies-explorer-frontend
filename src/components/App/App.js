@@ -55,7 +55,7 @@ function App() {
   const [allMovies, setAllMovies] = useState([]); // ФИЛЬМЫ c beatfilm-movies
   const [savedMovies, setSavedMovies] = useState([]); // // СОХРАНЕННЫЕ ФИЛЬМЫ
   const [savedMovieIds, setSavedMovieIds] = useState([]); // СОХРАНЕННЫЕ ФИЛЬМЫ ID
-  /*const [searchedMovies, setSearchedMovies] = useState([]);*/
+  const [searchedMovies, setSearchedMovies] = useState([]); // НАЙДЕННЫЕ ФИЛЬМЫ
 
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -183,7 +183,8 @@ function App() {
 
   //ПОЛУЧЕНИЕ ВСЕХ ФИЛЬМОВ ОСНОВНОГО с BeatfilmMoviesApi
   function handleGetAllMovies(textRequest, positionCheckbox) {
-    /*setLoading(true);*/
+   /* setLoading(true);
+    setTimeout(() => setLoading(false), 1000)*/
 
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
@@ -197,6 +198,7 @@ function App() {
     //если уже загружали фильмы
 
     if (!openingMoviesStorage) {
+      setLoading(true);
       apiMovies
         .getAllMovies()
         .then((dataFromServer) => {
@@ -295,6 +297,7 @@ function App() {
           localStorage.setItem("jwt", data.token); // сохраняем в ключ 'jwt' значение tokena
           setTooltipStatus(`success`); // установим статус Тултипа
           setLoggedIn(true); //статус-авторизовался
+          history.push('/movies')
           return data;
         }
         return data;
@@ -347,6 +350,7 @@ function App() {
     setCurrentUser([]);
     setAllMovies([]);
     setSavedMovieIds([]);
+    history.push('/');
   }, []);
 
   useEffect(() => {

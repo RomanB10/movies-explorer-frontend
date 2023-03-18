@@ -12,6 +12,7 @@ function SearchForm({onGetAllMovies}) {
   function handleChangeTextRequest(evt) {
     setTextRequest(evt.target.value);
 }
+console.log(`textRequest in searsForm`, textRequest)
 
   function handleSubmit(event) {
     console.log('нажимаю')
@@ -46,7 +47,7 @@ useEffect(()=>{
             name="movie"
             id="movie"
             tabIndex="1"
-            value={textRequest || " "}
+            value={textRequest || ""}
             onChange={ handleChangeTextRequest}
           ></input>
           <button className="form__search_btn" type='submit'></button>
