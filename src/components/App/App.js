@@ -295,7 +295,6 @@ function App() {
           localStorage.setItem("jwt", data.token); // сохраняем в ключ 'jwt' значение tokena
           setTooltipStatus(`success`); // установим статус Тултипа
           setLoggedIn(true); //статус-авторизовался
-          history.push("/signin");
           return data;
         }
         return data;
@@ -320,17 +319,14 @@ function App() {
   //ЗАПРОС НА РЕГИСТРАЦИЮ
   const cbRegister = useCallback(async (name, email, password) => {
     try {
-      console.log("cbRegister", name, email, password);
       setLoading(true); //состояние загрузки (идет загрузка)
       const data = await Auth.register(name, email, password);
       if (!data) {
         throw new Error("Неверные имя или пароль пользователя");
       }
-      /* setLoggedIn(true);*/ //статус-авторизовался
       setIsInfoToolTipOpen(true); // стейт открытого Тултипа
       setTooltipStatus(`success`); // установим статус Тултипа
-      /* history.push('/signin')*/
-      return data;
+      cbLogin(email,password)// сразу авторизуемся,чтобы рендерить 'movies'
     } catch (err) {
       setIsInfoToolTipOpen(true); // стейт открытого Тултипа
       setTooltipStatus(`fail`); // установим статус Тултипа
@@ -342,7 +338,7 @@ function App() {
     } finally {
       setLoading(false); // состояние загрузки (загрузка завершена)
     }
-  }, []);
+  }, [setLoading, setTooltipStatus, setIsInfoToolTipOpen]);
 
   //ВЫХОД ИЗ СИСТЕМЫ (обнудение стейт-переменных и хранилища)
   const cbLogout = useCallback(() => {
