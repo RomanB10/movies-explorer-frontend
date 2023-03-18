@@ -1,6 +1,6 @@
 import "./Navigation.css";
 import { Link, Route, Switch } from "react-router-dom";
-import { SCREEN_MD } from "../components/const-breakpoints";
+import { SCREEN_MD } from "../utils/constants";
 
 function Navigation({ currentPath, width, loggedIn }) {
   return (

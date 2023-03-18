@@ -2,7 +2,7 @@ import "./Header.css";
 import headerLogo from "../images/logo.svg";
 import Navigation from "./Navigation";
 import { Link } from "react-router-dom";
-import { SCREEN_MD } from "../components/const-breakpoints";
+import { SCREEN_MD } from "../utils/constants";
 
 function Header({ loggedIn, currentPath, onMenuClick, width }) {
 

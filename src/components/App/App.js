@@ -17,7 +17,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import MenuPopup from "../MenuPopup";
 import Footer from "../Footer";
 import Preloader from "../Movies/Preloader";
-import { imageUrl } from "../const-breakpoints";
+import { IMAGE_URL } from "../../utils/constants";
 
 import Login from "../Login";
 import Register from "../Register";
@@ -122,9 +122,9 @@ function App() {
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: imageUrl + data.image.url,
+        image: IMAGE_URL + data.image.url,
         trailerLink: data.trailerLink,
-        thumbnail: imageUrl + data.image.formats.thumbnail.url,
+        thumbnail: IMAGE_URL + data.image.formats.thumbnail.url,
         movieId: data.id,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
@@ -261,14 +261,12 @@ function App() {
       if (user) {
         setLoggedIn(true); //статус-авторизовался
         const refreshUser = user;
-        console.log("чекТОкен вернул бэк", refreshUser);
         setCurrentUser({
           name: refreshUser.name,
           email: refreshUser.email,
           _id: refreshUser._id,
           ...currentUser,
         }); //обновление/дублирование стэйта актуальными данными с сервера name, email
-        console.log("чекТОкен currentUser", currentUser);
       }
     } catch (err) {
       if (err === 400) {

@@ -1,7 +1,7 @@
 import "./MoviesCard.css";
 import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import { useContext, useEffect, useState } from "react";
-import { imageUrl } from "../const-breakpoints";
+import { IMAGE_URL } from "../../utils/constants";
 
 function MoviesCard({
   movie,
@@ -67,7 +67,7 @@ function MoviesCard({
         alt={`Здесь должно быть изображение постера к фильму "${movie.nameRU}"`}
         src={
           currentPath === "/movies"
-            ? `${imageUrl}${movie.image.url}`
+            ? `${IMAGE_URL}${movie.image.url}`
             : currentPath === "/saved-movies"
             ? `${movie.image}`
             : ""
