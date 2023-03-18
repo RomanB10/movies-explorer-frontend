@@ -2,41 +2,72 @@ import "./Navigation.css";
 import { Link, Route, Switch } from "react-router-dom";
 import { SCREEN_MD } from "../components/const-breakpoints";
 
-function Navigation({ currentPath, width }) {
-  /*console.log("currentPath in navigation", currentPath);*/
+function Navigation({ currentPath, width, loggedIn }) {
+  console.log("currentPath in navigation", currentPath);
   return (
     <div
       className={
-        width <= SCREEN_MD && currentPath === "/"
+        width <= SCREEN_MD && currentPath === "/" && !loggedIn
           ? `navigation navigation-lead`
           : `navigation navigation-dropdown`
       }
     >
       <ul
         className={
-          width <= SCREEN_MD && currentPath === "/"
+          width <= SCREEN_MD && currentPath === "/" && !loggedIn
             ? `navigation__list navigation__list-lead`
             : `navigation__list navigation__list-dropdown`
         }
       >
         <Switch>
           <Route exact path="/">
-            <li>
-              <Link
-                to="/signup"
-                className="navigation__link navigation__link_text_small-size"
-              >
-                Регистрация
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/signin"
-                className="navigation__link navigation__link_text_small-size navigation__link_type_enter"
-              >
-                Войти
-              </Link>
-            </li>
+            {loggedIn ? (
+              <>
+                <li>
+                  <Link
+                    to="/"
+                    className="navigation__link  navigation__link_disabled navigation__link_text_large-size"
+                  >
+                    Главная
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/movies"
+                    className="navigation__link navigation__link_text_large-size"
+                  >
+                    Фильмы
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/saved-movies"
+                    className="navigation__link navigation__link_text_large-size"
+                  >
+                    Сохраненные фильмы
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/signup"
+                    className="navigation__link navigation__link_text_small-size"
+                  >
+                    Регистрация
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/signin"
+                    className="navigation__link navigation__link_text_small-size navigation__link_type_enter"
+                  >
+                    Войти
+                  </Link>
+                </li>
+              </>
+            )}
           </Route>
 
           <Route exact path="/movies">
@@ -121,6 +152,27 @@ function Navigation({ currentPath, width }) {
           </Route>
         </Switch>
       </ul>
+      {(currentPath === "/" && loggedIn) ||
+      currentPath === "/movies" ||
+      currentPath === "/saved-movies" ||
+      currentPath === "/profile" ? (
+        <Link to="/profile" className="navigation__link">
+          <div className="navigation__accaunt">
+            <p className="navigation__link">Аккаунт</p>
+            <button className="navigation__button"></button>
+          </div>
+        </Link>
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+}
+
+export default Navigation;
+
+/*
+
       {currentPath === "/movies" ? (
         <Link to="/profile" className="navigation__link">
           <div className="navigation__accaunt">
@@ -144,9 +196,22 @@ function Navigation({ currentPath, width }) {
         </Link>
       ) : (
         <></>
-      )}
-    </div>
-  );
-}
+      )
 
-export default Navigation;
+
+
+
+       {(loggedIn && currentPath === "/") ||
+      (loggedIn && currentPath === "/movies") ||
+      (loggedIn && currentPath === "/saved-movies") ||
+      (loggedIn && currentPath === "/profile") ? (
+        <Link to="/profile" className="navigation__link">
+          <div className="navigation__accaunt">
+            <p className="navigation__link">Аккаунт</p>
+            <button className="navigation__button"></button>
+          </div>
+        </Link>
+      ) : (
+        <></>
+      )}
+      */

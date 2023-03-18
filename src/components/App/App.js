@@ -57,6 +57,18 @@ function App() {
   const [savedMovieIds, setSavedMovieIds] = useState([]); // СОХРАНЕННЫЕ ФИЛЬМЫ ID
   /*const [searchedMovies, setSearchedMovies] = useState([]);*/
 
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = (event) => {
+      setWidth(event.target.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   // открытие/закрытие меню dropdown
   function handleMenuClick() {
     setMenuPopupOpen(true);
@@ -360,17 +372,17 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <SavedMoviesContext.Provider value={savedMovies}>
             {currentPath === "/" ? (
-              <Header currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width}loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/movies" ? (
-              <Header currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width} loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/saved-movies" ? (
-              <Header currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width} loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/signin" ? (
-              <Header currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/signup" ? (
-              <Header currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/profile" ? (
-              <Header currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : (
               <></>
             )}
@@ -437,6 +449,8 @@ function App() {
               isMenuPopupOpen={isMenuPopupOpen}
               onClose={closeAllPopups}
               currentPath={currentPath}
+              width={width}
+              loggedIn={loggedIn}
             />
             <InfoTooltip
               tooltipStatus={tooltipStatus}

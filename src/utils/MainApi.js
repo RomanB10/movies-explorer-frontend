@@ -84,8 +84,8 @@ getUserInfo(){
 //Прямо внутри api.js создайте экземпляр класса Api 
 //и экспортируйте этот экземпляр вместо самого класса.
 const apiMain = new MainApi({
-    /*url: "http://localhost:3005",*/
-    url: "https://api.movies-explorer.romb.nomoredomains.rocks"
+    url: "http://localhost:3005",
+    /*url: "https://api.movies-explorer.romb.nomoredomains.rocks"*/
    });
    
    export default apiMain;
