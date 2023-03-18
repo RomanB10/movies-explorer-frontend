@@ -8,9 +8,9 @@ function MoviesCard({
   onMoviesCardSave,
   onMoviesCardDelete,
   currentPath,
+  onVideoClick,
   ...props
 }) {
-  
   const savedMovies = useContext(SavedMoviesContext);
   /*const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));*/
 
@@ -62,17 +62,24 @@ function MoviesCard({
         <h2 className="movie-card__text">{movie.nameRU}</h2>
         <p className="movie-card__duration">{movieDuration}</p>
       </div>
-      <img
-        className="movie-card__image"
-        alt={`Здесь должно быть изображение постера к фильму "${movie.nameRU}"`}
-        src={
-          currentPath === "/movies"
-            ? `${IMAGE_URL}${movie.image.url}`
-            : currentPath === "/saved-movies"
-            ? `${movie.image}`
-            : ""
-        }
-      />
+      <a
+        className="movie-card__link-image"
+        target="_blank"
+        href={movie.trailerLink}
+        rel="noreferrer"
+      >
+        <img
+          className="movie-card__image"
+          alt={`Здесь должно быть изображение постера к фильму "${movie.nameRU}"`}
+          src={
+            currentPath === "/movies"
+              ? `${IMAGE_URL}${movie.image.url}`
+              : currentPath === "/saved-movies"
+              ? `${movie.image}`
+              : ""
+          }
+        />
+      </a>
       <div className="movie-card__ending-container">
         <button
           className={
