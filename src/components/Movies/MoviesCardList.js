@@ -8,21 +8,22 @@ function MoviesCardList({
   onMoviesCardDelete,
   currentPath,
 }) {
+
   return (
     <div className="contetn">
       <ul className="movie-grid">
         {allMovies.map((item) => (
           <MoviesCard
-            key={item.id || item.movieId}
+            key={item.id || item._id}
             movie={item}
             savedMovies ={savedMovies}
             onMoviesCardSave={onMoviesCardSave}
             onMoviesCardDelete={onMoviesCardDelete}
             currentPath={currentPath}
             {...item}
-          />
-        ))}
-      </ul>
+            />
+         ))}
+               </ul>
       <button
         className="movie-grid__btn"
         type="button"

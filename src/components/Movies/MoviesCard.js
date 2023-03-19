@@ -8,11 +8,10 @@ function MoviesCard({
   onMoviesCardSave,
   onMoviesCardDelete,
   currentPath,
-  onVideoClick,
   ...props
 }) {
   const savedMovies = useContext(SavedMoviesContext);
-  /*const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));*/
+    /*const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));*/
 
   const [isSaved, setIsSaved] = useState(false); // стейт лайка
 
@@ -29,7 +28,9 @@ function MoviesCard({
     }
     if (isSaved) {
       setIsSaved(false);
-      onMoviesCardDelete(movie);
+      console.log('передали на удаление movie',movie)
+      onMoviesCardDelete(savedMovies.filter((i) => i.movieId === movie.id)[0]);
+     /* onMoviesCardDelete(movie)*/
     } else {
       setIsSaved(true);
     }

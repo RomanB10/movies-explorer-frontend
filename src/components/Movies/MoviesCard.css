@@ -36,8 +36,9 @@
     color: #8B8B8B;
 }
 
-.movie-card__link-image{
-
+.movie-card__link-image {
+    height: 100%;
+    width: 100%;
 }
 
 .movie-card__image {

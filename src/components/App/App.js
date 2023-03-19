@@ -18,6 +18,7 @@ import MenuPopup from "../MenuPopup";
 import Footer from "../Footer";
 import Preloader from "../Movies/Preloader";
 import { IMAGE_URL } from "../../utils/constants";
+import ShortMoviesFilter from "../ShortMoviesFilter/ShortMoviesFilter";
 
 import Login from "../Login";
 import Register from "../Register";
@@ -77,6 +78,15 @@ function App() {
     setMenuPopupOpen(false);
     setIsInfoToolTipOpen(false);
   }
+/*
+  useEffect(() => {
+    if (localStorage.getItem('searchedFilms')) {
+      const startedSearch = JSON.parse(localStorage.getItem('searchedFilms'));
+      const searchResult = ShortMoviesFilter(startedSearch, textRequest, positionCheckbox);
+      setSearchedMovies(searchResult);
+    }
+  }, [currentUser])
+*/
 
   //ОБНОВЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ (name, email)
   const cbProfile = useCallback(
@@ -134,32 +144,22 @@ function App() {
         setSavedMovies([newMovie, ...savedMovies]); //при сеттере необходимо создавать новый массив, клонируя предыдущий ...spread
         setSavedMovieIds([newMovie.movieId, ...savedMovieIds]);
         /* setSearchedMovies([newMovie, ...savedMovies])*/
-        /* localStorage.setItem("savedMovies", JSON.stringify(savedMovies));*/
+        localStorage.setItem("savedMovieIds", JSON.stringify(savedMovies));
       })
       .catch((err) => {
         console.log(err);
       });
   }
   //УДАЛЕНИЕ СОХР.ФИЛЬМА С ОСНОВНОГО API
-  function handleMoviesDelete(movies) {
+  function handleMoviesDelete(movie) {
     apiMain
-      .removeMoviesCard(movies._id || movies.id)
+      .removeMoviesCard(movie._id )
       .then(() => {
-        //вариант для сохраненных фильмов
         const updatedMoviesList = savedMovies.filter(function (savedMovie) {
-          return savedMovie._id !== movies._id;
+          return savedMovie._id !== movie._id;
         });
-
         //возвращаем массив без удаленной карточки
         setSavedMovies(updatedMoviesList);
-
-        //вариант для  фильмов со страницы фильмы
-        const updatedMoviesIdList = savedMovieIds.filter(function (
-          savedMovieId
-        ) {
-          return savedMovieId !== movies.id;
-        });
-        setSavedMovieIds(updatedMoviesIdList);
       })
       .catch((err) => {
         console.log(err);
@@ -172,7 +172,7 @@ function App() {
       apiMain
         .getAllMoviesMainApi()
         .then((dataFromServer) => {
-          /*localStorage.setItem("savedMovies", JSON.stringify(dataFromServer));*/
+          localStorage.setItem("savedMovies", JSON.stringify(dataFromServer));
           setSavedMovies(dataFromServer);
         })
         .catch((err) => {
@@ -192,7 +192,6 @@ function App() {
     localStorage.setItem("positionCheckbox", positionCheckbox); //Запись пойска
 
     const openingMoviesStorage = JSON.parse(localStorage.getItem("AllMovies"));
-    /* const searchedFilms = ShortMoviesFilter(openingMoviesStorage ,textRequest,positionCheckbox);*/
 
     console.log(`openingMoviesStorage`, openingMoviesStorage);
     //если уже загружали фильмы
@@ -203,10 +202,7 @@ function App() {
         .getAllMovies()
         .then((dataFromServer) => {
           setAllMovies(dataFromServer);
-          localStorage.setItem(
-            "AllMovies",
-            JSON.stringify(dataFromServer)
-          ); /*ЗАПИСЬ В СТРОКУ ПЕРВОЙ ЗАГРУЗКИ ФИЛЬМОВ*/
+          localStorage.setItem("AllMovies",JSON.stringify(dataFromServer)); /*ЗАПИСЬ В СТРОКУ ПЕРВОЙ ЗАГРУЗКИ ФИЛЬМОВ*/
         })
         .catch((err) => {
           console.log(
@@ -220,6 +216,18 @@ function App() {
       setAllMovies(openingMoviesStorage);
     }
   }
+/*
+  useEffect(() => {
+    if (allMovies.length > 0) {
+      const searchedFilms = ShortMoviesFilter(allMovies, textRequest, positionCheckbox);
+      console.log(`searchedFilms`,searchedFilms)
+      localStorage.setItem('searchedFilms', JSON.stringify(searchedFilms));
+
+      setSearchedMovies(searchedFilms);
+
+    }
+  }, [allMovies, textRequest, positionCheckbox]);
+*/
   //ЗАПРОС к моему серверу за данными текущего пользователя при каждом рендере
   useEffect(() => {
     if (loggedIn) {
@@ -314,7 +322,7 @@ function App() {
         setLoading(false); // состояние загрузки (загрузка завершена)
       }
     },
-    [setLoading, setLoggedIn, setTooltipStatus, setIsInfoToolTipOpen]
+    []
   );
 
   //ЗАПРОС НА РЕГИСТРАЦИЮ
