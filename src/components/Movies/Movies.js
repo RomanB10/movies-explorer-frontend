@@ -4,22 +4,26 @@ import MoviesCardList from "./MoviesCardList";
 /*import Preloader from "./Preloader";*/
 
 function Movies({
-  allMovies,
+  moviesList,
   savedMovies,
   onMoviesCardSave,
   onMoviesCardDelete,
   onGetAllMovies,
   currentPath,
+  elseButton,
+  onSearchSavedMovie,
 }) {
   return (
     <section className="movies-container">
-      <SearchForm onGetAllMovies={onGetAllMovies} />
+      <SearchForm onGetAllMovies={onGetAllMovies}  currentPath={currentPath}/>
       <MoviesCardList
-        allMovies={allMovies}
+        moviesList={moviesList}
         savedMovies ={savedMovies}
         onMoviesCardSave={onMoviesCardSave}
         onMoviesCardDelete={onMoviesCardDelete}
         currentPath={currentPath}
+        elseButton ={elseButton}
+        onSearchSavedMovie ={onSearchSavedMovie}
       />
     </section>
   );

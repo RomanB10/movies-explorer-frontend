@@ -4,12 +4,11 @@ import MoviesCard from "../Movies/MoviesCard";
 /*import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import { useContext } from "react";*/
 
-function SavedMovies({savedMovies,currentPath,onMoviesCardDelete}) {
+function SavedMovies({savedMovies,currentPath,onMoviesCardDelete,onSearchSavedMovie}) {
 
-  
   return (
     <section className="movies-container">
-      <SearchForm />
+      <SearchForm onSearchSavedMovie ={onSearchSavedMovie}/>
       <div className="contetn">
         <ul className="movie-grid">
         {savedMovies.map((item)=>(

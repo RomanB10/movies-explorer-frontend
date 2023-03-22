@@ -39,7 +39,7 @@
     outline-color: #00f;
 }
 
-.form__search_btn {
+.form__search-btn {
     padding-right: 40px;
     background-image: url(../../images/buttons/findBtn.svg);
     background-color: transparent;
@@ -50,7 +50,11 @@
     background-repeat: no-repeat;
 }
 
-.form__search_btn:hover {
+.form__search-btn_type_inactive {
+    opacity: .5;
+}
+
+.form__search-btn:hover {
     cursor: pointer;
     opacity: 0.5;
 }

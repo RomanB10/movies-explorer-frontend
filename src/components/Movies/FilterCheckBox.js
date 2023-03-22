@@ -7,7 +7,7 @@ function FilterCheckBox({ positionCheckbox, onToggleCheckbox }) {
         <input
           type="checkbox"
           name="checkbox"
-          value={positionCheckbox}
+          value={positionCheckbox || false}
           onChange={onToggleCheckbox}
         />
         <span className="checkbox-ios-switch"></span>Короткометражки

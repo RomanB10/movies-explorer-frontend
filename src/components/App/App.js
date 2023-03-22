@@ -55,10 +55,12 @@ function App() {
 
   const [allMovies, setAllMovies] = useState([]); // ФИЛЬМЫ c beatfilm-movies
   const [savedMovies, setSavedMovies] = useState([]); // // СОХРАНЕННЫЕ ФИЛЬМЫ
-  const [savedMovieIds, setSavedMovieIds] = useState([]); // СОХРАНЕННЫЕ ФИЛЬМЫ ID
-  const [searchedMovies, setSearchedMovies] = useState([]); // НАЙДЕННЫЕ ФИЛЬМЫ
+  const [moviesList, setMoviesList] = useState([]); // Фильмы для отображения на странице ФИЛЬМЫ
+  const [searchedMovies, setSearchedMovies] = useState([]); // НАЙДЕННЫЕ ФИЛЬМЫ 
+  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]); // НАЙДЕННЫЕ СОХРАНЕННЫЕ ФИЛЬМЫ 
 
   const [width, setWidth] = useState(window.innerWidth);
+  const [elseButton,setElseButton] = useState(false);// Стейт кнопки "Еще"
 
   useEffect(() => {
     const handleResize = (event) => {
@@ -78,20 +80,10 @@ function App() {
     setMenuPopupOpen(false);
     setIsInfoToolTipOpen(false);
   }
-/*
-  useEffect(() => {
-    if (localStorage.getItem('searchedFilms')) {
-      const startedSearch = JSON.parse(localStorage.getItem('searchedFilms'));
-      const searchResult = ShortMoviesFilter(startedSearch, textRequest, positionCheckbox);
-      setSearchedMovies(searchResult);
-    }
-  }, [currentUser])
-*/
 
   //ОБНОВЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ (name, email)
   const cbProfile = useCallback(
     async (data) => {
-      /*console.log(`cbProfile=`,data)*/
       try {
         setLoading(true); //состояние загрузки (идет загрузка)
         const user = await apiMain.setUserInfo(data);
@@ -142,9 +134,7 @@ function App() {
       .then((dataFromServer) => {
         const newMovie = dataFromServer;
         setSavedMovies([newMovie, ...savedMovies]); //при сеттере необходимо создавать новый массив, клонируя предыдущий ...spread
-        setSavedMovieIds([newMovie.movieId, ...savedMovieIds]);
-        /* setSearchedMovies([newMovie, ...savedMovies])*/
-        localStorage.setItem("savedMovieIds", JSON.stringify(savedMovies));
+        localStorage.setItem("savedMovieIds", JSON.stringify([newMovie, ...savedMovies]));
       })
       .catch((err) => {
         console.log(err);
@@ -185,14 +175,9 @@ function App() {
   function handleGetAllMovies(textRequest, positionCheckbox) {
    /* setLoading(true);
     setTimeout(() => setLoading(false), 1000)*/
-
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
-    localStorage.setItem("textRequest", textRequest); //Запись пойска
-    localStorage.setItem("positionCheckbox", positionCheckbox); //Запись пойска
-
     const openingMoviesStorage = JSON.parse(localStorage.getItem("AllMovies"));
-
     console.log(`openingMoviesStorage`, openingMoviesStorage);
     //если уже загружали фильмы
 
@@ -216,18 +201,44 @@ function App() {
       setAllMovies(openingMoviesStorage);
     }
   }
-/*
+
+
+
+
+
+  function handleSearchSavedMovie(textRequest, positionCheckbox) {
+
+      const searchedSavedFilms = ShortMoviesFilter(savedMovies, textRequest, positionCheckbox);
+      setSearchedSavedMovies(searchedSavedFilms);
+      setTextRequest(textRequest);
+      setPositionCheckbox(positionCheckbox);
+
+  }
+
+
+// при условии уже загруженных фильмов с Beatfilm
   useEffect(() => {
     if (allMovies.length > 0) {
-      const searchedFilms = ShortMoviesFilter(allMovies, textRequest, positionCheckbox);
-      console.log(`searchedFilms`,searchedFilms)
-      localStorage.setItem('searchedFilms', JSON.stringify(searchedFilms));
+      console.log(`allMovies.length`,allMovies.length)
+      const searchedResult = ShortMoviesFilter(allMovies, textRequest, positionCheckbox);
+      console.log(`searchedFilms`,searchedResult)
+      localStorage.setItem("textRequest", textRequest); //Запись пойска
+      localStorage.setItem("positionCheckbox", positionCheckbox); //Запись пойска
+      localStorage.setItem('searchedResult', JSON.stringify(searchedResult));
 
-      setSearchedMovies(searchedFilms);
+      setSearchedMovies(searchedResult);
 
     }
+    return;
   }, [allMovies, textRequest, positionCheckbox]);
-*/
+
+  // при условии уже найденных фильмов по поиску
+  useEffect(() => {
+    if (searchedMovies.length > 0) {
+        setMoviesList(searchedMovies.slice(0, 6));
+      }
+    },[searchedMovies]);
+
   //ЗАПРОС к моему серверу за данными текущего пользователя при каждом рендере
   useEffect(() => {
     if (loggedIn) {
@@ -235,17 +246,12 @@ function App() {
         .getUserInfo()
         .then((dataFromServer) => {
           const refreshUser = dataFromServer;
-          console.log(
-            "apiMain.getUserInfo Вернул дату refreshUser",
-            refreshUser
-          );
           setCurrentUser({
             name: refreshUser.name,
             email: refreshUser.email,
             _id: refreshUser._id,
             ...currentUser,
           }); //обновление стейта с данными пользователя
-          console.log("apiMain.getUserInfo CurrentUser", currentUser);
         })
         .catch((err) => {
           console.log(err);
@@ -253,12 +259,12 @@ function App() {
     }
   }, [loggedIn]);
 
+
   //ЗАПРОС ПРОВЕРКИ ТОКЕНА
   const tokenCheck = useCallback(async () => {
     try {
       setLoading(true); //состояние загрузки (идет загрузка)
       let jwt = localStorage.getItem("jwt"); // получаем значение по ключю из хранилища
-      console.log("jwt", jwt);
       if (!jwt) {
         throw new Error("Токен не обнаружен");
       }
@@ -349,13 +355,31 @@ function App() {
     }
   }, [setLoading, setTooltipStatus, setIsInfoToolTipOpen]);
 
+ 
+  
+/*
+  useEffect(() => {
+    if (allMovies.length === 0) {
+      setElseButton(false);
+      console.log('false',allMovies)
+    }
+      setElseButton(true)
+      console.log('true',allMovies)
+  }, [setElseButton]);*/
+
+
+
+
   //ВЫХОД ИЗ СИСТЕМЫ (обнудение стейт-переменных и хранилища)
   const cbLogout = useCallback(() => {
     setLoggedIn(false); // статус не авторизован
     localStorage.clear();
     setCurrentUser([]);
     setAllMovies([]);
-    setSavedMovieIds([]);
+    setSavedMovies([]);
+    setMoviesList([]);
+    setSearchedSavedMovies([]);
+    setSearchedMovies([]);
     history.push('/');
   }, []);
 
@@ -402,11 +426,13 @@ function App() {
                 component={Movies}
                 loggedIn={loggedIn}
                 isLoading={loading}
-                allMovies={allMovies}
+                moviesList={moviesList}
                 savedMovies={savedMovies}
                 onMoviesCardSave={handleMoviesCardSave}
                 onMoviesCardDelete={handleMoviesDelete}
                 onGetAllMovies={handleGetAllMovies}
+                elseButton = {elseButton}
+                onSearchSavedMovie ={handleSearchSavedMovie}
               />
               <ProtectedRoute
                 path="/saved-movies"
@@ -415,6 +441,7 @@ function App() {
                 savedMovies={savedMovies}
                 onMoviesCardDelete={handleMoviesDelete}
                 currentPath={currentPath}
+                onSearchSavedMovie ={handleSearchSavedMovie}
               />
               <ProtectedRoute
                 path="/profile"

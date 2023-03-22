@@ -2,17 +2,18 @@ import "./MoviesCardList.css";
 import MoviesCard from "./MoviesCard";
 
 function MoviesCardList({
-  allMovies,
+  moviesList,
   savedMovies,
   onMoviesCardSave,
   onMoviesCardDelete,
   currentPath,
+  elseButton,
 }) {
-
+  console.log(`moviesList`,moviesList)
   return (
     <div className="contetn">
       <ul className="movie-grid">
-        {allMovies.map((item) => (
+        {moviesList.map((item) => (
           <MoviesCard
             key={item.id || item._id}
             movie={item}
@@ -25,7 +26,7 @@ function MoviesCardList({
          ))}
                </ul>
       <button
-        className="movie-grid__btn"
+        className={elseButton?`movie-grid__btn`: `movie-grid__btn movie-grid__btn_type_hidden`}
         type="button"
         aria-label="Еще показать фильмы"
       >
