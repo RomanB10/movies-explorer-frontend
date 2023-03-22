@@ -5,6 +5,7 @@
 }
 
 .movie-grid__btn_type_hidden{
+    visibility: hidden;
     margin-top: 115px;
     background-color: #202020;
     color: #202020;

@@ -12,6 +12,7 @@ function Movies({
   currentPath,
   elseButton,
   onSearchSavedMovie,
+  onHandleLoadMoreMovies,
 }) {
   return (
     <section className="movies-container">
@@ -24,6 +25,7 @@ function Movies({
         currentPath={currentPath}
         elseButton ={elseButton}
         onSearchSavedMovie ={onSearchSavedMovie}
+        onHandleLoadMoreMovies ={onHandleLoadMoreMovies}
       />
     </section>
   );

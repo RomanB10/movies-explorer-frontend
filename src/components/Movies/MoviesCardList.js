@@ -8,6 +8,7 @@ function MoviesCardList({
   onMoviesCardDelete,
   currentPath,
   elseButton,
+  onHandleLoadMoreMovies,
 }) {
   console.log(`moviesList`,moviesList)
   return (
@@ -29,6 +30,7 @@ function MoviesCardList({
         className={elseButton?`movie-grid__btn`: `movie-grid__btn movie-grid__btn_type_hidden`}
         type="button"
         aria-label="Еще показать фильмы"
+        onClick = {onHandleLoadMoreMovies}
       >
         Еще
       </button>

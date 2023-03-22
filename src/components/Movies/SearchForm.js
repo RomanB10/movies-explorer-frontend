@@ -52,7 +52,7 @@ function SearchForm({ onGetAllMovies,onSearchSavedMovie,currentPath }) {
             placeholder="Фильм"
             name="movie"
             id="movie"
-            required
+           /* required*/
             title="Нужно ввести ключевое слово"
             tabIndex="1"
             value={textRequest || ""}

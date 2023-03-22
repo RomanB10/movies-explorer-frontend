@@ -32,6 +32,17 @@ import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import apiMain from "../../utils/MainApi";
 import apiMovies from "../../utils/MoviesApi";
 
+import {SCREEN_XS,
+  SCREEN_SM,
+   SCREEN_MD,
+  SCREEN_LG,
+  LOAD_SIZE_LG,
+   LOAD_SIZE_MD,
+  LOAD_SIZE_SM,
+   LOAD_CARD_SIZE_LG,
+  LOAD_CARD_SIZE_MD,
+   LOAD_CARD_SIZE_SM} from '../../utils/constants';
+
 function App() {
   const history = useHistory();
 
@@ -58,6 +69,9 @@ function App() {
   const [moviesList, setMoviesList] = useState([]); // Фильмы для отображения на странице ФИЛЬМЫ
   const [searchedMovies, setSearchedMovies] = useState([]); // НАЙДЕННЫЕ ФИЛЬМЫ 
   const [searchedSavedMovies, setSearchedSavedMovies] = useState([]); // НАЙДЕННЫЕ СОХРАНЕННЫЕ ФИЛЬМЫ 
+
+  const [displayMovies, setDisplayMovies] = useState(0)
+  const [elseMovies, setElseMovies] = useState(0)
 
   const [width, setWidth] = useState(window.innerWidth);
   const [elseButton,setElseButton] = useState(false);// Стейт кнопки "Еще"
@@ -232,12 +246,49 @@ function App() {
     return;
   }, [allMovies, textRequest, positionCheckbox]);
 
+
+  // количество отображаемых фильмов + количество добавляемых 
+  useEffect(() => {
+    if (width > SCREEN_MD) {
+      setDisplayMovies(12);
+      setElseMovies(3);
+    } else if (width >SCREEN_SM) {
+      setDisplayMovies(8);
+      setElseMovies(2);
+    } else {
+      setDisplayMovies(5);
+      setElseMovies(1);
+    }
+    return
+  }, [width])
+
   // при условии уже найденных фильмов по поиску
   useEffect(() => {
     if (searchedMovies.length > 0) {
-        setMoviesList(searchedMovies.slice(0, 6));
+    if (searchedMovies.length > displayMovies) {
+        setMoviesList(searchedMovies.slice(0, displayMovies));
+        setElseButton(true);//кнопка 'еще' отрисовывается
+      } else {
+        setMoviesList(searchedMovies);
       }
-    },[searchedMovies]);
+    }
+      },[searchedMovies,displayMovies]);
+
+    // функция добавления фильмов
+    function handleLoadMoreMovies() {
+      console.log('нажал кнопку `еще`')
+      console.log('displayMovies',displayMovies)
+      setDisplayMovies((prev) => prev + elseMovies);
+      console.log('displayMovies',displayMovies)
+    }
+
+  //отображение карточек при невозможности загрузить больше
+  //кнопка 'еще' скрывается
+  useEffect(() => {
+    if (moviesList.length === searchedMovies.length) {
+      setElseButton(false);
+    }
+  }, [moviesList, searchedMovies]);
 
   //ЗАПРОС к моему серверу за данными текущего пользователя при каждом рендере
   useEffect(() => {
@@ -367,7 +418,14 @@ function App() {
       console.log('true',allMovies)
   }, [setElseButton]);*/
 
-
+/*  useEffect(() => {
+    if (!moviesList.length === searchedMovies.length) {
+      setElseButton(true);
+    }
+    else{
+      setElseButton(false);
+    }
+  }, [moviesList, searchedMovies]);*/
 
 
   //ВЫХОД ИЗ СИСТЕМЫ (обнудение стейт-переменных и хранилища)
@@ -433,6 +491,7 @@ function App() {
                 onGetAllMovies={handleGetAllMovies}
                 elseButton = {elseButton}
                 onSearchSavedMovie ={handleSearchSavedMovie}
+                onHandleLoadMoreMovies ={handleLoadMoreMovies}
               />
               <ProtectedRoute
                 path="/saved-movies"

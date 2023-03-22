@@ -8,11 +8,19 @@ function ShortMoviesFilter(movies, textRequest, positionCheckbox){
     if (positionCheckbox) {
        shortMoviesFilter = shortMoviesFilter.filter((movie)=> movie.duration <= 40)
     }
-    
+
+    if (textRequest==='' || textRequest=== null || textRequest=== 'undefined') {
+      console.log('условие когда textRequest = null')
+      searchResult = shortMoviesFilter;
+    } else {
+
     //отсеиваем по полю с названием
     searchResult = shortMoviesFilter.filter((movie)=>{
         return movie.nameRU.toLowerCase().includes(textRequest.toLowerCase())
     })
+  }
+    
+
     console.log('В компонент фильтрации итог ПОИСКА=',searchResult)
     return searchResult;
 }
