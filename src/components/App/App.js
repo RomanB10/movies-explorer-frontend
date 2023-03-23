@@ -59,9 +59,10 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false); // информация о нашей авторизации (авторизован или нет)
   const [loading, setLoading] = useState(true); // информация о загрузке(идет загрузка или нет)
 
-  const [textRequest, setTextRequest] = useState(""); // ТЕКСТ ЗАПРОСА
+  const [textRequest, setTextRequest] = useState(""); // текст запроса на странице 'фильмы'
+  const [textRequestSavedMovies, setTextRequestSavedMovies] = useState(""); // текст запроса на странице 'сохраненные фильмы'
   const [positionCheckbox, setPositionCheckbox] = useState(false); //Состояние чекбокса
-
+  
   const [currentUser, setCurrentUser] = useState({}); // ПОЛЬЗОВАТЕЛЬ
 
   const [allMovies, setAllMovies] = useState([]); // ФИЛЬМЫ c beatfilm-movies
@@ -220,14 +221,27 @@ function App() {
 
 
 
-  function handleSearchSavedMovie(textRequest, positionCheckbox) {
-
-      const searchedSavedFilms = ShortMoviesFilter(savedMovies, textRequest, positionCheckbox);
-      setSearchedSavedMovies(searchedSavedFilms);
-      setTextRequest(textRequest);
-      setPositionCheckbox(positionCheckbox);
-
+  function handleSearchSavedMovie(textRequestSavedMovies, positionCheckbox) {
+    console.log("приходит в обработчик сохраненные фильмы ИНПУТ=", textRequestSavedMovies)
+      const searchedSavedMovies = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
+      
+      setTextRequestSavedMovies(textRequestSavedMovies);
+      setPositionCheckbox(positionCheckbox)
+      setSearchedSavedMovies(searchedSavedMovies);
+      
   }
+
+  useEffect(() => {
+    if (searchedSavedMovies.length > 0) {
+        const searchedResult = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
+        console.log(`searchedFilms в saved-movies`,searchedResult)
+        console.log("effect SAVED-MOVIES ИНПУТ=", textRequestSavedMovies)
+        localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies); //Запись пойска
+        setSearchedSavedMovies(searchedResult);
+    }
+    
+    return localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies);
+}, [savedMovies, textRequestSavedMovies, positionCheckbox]);
 
 
 // при условии уже загруженных фильмов с Beatfilm
@@ -235,7 +249,7 @@ function App() {
     if (allMovies.length > 0) {
       console.log(`allMovies.length`,allMovies.length)
       const searchedResult = ShortMoviesFilter(allMovies, textRequest, positionCheckbox);
-      console.log(`searchedFilms`,searchedResult)
+      console.log(`searchedFilms в movies`,searchedResult)
       localStorage.setItem("textRequest", textRequest); //Запись пойска
       localStorage.setItem("positionCheckbox", positionCheckbox); //Запись пойска
       localStorage.setItem('searchedResult', JSON.stringify(searchedResult));
@@ -406,26 +420,7 @@ function App() {
     }
   }, [setLoading, setTooltipStatus, setIsInfoToolTipOpen]);
 
- 
-  
-/*
-  useEffect(() => {
-    if (allMovies.length === 0) {
-      setElseButton(false);
-      console.log('false',allMovies)
-    }
-      setElseButton(true)
-      console.log('true',allMovies)
-  }, [setElseButton]);*/
 
-/*  useEffect(() => {
-    if (!moviesList.length === searchedMovies.length) {
-      setElseButton(true);
-    }
-    else{
-      setElseButton(false);
-    }
-  }, [moviesList, searchedMovies]);*/
 
 
   //ВЫХОД ИЗ СИСТЕМЫ (обнудение стейт-переменных и хранилища)
@@ -490,7 +485,6 @@ function App() {
                 onMoviesCardDelete={handleMoviesDelete}
                 onGetAllMovies={handleGetAllMovies}
                 elseButton = {elseButton}
-                onSearchSavedMovie ={handleSearchSavedMovie}
                 onHandleLoadMoreMovies ={handleLoadMoreMovies}
               />
               <ProtectedRoute
@@ -498,6 +492,7 @@ function App() {
                 loggedIn={loggedIn}
                 component={SavedMovies}
                 savedMovies={savedMovies}
+                searchedSavedMovies ={searchedSavedMovies}
                 onMoviesCardDelete={handleMoviesDelete}
                 currentPath={currentPath}
                 onSearchSavedMovie ={handleSearchSavedMovie}

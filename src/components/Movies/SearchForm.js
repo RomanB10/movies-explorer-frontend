@@ -3,44 +3,60 @@ import FilterCheckBox from "./FilterCheckBox";
 import { useState, useEffect } from "react";
 import useFormWithValidation from "../../utils/useFormWithValidation";
 
-function SearchForm({ onGetAllMovies,onSearchSavedMovie,currentPath }) {
-
-  const [textRequest, setTextRequest] = useState(""); // ТЕКСТ ЗАПРОСА
+function SearchForm({ onGetAllMovies, onSearchSavedMovie, currentPath }) {
+  const [textRequest, setTextRequest] = useState(""); // текст запроса на странице 'фильмы'
+  const [textRequestSavedMovies, setTextRequestSavedMovies] = useState(""); // текст запроса на странице 'сохраненные фильмы'
   const [positionCheckbox, setPositionCheckbox] = useState(false); //Состояние чекбокса
-
-
+    
   // вносим данные поля
   function handleChangeTextRequest(evt) {
-      setTextRequest(evt.target.value);
-    }
-  console.log(`textRequest in searsForm`, textRequest);
+    if (currentPath === "/movies"){
+    setTextRequest(evt.target.value);}
+    else {
+    setTextRequestSavedMovies(evt.target.value)}
+  }
 
   function handleSubmit(event) {
-    console.log("нажимаю");
+    console.log("НАЖАЛ");
     event.preventDefault();
-    if (currentPath === "/movies"){
-    /*передаю запрос в BeatfilmMoviesApi с текстом запроса и состоянием чекбокса*/
-    onGetAllMovies(textRequest, positionCheckbox);}
-    else {
-    /*передаю запрос в мой Api с текстом запроса и состоянием чекбокса*/
-    onSearchSavedMovie(textRequest, positionCheckbox)}
+    if (currentPath === "/movies") {
+      /*передаю запрос в BeatfilmMoviesApi с текстом запроса и состоянием чекбокса*/
+      console.log('ПОИСК на /movies',textRequest, positionCheckbox)
+      onGetAllMovies(textRequest, positionCheckbox);
+    } else {
+      /*передаю запрос в мой Api с текстом запроса и состоянием чекбокса*/
+      /*console.log('выполняется поиск на /saved-movies',textRequest, positionCheckbox)
+      onSearchSavedMovie(textRequest, positionCheckbox);*/
+      console.log('ПОИСК на /saved-movies',textRequestSavedMovies, positionCheckbox)
+      onSearchSavedMovie(textRequestSavedMovies, positionCheckbox);
+    }
   }
 
   function toggleCheckbox(evt) {
+    console.log("ПЕРЕКЛЮЧИЛ");
     console.log("evt.target.checked", evt.target.checked);
     setPositionCheckbox(evt.target.checked);
-    if (currentPath === "/movies"){
-    onGetAllMovies(textRequest, positionCheckbox);} // выполнение запроса с изменным статусом короткометражки
-    else{
-      onSearchSavedMovie(textRequest, positionCheckbox)}
+    if (currentPath === "/movies") {
+      console.log('toggle на /movies',textRequest, positionCheckbox)
+      onGetAllMovies(textRequest, positionCheckbox);
+    } // выполнение запроса с изменным статусом короткометражки
+    else {
+      /*console.log('выполняется toggle на /saved-movies',textRequest, positionCheckbox)
+      onSearchSavedMovie(textRequest, positionCheckbox);*/
+      console.log('toggle /saved-movies',textRequestSavedMovies, positionCheckbox)
+      onSearchSavedMovie(textRequestSavedMovies, positionCheckbox);
+    }
+    return
   }
 
   useEffect(() => {
     const textRequest = localStorage.getItem("textRequest");
     const positionCheckbox = localStorage.getItem("positionCheckbox");
+    const textRequestSavedMovies = localStorage.getItem("textRequestSavedMovies");
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
-  }, []);
+    setTextRequestSavedMovies(textRequestSavedMovies);
+  }, [setTextRequest,setPositionCheckbox,setTextRequestSavedMovies]);
 
   return (
     <form className="form__search" onSubmit={handleSubmit}>
@@ -52,16 +68,14 @@ function SearchForm({ onGetAllMovies,onSearchSavedMovie,currentPath }) {
             placeholder="Фильм"
             name="movie"
             id="movie"
-           /* required*/
+            /* required*/
             title="Нужно ввести ключевое слово"
             tabIndex="1"
-            value={textRequest || ""}
+            /*value={currentPath ==='/movies'? textRequest: currentPath ==='/saved-movies'? textRequestSavedMovies:""}*/
+            value={currentPath ==='/movies'? textRequest:textRequestSavedMovies}
             onChange={handleChangeTextRequest}
           ></input>
-          <button
-            className='form__search-btn'
-            type="submit"
-          ></button>
+          <button className="form__search-btn" type="submit"></button>
         </fildset>
         <FilterCheckBox
           positionCheckbox={positionCheckbox}
@@ -73,9 +87,6 @@ function SearchForm({ onGetAllMovies,onSearchSavedMovie,currentPath }) {
 }
 
 export default SearchForm;
-
-
-
 
 /*
 function SearchForm({ onGetAllMovies,onSearchSavedMovie,currentPath }) {
@@ -196,5 +207,3 @@ function SearchForm({ onGetAllMovies,onSearchSavedMovie,currentPath }) {
 
 export default SearchForm;
 */
-
-
