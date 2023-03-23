@@ -193,7 +193,7 @@ function App() {
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
     const openingMoviesStorage = JSON.parse(localStorage.getItem("AllMovies"));
-    console.log(`openingMoviesStorage`, openingMoviesStorage);
+    /*console.log(`openingMoviesStorage`, openingMoviesStorage);*/
     //если уже загружали фильмы
 
     if (!openingMoviesStorage) {
@@ -234,7 +234,7 @@ function App() {
   useEffect(() => {
     if (searchedSavedMovies.length > 0) {
         const searchedResult = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
-        console.log(`searchedFilms в saved-movies`,searchedResult)
+        /*console.log(`searchedFilms в saved-movies`,searchedResult)*/
         console.log("effect SAVED-MOVIES ИНПУТ=", textRequestSavedMovies)
         localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies); //Запись пойска
         setSearchedSavedMovies(searchedResult);
@@ -249,15 +249,15 @@ function App() {
     if (allMovies.length > 0) {
       console.log(`allMovies.length`,allMovies.length)
       const searchedResult = ShortMoviesFilter(allMovies, textRequest, positionCheckbox);
-      console.log(`searchedFilms в movies`,searchedResult)
+      /*console.log(`searchedFilms в movies`,searchedResult)*/
       localStorage.setItem("textRequest", textRequest); //Запись пойска
-      localStorage.setItem("positionCheckbox", positionCheckbox); //Запись пойска
+      localStorage.setItem("positionCheckbox", positionCheckbox); //Запись положения чекбоксаЫ
       localStorage.setItem('searchedResult', JSON.stringify(searchedResult));
 
       setSearchedMovies(searchedResult);
 
     }
-    return;
+    return ;
   }, [allMovies, textRequest, positionCheckbox]);
 
 

@@ -34,17 +34,18 @@ function SearchForm({ onGetAllMovies, onSearchSavedMovie, currentPath }) {
 
   function toggleCheckbox(evt) {
     console.log("ПЕРЕКЛЮЧИЛ");
+    console.log('Состояние toggle,',positionCheckbox)
     console.log("evt.target.checked", evt.target.checked);
     setPositionCheckbox(evt.target.checked);
     if (currentPath === "/movies") {
       console.log('toggle на /movies',textRequest, positionCheckbox)
-      onGetAllMovies(textRequest, positionCheckbox);
+      onGetAllMovies(textRequest, evt.target.checked);
     } // выполнение запроса с изменным статусом короткометражки
     else {
       /*console.log('выполняется toggle на /saved-movies',textRequest, positionCheckbox)
       onSearchSavedMovie(textRequest, positionCheckbox);*/
       console.log('toggle /saved-movies',textRequestSavedMovies, positionCheckbox)
-      onSearchSavedMovie(textRequestSavedMovies, positionCheckbox);
+      onSearchSavedMovie(textRequestSavedMovies, evt.target.checked);
     }
     return
   }
@@ -54,8 +55,14 @@ function SearchForm({ onGetAllMovies, onSearchSavedMovie, currentPath }) {
     const positionCheckbox = localStorage.getItem("positionCheckbox");
     const textRequestSavedMovies = localStorage.getItem("textRequestSavedMovies");
     setTextRequest(textRequest);
-    setPositionCheckbox(positionCheckbox);
+    /*setPositionCheckbox(positionCheckbox);*/
     setTextRequestSavedMovies(textRequestSavedMovies);
+  
+  if (JSON.parse(positionCheckbox) === true) {
+    setPositionCheckbox(true);
+  } else {
+    setPositionCheckbox(false);
+  }
   }, [setTextRequest,setPositionCheckbox,setTextRequestSavedMovies]);
 
   return (

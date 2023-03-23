@@ -10,7 +10,7 @@ function MoviesCardList({
   elseButton,
   onHandleLoadMoreMovies,
 }) {
-  console.log(`moviesList`,moviesList)
+ /* console.log(`moviesList`,moviesList)*/
   return (
     <div className="contetn">
       <ul className="movie-grid">
