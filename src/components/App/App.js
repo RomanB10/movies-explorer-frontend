@@ -188,8 +188,8 @@ function App() {
 
   //ПОЛУЧЕНИЕ ВСЕХ ФИЛЬМОВ ОСНОВНОГО с BeatfilmMoviesApi
   function handleGetAllMovies(textRequest, positionCheckbox) {
-   /* setLoading(true);
-    setTimeout(() => setLoading(false), 1000)*/
+    setLoading(true);
+    setTimeout(() => setLoading(false), 1000)
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
     const openingMoviesStorage = JSON.parse(localStorage.getItem("AllMovies"));
@@ -222,6 +222,8 @@ function App() {
 
 
   function handleSearchSavedMovie(textRequestSavedMovies, positionCheckbox) {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 1000);
     console.log("приходит в обработчик сохраненные фильмы ИНПУТ=", textRequestSavedMovies)
       const searchedSavedMovies = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
       
@@ -444,28 +446,23 @@ function App() {
     setCurrentPath(location.pathname);
   }, [location]);
 
-  if (loading) {
-    // на весь компонент App пока идет загрузка рендери это
-    return <Preloader />;
-  }
-
   return (
     <div className="app">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
           <SavedMoviesContext.Provider value={savedMovies}>
             {currentPath === "/" ? (
-              <Header width={width}loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width}isLoading={loading} loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/movies" ? (
-              <Header width={width} loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width}isLoading={loading}  loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/saved-movies" ? (
-              <Header width={width} loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width}isLoading={loading}  loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/signin" ? (
-              <Header width={width} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width}isLoading={loading} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/signup" ? (
-              <Header width={width} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width} isLoading={loading} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : currentPath === "/profile" ? (
-              <Header width={width} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header width={width} isLoading={loading} currentPath={currentPath} onMenuClick={handleMenuClick} />
             ) : (
               <></>
             )}
@@ -490,6 +487,7 @@ function App() {
               <ProtectedRoute
                 path="/saved-movies"
                 loggedIn={loggedIn}
+                isLoading={loading}
                 component={SavedMovies}
                 savedMovies={savedMovies}
                 searchedSavedMovies ={searchedSavedMovies}

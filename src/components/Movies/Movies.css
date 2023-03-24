@@ -2,6 +2,13 @@
     margin: 0 70px;
 }
 
+.movies-container__text-search-result{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
 @media (max-width: 768px) {
     .movies-container{
      margin-right: 30px;

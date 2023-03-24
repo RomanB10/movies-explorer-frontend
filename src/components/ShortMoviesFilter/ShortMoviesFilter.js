@@ -1,6 +1,6 @@
 function ShortMoviesFilter(movies, textRequest, positionCheckbox){
     let shortMoviesFilter = movies; // по умолчанию все подгруженные фильмы
-   /* console.log('В компонент фильтрации, СПИСОК ФИЛЬМОВ=',movies)*/
+    console.log('В компонент фильтрации, СПИСОК ФИЛЬМОВ=',movies)
     console.log('В компонент фильтрации, ТЕКСТ ИНПУТА=',textRequest)
     console.log('В компонент фильтрации, ПЕРЕКЛЮЧАТЕЛЬ=',positionCheckbox)
     let searchResult
@@ -21,7 +21,7 @@ function ShortMoviesFilter(movies, textRequest, positionCheckbox){
   }
     
 
-    /*console.log('В компонент фильтрации, ИТОГ ПОИСКА=',searchResult)*/
+    console.log('В компонент фильтрации, ИТОГ ПОИСКА=',searchResult);
     return searchResult;
 }
 

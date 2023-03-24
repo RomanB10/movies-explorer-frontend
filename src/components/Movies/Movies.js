@@ -4,6 +4,7 @@ import MoviesCardList from "./MoviesCardList";
 /*import Preloader from "./Preloader";*/
 
 function Movies({
+  isLoading,
   moviesList,
   savedMovies,
   onMoviesCardSave,
@@ -16,16 +17,17 @@ function Movies({
 }) {
   return (
     <section className="movies-container">
-      <SearchForm onGetAllMovies={onGetAllMovies}  currentPath={currentPath}/>
+      <SearchForm onGetAllMovies={onGetAllMovies} currentPath={currentPath} />
       <MoviesCardList
+        isLoading={isLoading}
         moviesList={moviesList}
-        savedMovies ={savedMovies}
+        savedMovies={savedMovies}
         onMoviesCardSave={onMoviesCardSave}
         onMoviesCardDelete={onMoviesCardDelete}
         currentPath={currentPath}
-        elseButton ={elseButton}
-        onSearchSavedMovie ={onSearchSavedMovie}
-        onHandleLoadMoreMovies ={onHandleLoadMoreMovies}
+        elseButton={elseButton}
+        onSearchSavedMovie={onSearchSavedMovie}
+        onHandleLoadMoreMovies={onHandleLoadMoreMovies}
       />
     </section>
   );

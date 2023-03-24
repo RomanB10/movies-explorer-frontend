@@ -3,8 +3,9 @@ import headerLogo from "../images/logo.svg";
 import Navigation from "./Navigation";
 import { Link } from "react-router-dom";
 import { SCREEN_MD } from "../utils/constants";
+import Preloader from "./Movies/Preloader";
 
-function Header({ loggedIn, currentPath, onMenuClick, width }) {
+function Header({ loggedIn, isLoading, currentPath, onMenuClick, width }) {
 
   return (
     <header
@@ -24,13 +25,14 @@ function Header({ loggedIn, currentPath, onMenuClick, width }) {
           : ""
       }
     >
+      {isLoading? <Preloader />:
       <Link to="/">
         <img
           className="header__logo"
           src={headerLogo}
           alt="Здесь должно быть изображение Лого"
         />
-      </Link>
+      </Link>}
       {currentPath === "/" ? (
         <>
           {width <= SCREEN_MD && loggedIn ? (

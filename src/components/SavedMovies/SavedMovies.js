@@ -5,6 +5,7 @@ import MoviesCard from "../Movies/MoviesCard";
 import { useContext } from "react";*/
 
 function SavedMovies({
+  isLoading,
   savedMovies,
   searchedSavedMovies,
   currentPath,
@@ -14,6 +15,17 @@ function SavedMovies({
   return (
     <section className="movies-container">
       <SearchForm onSearchSavedMovie={onSearchSavedMovie} />
+      {!isLoading && searchedSavedMovies.length === 0 ? (
+        <p className="movies-container__text-search-result">
+          Ничего не найдено
+        </p>
+      ) : !isLoading && savedMovies.length === 0 ? (
+        <p className="movies-container__text-search-result">
+          Ничего не найдено
+        </p>
+      ) : (
+        ""
+      )}
       <div className="contetn">
         <ul className="movie-grid">
           {searchedSavedMovies.length > 0
