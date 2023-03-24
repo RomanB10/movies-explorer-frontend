@@ -1,7 +1,6 @@
 import "./Movies.css";
 import SearchForm from "./SearchForm";
 import MoviesCardList from "./MoviesCardList";
-/*import Preloader from "./Preloader";*/
 
 function Movies({
   isLoading,

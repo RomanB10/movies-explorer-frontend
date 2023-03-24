@@ -11,11 +11,7 @@ function MoviesCard({
   ...props
 }) {
   const savedMovies = useContext(SavedMoviesContext);
-    /*const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));*/
-
-
   const [isSaved, setIsSaved] = useState(false); // стейт лайка
-  
 
   //Продолжительность фильма
   const hours = Math.floor(movie.duration / 60);
@@ -30,9 +26,8 @@ function MoviesCard({
     }
     if (isSaved) {
       setIsSaved(false);
-      console.log('передали на удаление movie',movie)
+      console.log("передали на удаление movie", movie);
       onMoviesCardDelete(savedMovies.filter((i) => i.movieId === movie.id)[0]);
-     /* onMoviesCardDelete(movie)*/
     } else {
       setIsSaved(true);
     }
@@ -44,8 +39,10 @@ function MoviesCard({
     setIsSaved(false);
     onMoviesCardDelete(movie);
   }
-   
-  const movieSaveButtonClassName = `movie-card__btn  ${isSaved && `movie-card__btn_type_saved`}`;
+
+  const movieSaveButtonClassName = `movie-card__btn  ${
+    isSaved && `movie-card__btn_type_saved`
+  }`;
   const movieDeleteButtonClassName = `movie-card__btn movie-card__btn_type_deleted`;
 
   useEffect(() => {
@@ -56,9 +53,6 @@ function MoviesCard({
     return;
   }, [setIsSaved, props.id]);
 
-
-
-  /*console.log(`${imageUrl}${movie.image.url}`);*/
   return (
     <li className="movie-card">
       <div className="movie-card__heading-container">
@@ -89,7 +83,6 @@ function MoviesCard({
             currentPath === "/movies"
               ? movieSaveButtonClassName
               : movieDeleteButtonClassName
-              
           }
           type="button"
           aria-label="Сохранить"

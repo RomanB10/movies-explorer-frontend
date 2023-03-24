@@ -1,5 +1,4 @@
-export const BASE_URL = "http://localhost:3005";
-/*export const BASE_URL = "https://api.movies-explorer.romb.nomoredomains.rocks"*/;
+export const BASE_URL = "https://api.movies-explorer.romb.nomoredomains.rocks";
 
 /*мой API*/
 

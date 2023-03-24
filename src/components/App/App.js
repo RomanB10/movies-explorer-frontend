@@ -16,8 +16,6 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import MenuPopup from "../MenuPopup";
 import Footer from "../Footer";
-import Preloader from "../Movies/Preloader";
-import { IMAGE_URL } from "../../utils/constants";
 import ShortMoviesFilter from "../ShortMoviesFilter/ShortMoviesFilter";
 
 import Login from "../Login";
@@ -32,10 +30,10 @@ import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import apiMain from "../../utils/MainApi";
 import apiMovies from "../../utils/MoviesApi";
 
-import {SCREEN_XS,
+import {
+  IMAGE_URL,
   SCREEN_SM,
    SCREEN_MD,
-  SCREEN_LG,
   LOAD_SIZE_LG,
    LOAD_SIZE_MD,
   LOAD_SIZE_SM,
@@ -67,14 +65,14 @@ function App() {
 
   const [allMovies, setAllMovies] = useState([]); // ФИЛЬМЫ c beatfilm-movies
   const [savedMovies, setSavedMovies] = useState([]); // // СОХРАНЕННЫЕ ФИЛЬМЫ
-  const [moviesList, setMoviesList] = useState([]); // Фильмы для отображения на странице ФИЛЬМЫ
-  const [searchedMovies, setSearchedMovies] = useState([]); // НАЙДЕННЫЕ ФИЛЬМЫ 
-  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]); // НАЙДЕННЫЕ СОХРАНЕННЫЕ ФИЛЬМЫ 
+  const [moviesList, setMoviesList] = useState([]); // Фильмы для отображения на странице '/movies'
+  const [searchedMovies, setSearchedMovies] = useState([]); // НАЙДЕННЫЕ ФИЛЬМЫ через поиск
+  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]); // НАЙДЕННЫЕ СОХРАНЕННЫЕ ФИЛЬМЫ через поиск
 
-  const [displayMovies, setDisplayMovies] = useState(0)
-  const [elseMovies, setElseMovies] = useState(0)
+  const [displayMovies, setDisplayMovies] = useState(0)// количество отображаемых карточек с фильмами
+  const [elseMovies, setElseMovies] = useState(0)// количество подгружаемых карточек с фильмами
 
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);// текущий размер окна
   const [elseButton,setElseButton] = useState(false);// Стейт кнопки "Еще"
 
   useEffect(() => {
@@ -155,6 +153,7 @@ function App() {
         console.log(err);
       });
   }
+
   //УДАЛЕНИЕ СОХР.ФИЛЬМА С ОСНОВНОГО API
   function handleMoviesDelete(movie) {
     apiMain
@@ -193,9 +192,7 @@ function App() {
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
     const openingMoviesStorage = JSON.parse(localStorage.getItem("AllMovies"));
-    /*console.log(`openingMoviesStorage`, openingMoviesStorage);*/
-    //если уже загружали фильмы
-
+    //проверка, фильмы уже загружены или нет
     if (!openingMoviesStorage) {
       setLoading(true);
       apiMovies
@@ -217,27 +214,20 @@ function App() {
     }
   }
 
-
-
-
-
+//выполнение поиска по сохраненным фильмам
   function handleSearchSavedMovie(textRequestSavedMovies, positionCheckbox) {
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
-    console.log("приходит в обработчик сохраненные фильмы ИНПУТ=", textRequestSavedMovies)
       const searchedSavedMovies = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
       
       setTextRequestSavedMovies(textRequestSavedMovies);
       setPositionCheckbox(positionCheckbox)
       setSearchedSavedMovies(searchedSavedMovies);
-      
   }
 
   useEffect(() => {
     if (searchedSavedMovies.length > 0) {
         const searchedResult = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
-        /*console.log(`searchedFilms в saved-movies`,searchedResult)*/
-        console.log("effect SAVED-MOVIES ИНПУТ=", textRequestSavedMovies)
         localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies); //Запись пойска
         setSearchedSavedMovies(searchedResult);
     }
@@ -249,15 +239,12 @@ function App() {
 // при условии уже загруженных фильмов с Beatfilm
   useEffect(() => {
     if (allMovies.length > 0) {
-      console.log(`allMovies.length`,allMovies.length)
       const searchedResult = ShortMoviesFilter(allMovies, textRequest, positionCheckbox);
-      /*console.log(`searchedFilms в movies`,searchedResult)*/
       localStorage.setItem("textRequest", textRequest); //Запись пойска
-      localStorage.setItem("positionCheckbox", positionCheckbox); //Запись положения чекбоксаЫ
+      localStorage.setItem("positionCheckbox", positionCheckbox); //Запись положения чекбокса
       localStorage.setItem('searchedResult', JSON.stringify(searchedResult));
 
       setSearchedMovies(searchedResult);
-
     }
     return ;
   }, [allMovies, textRequest, positionCheckbox]);
@@ -266,14 +253,14 @@ function App() {
   // количество отображаемых фильмов + количество добавляемых 
   useEffect(() => {
     if (width > SCREEN_MD) {
-      setDisplayMovies(12);
-      setElseMovies(3);
+      setDisplayMovies(LOAD_SIZE_LG);
+      setElseMovies(LOAD_CARD_SIZE_LG);
     } else if (width >SCREEN_SM) {
-      setDisplayMovies(8);
-      setElseMovies(2);
+      setDisplayMovies(LOAD_SIZE_MD);
+      setElseMovies(LOAD_CARD_SIZE_MD);
     } else {
-      setDisplayMovies(5);
-      setElseMovies(1);
+      setDisplayMovies(LOAD_SIZE_SM);
+      setElseMovies(LOAD_CARD_SIZE_SM);
     }
     return
   }, [width])
@@ -292,10 +279,7 @@ function App() {
 
     // функция добавления фильмов
     function handleLoadMoreMovies() {
-      console.log('нажал кнопку `еще`')
-      console.log('displayMovies',displayMovies)
       setDisplayMovies((prev) => prev + elseMovies);
-      console.log('displayMovies',displayMovies)
     }
 
   //отображение карточек при невозможности загрузить больше
@@ -421,9 +405,6 @@ function App() {
       setLoading(false); // состояние загрузки (загрузка завершена)
     }
   }, [setLoading, setTooltipStatus, setIsInfoToolTipOpen]);
-
-
-
 
   //ВЫХОД ИЗ СИСТЕМЫ (обнудение стейт-переменных и хранилища)
   const cbLogout = useCallback(() => {

@@ -1,8 +1,6 @@
 import "./SavedMovies.css";
 import SearchForm from "../Movies/SearchForm";
 import MoviesCard from "../Movies/MoviesCard";
-/*import SavedMoviesContext from "../contexts/SavedMoviesContext";
-import { useContext } from "react";*/
 
 function SavedMovies({
   isLoading,
