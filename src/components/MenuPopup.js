@@ -24,6 +24,7 @@ useEffect(()=>{
           currentPath={currentPath}
           loggedIn={loggedIn}
           width={width}
+          onClose={onClose}
         />
         <button
           className="popup__close-btn"

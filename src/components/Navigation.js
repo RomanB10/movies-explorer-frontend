@@ -2,7 +2,7 @@ import "./Navigation.css";
 import { Link, Route, Switch } from "react-router-dom";
 import { SCREEN_MD } from "../utils/constants";
 
-function Navigation({ currentPath, width, loggedIn }) {
+function Navigation({ currentPath, width, loggedIn, onClose }) {
   return (
     <div
       className={
@@ -24,6 +24,7 @@ function Navigation({ currentPath, width, loggedIn }) {
               <>
                 <li>
                   <Link
+                    onClick={width <= SCREEN_MD && onClose}
                     to="/"
                     className="navigation__link  navigation__link_disabled navigation__link_text_large-size"
                   >
@@ -32,6 +33,7 @@ function Navigation({ currentPath, width, loggedIn }) {
                 </li>
                 <li>
                   <Link
+                    onClick={width <= SCREEN_MD && onClose}
                     to="/movies"
                     className="navigation__link navigation__link_text_large-size"
                   >
@@ -40,6 +42,7 @@ function Navigation({ currentPath, width, loggedIn }) {
                 </li>
                 <li>
                   <Link
+                    onClick={width <= SCREEN_MD && onClose}
                     to="/saved-movies"
                     className="navigation__link navigation__link_text_large-size"
                   >
@@ -51,6 +54,7 @@ function Navigation({ currentPath, width, loggedIn }) {
               <>
                 <li>
                   <Link
+                    onClick={width <= SCREEN_MD && onClose}
                     to="/signup"
                     className="navigation__link navigation__link_text_small-size"
                   >
@@ -59,6 +63,7 @@ function Navigation({ currentPath, width, loggedIn }) {
                 </li>
                 <li>
                   <Link
+                    onClick={width <= SCREEN_MD && onClose}
                     to="/signin"
                     className="navigation__link navigation__link_text_small-size navigation__link_type_enter"
                   >
@@ -72,6 +77,7 @@ function Navigation({ currentPath, width, loggedIn }) {
           <Route exact path="/movies">
             <li>
               <Link
+               onClick={width <= SCREEN_MD && onClose}
                 to="/"
                 className="navigation__link  navigation__link_disabled navigation__link_text_large-size"
               >
@@ -80,6 +86,7 @@ function Navigation({ currentPath, width, loggedIn }) {
             </li>
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/movies"
                 className="navigation__link navigation__link_text_large-size"
               >
@@ -88,6 +95,7 @@ function Navigation({ currentPath, width, loggedIn }) {
             </li>
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/saved-movies"
                 className="navigation__link navigation__link_text_large-size"
               >
@@ -99,6 +107,7 @@ function Navigation({ currentPath, width, loggedIn }) {
           <Route exact path="/saved-movies">
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/"
                 className="navigation__link navigation__link_disabled navigation__link_text_large-size"
               >
@@ -107,6 +116,7 @@ function Navigation({ currentPath, width, loggedIn }) {
             </li>
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/movies"
                 className="navigation__link navigation__link_text_large-size"
               >
@@ -115,6 +125,7 @@ function Navigation({ currentPath, width, loggedIn }) {
             </li>
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/saved-movies"
                 className="navigation__link navigation__link_text_large-size"
               >
@@ -126,6 +137,7 @@ function Navigation({ currentPath, width, loggedIn }) {
           <Route exact path="/profile">
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/"
                 className="navigation__link  navigation__link_disabled navigation__link_text_large-size"
               >
@@ -134,6 +146,7 @@ function Navigation({ currentPath, width, loggedIn }) {
             </li>
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/movies"
                 className="navigation__link navigation__link_text_large-size"
               >
@@ -142,6 +155,7 @@ function Navigation({ currentPath, width, loggedIn }) {
             </li>
             <li>
               <Link
+                onClick={width <= SCREEN_MD && onClose}
                 to="/saved-movies"
                 className="navigation__link navigation__link_text_large-size"
               >
@@ -155,7 +169,7 @@ function Navigation({ currentPath, width, loggedIn }) {
       currentPath === "/movies" ||
       currentPath === "/saved-movies" ||
       currentPath === "/profile" ? (
-        <Link to="/profile" className="navigation__link">
+        <Link onClick={width <= SCREEN_MD && onClose} to="/profile" className="navigation__link">
           <div className="navigation__accaunt">
             <p className="navigation__link">Аккаунт</p>
             <button className="navigation__button"></button>
@@ -169,48 +183,3 @@ function Navigation({ currentPath, width, loggedIn }) {
 }
 
 export default Navigation;
-
-/*
-
-      {currentPath === "/movies" ? (
-        <Link to="/profile" className="navigation__link">
-          <div className="navigation__accaunt">
-            <p className="navigation__link">Аккаунт</p>
-            <button className="navigation__button"></button>
-          </div>
-        </Link>
-      ) : currentPath === "/saved-movies" ? (
-        <Link to="/profile" className="navigation__link">
-          <div className="navigation__accaunt">
-            <p className="navigation__link">Аккаунт</p>
-            <button className="navigation__button"></button>
-          </div>
-        </Link>
-      ) : currentPath === "/profile" ? (
-        <Link to="/profile" className="navigation__link">
-          <div className="navigation__accaunt">
-            <p className="navigation__link">Аккаунт</p>
-            <button className="navigation__button"></button>
-          </div>
-        </Link>
-      ) : (
-        <></>
-      )
-
-
-
-
-       {(loggedIn && currentPath === "/") ||
-      (loggedIn && currentPath === "/movies") ||
-      (loggedIn && currentPath === "/saved-movies") ||
-      (loggedIn && currentPath === "/profile") ? (
-        <Link to="/profile" className="navigation__link">
-          <div className="navigation__accaunt">
-            <p className="navigation__link">Аккаунт</p>
-            <button className="navigation__button"></button>
-          </div>
-        </Link>
-      ) : (
-        <></>
-      )}
-      */
