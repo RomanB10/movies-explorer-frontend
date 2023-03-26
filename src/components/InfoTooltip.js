@@ -1,6 +1,7 @@
 import "./InfoTooltip.css";
 import unionFail from "../images/unionFail.svg";
 import unionSuccess from "../images/unionSuccess.svg";
+import { useEffect } from "react";
 
 function InfoTooltip({ isInfoToolTipOpen, tooltipStatus, onClose }) {
   const imageInfo =
@@ -9,13 +10,26 @@ function InfoTooltip({ isInfoToolTipOpen, tooltipStatus, onClose }) {
       : tooltipStatus === "success update"
       ? unionSuccess
       : unionFail;
-      
+
   const textInfo =
     tooltipStatus === "success"
       ? `Вы успешно зарегистрировались!`
       : tooltipStatus === "success update"
       ? `Вы успешно поменяли учетную запись!`
       : `Что-то пошло не так! Попробуйте еще раз.`;
+
+  function handleEscClose(evt) {
+    if (evt.key === "Escape") {
+      onClose && onClose();
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleEscClose);
+    return () => {
+      window.removeEventListener("keydown", handleEscClose);
+    };
+  }, []);
 
   return (
     <div className={isInfoToolTipOpen ? "tooltip   tooltip_opened" : "tooltip"}>

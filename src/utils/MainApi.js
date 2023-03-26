@@ -83,7 +83,9 @@ class MainApi {
 //Прямо внутри api.js создайте экземпляр класса Api
 //и экспортируйте этот экземпляр вместо самого класса.
 const apiMain = new MainApi({
-  url: "https://api.movies-explorer.romb.nomoredomains.rocks",
+  /*url: "https://api.movies-explorer.romb.nomoredomains.rocks",*/
+  url: "http://localhost:3005",
+  
 });
 
 export default apiMain;
