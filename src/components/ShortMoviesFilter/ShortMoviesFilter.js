@@ -1,10 +1,12 @@
+import {MOVIE_SHORT} from '../../utils/constants';
+
 function ShortMoviesFilter(movies, textRequest, positionCheckbox) {
   let shortMoviesFilter = movies; // по умолчанию все подгруженные фильмы
   let searchResult;
   //если короткометражка, то фильмы меньше 40 мин
   if (positionCheckbox) {
     shortMoviesFilter = shortMoviesFilter.filter(
-      (movie) => movie.duration <= 40
+      (movie) => movie.duration <= MOVIE_SHORT
     );
   }
 

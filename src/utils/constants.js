@@ -11,4 +11,6 @@ export const LOAD_CARD_SIZE_LG = 3;
 export const LOAD_CARD_SIZE_MD = 2;
 export const LOAD_CARD_SIZE_SM = 1;
 
+export const MOVIE_SHORT = 40; 
+
 export const IMAGE_URL = `https://api.nomoreparties.co`;
