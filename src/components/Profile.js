@@ -8,7 +8,7 @@ import './Login.css';
 function Profile({ onLogout, onUpdateUser,isloading }) {
   //Хук возвращает значение контекста, которое было передано в прорс value провайдера
   const currentUser = useContext(CurrentUserContext);
-
+  
   const {
     values,
     setValues,
@@ -66,7 +66,7 @@ function Profile({ onLogout, onUpdateUser,isloading }) {
   useEffect(() => {
     setIsValid(false);
     setValues({ name: currentUser.name, email: currentUser.email });
-  }, [onUpdateUser]);
+  }, [onUpdateUser,currentUser,setValues]);
 
   return (
     <div className="profileContainer">
