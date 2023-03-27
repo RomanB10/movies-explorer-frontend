@@ -55,7 +55,7 @@ function App() {
   const [tooltipStatus, setTooltipStatus] = useState(""); // статус 'fail'или 'success'
 
   const [loggedIn, setLoggedIn] = useState(false); // информация о нашей авторизации (авторизован или нет)
-  const [loading, setLoading] = useState(true); // информация о загрузке(идет загрузка или нет)
+  const [loading, setLoading] = useState(false); // информация о загрузке(идет загрузка или нет)
 
   const [textRequest, setTextRequest] = useState(""); // текст запроса на странице 'фильмы'
   const [textRequestSavedMovies, setTextRequestSavedMovies] = useState(""); // текст запроса на странице 'сохраненные фильмы'
@@ -332,6 +332,7 @@ function App() {
           _id: refreshUser._id,
           ...currentUser,
         }); //обновление/дублирование стэйта актуальными данными с сервера name, email
+        history.push(location)
       }
     } catch (err) {
       if (err === 400) {
@@ -379,7 +380,7 @@ function App() {
         setLoading(false); // состояние загрузки (загрузка завершена)
       }
     },
-    []
+    [setLoading, setTooltipStatus, setIsInfoToolTipOpen]
   );
 
   //ЗАПРОС НА РЕГИСТРАЦИЮ
@@ -411,6 +412,7 @@ function App() {
     setLoggedIn(false); // статус не авторизован
     localStorage.clear();
     setCurrentUser([]);
+    currentPath('');
     setAllMovies([]);
     setSavedMovies([]);
     setMoviesList([]);
@@ -485,21 +487,15 @@ function App() {
                 isloading = {loading}
               />
               <Route path="/signin">
-                <Login handleLogin={cbLogin} isLoggedIn={loggedIn}  isloading = {loading}/>
+              {!loggedIn ?
+                <Login handleLogin={cbLogin} isLoggedIn={loggedIn}  isloading = {loading}/>: (<Redirect exact to="/"/>)}
               </Route>
               <Route path="/signup">
-                <Register onRegister={cbRegister} isLoggedIn={loggedIn} isloading = {loading}/>
+              {!loggedIn ?
+                <Register onRegister={cbRegister} isLoggedIn={loggedIn} isloading = {loading}/>:(<Redirect exact to="/"/>)}
               </Route>
               <Route path="*">
                 <PageNotFound />
-              </Route>
-
-              <Route>
-                {!loggedIn ? (
-                  <Redirect exact to="/" />
-                ) : (
-                  <Redirect to="/movies" />
-                )}
               </Route>
             </Switch>
 
