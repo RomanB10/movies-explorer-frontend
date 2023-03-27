@@ -5,7 +5,7 @@ import useFormWithValidation from "../utils/useFormWithValidation";//Валид�
 /*import "./Profile.css";*/
 import './Login.css';
 
-function Profile({ onLogout, onUpdateUser }) {
+function Profile({ onLogout, onUpdateUser,isloading }) {
   //Хук возвращает значение контекста, которое было передано в прорс value провайдера
   const currentUser = useContext(CurrentUserContext);
 
@@ -100,6 +100,7 @@ function Profile({ onLogout, onUpdateUser }) {
                 minLength="2"
                 maxLength="200"
                 tabIndex="2"
+                disabled= {isloading}
                 value={values.name || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
                 onChange={handleChangeName}
               />
@@ -123,6 +124,7 @@ function Profile({ onLogout, onUpdateUser }) {
                 minLength="2"
                 maxLength="200"
                 tabIndex="3"
+                disabled= {isloading}
                 value={values.email || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
                 onChange={handleChangeEmail}
               />
@@ -134,7 +136,7 @@ function Profile({ onLogout, onUpdateUser }) {
             type="submit"
             name="edit"
             tabIndex="3"
-            disabled={!isValid}
+            disabled={isValid && isloading? 'true': !isValid && isloading? 'true':!isValid && !isloading?'false':""}
             className={
               isValid
                 ? `form__suggestion form__suggestion_type_edit`

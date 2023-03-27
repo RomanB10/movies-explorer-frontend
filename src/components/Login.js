@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useEffect } from "react";
 import useFormWithValidation from "../utils/useFormWithValidation";//Валидация по диплому 
 
-function Login({ handleLogin, isLoggedIn }) {
+function Login({ handleLogin, isLoggedIn, isloading }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
@@ -59,6 +59,7 @@ function Login({ handleLogin, isLoggedIn }) {
                 minLength="2"
                 maxLength="200"
                 tabIndex="1"
+                disabled= {isloading}
                 value={values.email || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
                 onChange={handleChange}
               />
@@ -78,6 +79,7 @@ function Login({ handleLogin, isLoggedIn }) {
                 minLength="8"
                 maxLength="200"
                 tabIndex="2"
+                disabled= {isloading}
                 value={values.password || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
                 onChange={handleChange}
               />
@@ -94,7 +96,7 @@ function Login({ handleLogin, isLoggedIn }) {
             type="submit"
             name="submit"
             tabIndex="3"
-            disabled={!isValid}
+            disabled={isValid && isloading? 'true': !isValid && isloading? 'true':!isValid && !isloading?'false':""}
           >
             Войти
           </button>

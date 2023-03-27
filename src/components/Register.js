@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import useFormWithValidation from "../utils/useFormWithValidation";//Валидация по диплому 
 
-function Register({ onRegister, isLoggedIn }) {
+function Register({ onRegister, isLoggedIn, isloading }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
@@ -65,6 +65,7 @@ console.log('isLoggedIn=',isLoggedIn)
                 maxLength="200"
                 tabIndex="1"
                 title="Введите Имя"
+                disabled= {isloading}
                 value={values.name || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
                 onChange={handleChange}
               />
@@ -86,6 +87,7 @@ console.log('isLoggedIn=',isLoggedIn)
                 maxLength="200"
                 tabIndex="2"
                 title="Введите почту"
+                disabled= {isloading}
                 value={values.email || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
                 onChange={handleChange}
               />
@@ -106,6 +108,7 @@ console.log('isLoggedIn=',isLoggedIn)
                 maxLength="200"
                 tabIndex="3"
                 title="Введите пароль"
+                disabled= {isloading}
                 value={values.password || ""} //добавили значение по умолчанию, чтобы в value не попадало undefined
                 onChange={handleChange}
               />
@@ -122,7 +125,7 @@ console.log('isLoggedIn=',isLoggedIn)
             type="submit"
             name="submit"
             tabIndex="3"
-            disabled={!isValid}
+            disabled={isValid && isloading? 'true': !isValid && isloading? 'true':!isValid && !isloading?'false':""}
           >
             Зарегистрироваться
           </button>

@@ -12,7 +12,7 @@ function SavedMovies({
 }) {
   return (
     <section className="movies-container">
-      <SearchForm onSearchSavedMovie={onSearchSavedMovie} />
+      <SearchForm onSearchSavedMovie={onSearchSavedMovie} isLoading={isLoading}/>
       {!isLoading && searchedSavedMovies.length === 0 ? (
         <p className="movies-container__text-search-result">
           Ничего не найдено

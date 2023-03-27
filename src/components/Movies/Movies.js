@@ -16,7 +16,7 @@ function Movies({
 }) {
   return (
     <section className="movies-container">
-      <SearchForm onGetAllMovies={onGetAllMovies} currentPath={currentPath} />
+      <SearchForm onGetAllMovies={onGetAllMovies} currentPath={currentPath} isLoading={isLoading}/>
       <MoviesCardList
         isLoading={isLoading}
         moviesList={moviesList}

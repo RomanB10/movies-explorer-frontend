@@ -482,12 +482,13 @@ function App() {
                 loggedIn={loggedIn}
                 onLogout={cbLogout}
                 onUpdateUser={cbProfile}
+                isloading = {loading}
               />
               <Route path="/signin">
-                <Login handleLogin={cbLogin} isLoggedIn={loggedIn} />
+                <Login handleLogin={cbLogin} isLoggedIn={loggedIn}  isloading = {loading}/>
               </Route>
               <Route path="/signup">
-                <Register onRegister={cbRegister} isLoggedIn={loggedIn} />
+                <Register onRegister={cbRegister} isLoggedIn={loggedIn} isloading = {loading}/>
               </Route>
               <Route path="*">
                 <PageNotFound />

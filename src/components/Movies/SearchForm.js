@@ -3,7 +3,7 @@ import FilterCheckBox from "./FilterCheckBox";
 import { useState, useEffect } from "react";
 import useFormWithValidation from "../../utils/useFormWithValidation";
 
-function SearchForm({ onGetAllMovies, onSearchSavedMovie, currentPath }) {
+function SearchForm({ onGetAllMovies, onSearchSavedMovie, currentPath, isLoading }) {
   const [textRequest, setTextRequest] = useState(""); // текст запроса на странице 'фильмы'
   const [textRequestSavedMovies, setTextRequestSavedMovies] = useState(""); // текст запроса на странице 'сохраненные фильмы'
   const [positionCheckbox, setPositionCheckbox] = useState(false); //Состояние чекбокса
@@ -68,12 +68,13 @@ function SearchForm({ onGetAllMovies, onSearchSavedMovie, currentPath }) {
             /*required*/
             title="Нужно ввести ключевое слово"
             tabIndex="1"
+            disabled= {isLoading}
             value={
               currentPath === "/movies" ? textRequest : textRequestSavedMovies
             }
             onChange={handleChangeTextRequest}
           ></input>
-          <button className="form__search-btn" type="submit"></button>
+          <button disabled= {isLoading} className="form__search-btn" type="submit"></button>
         </fildset>
         <FilterCheckBox
           positionCheckbox={positionCheckbox}
