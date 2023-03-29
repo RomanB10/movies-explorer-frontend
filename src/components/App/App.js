@@ -60,7 +60,8 @@ function App() {
   const [textRequest, setTextRequest] = useState(""); // текст запроса на странице 'фильмы'
   const [textRequestSavedMovies, setTextRequestSavedMovies] = useState(""); // текст запроса на странице 'сохраненные фильмы'
   const [positionCheckbox, setPositionCheckbox] = useState(false); //Состояние чекбокса
-  
+  const [positionCheckboxSavedMovies, setPositionCheckboxSavedMovies] = useState(false); 
+
   const [currentUser, setCurrentUser] = useState({}); // ПОЛЬЗОВАТЕЛЬ
 
   const [allMovies, setAllMovies] = useState([]); // ФИЛЬМЫ c beatfilm-movies
@@ -74,6 +75,8 @@ function App() {
 
   const [width, setWidth] = useState(window.innerWidth);// текущий размер окна
   const [elseButton,setElseButton] = useState(false);// Стейт кнопки "Еще"
+  const [isSaved, setIsSaved] = useState(false); // стейт лайка
+  const [searchActive, setSearchActive] = useState(false); // состояние нажатия на поиск
 
   useEffect(() => {
     const handleResize = (event) => {
@@ -84,6 +87,8 @@ function App() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+
 
   // открытие/закрытие меню dropdown
   function handleMenuClick() {
@@ -185,10 +190,22 @@ function App() {
     }
   }, [loggedIn]);
 
+
+
+  useEffect(() => {
+    if (localStorage.getItem('searchedResult')) {
+      const firstSearch = JSON.parse(localStorage.getItem('searchedResult'));
+      const updateSearchResult = ShortMoviesFilter(firstSearch, textRequest, positionCheckbox);
+      setSearchedMovies(updateSearchResult);
+      console.log('updateSearchResult',updateSearchResult)
+    }
+  }, [setSearchedMovies])
+
   //ПОЛУЧЕНИЕ ВСЕХ ФИЛЬМОВ ОСНОВНОГО с BeatfilmMoviesApi
   function handleGetAllMovies(textRequest, positionCheckbox) {
     setLoading(true);
     setTimeout(() => setLoading(false), 1000)
+    setMoviesList([]);
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
     const openingMoviesStorage = JSON.parse(localStorage.getItem("AllMovies"));
@@ -215,25 +232,29 @@ function App() {
   }
 
 //выполнение поиска по сохраненным фильмам
-  function handleSearchSavedMovie(textRequestSavedMovies, positionCheckbox) {
+  function handleSearchSavedMovie(textRequestSavedMovies, positionCheckboxSavedMovies) {
+    console.log('positionCheckboxSavedMovies',positionCheckboxSavedMovies)
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
-      const searchedSavedMovies = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
+      const searchedSavedMovies = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckboxSavedMovies);
       
       setTextRequestSavedMovies(textRequestSavedMovies);
-      setPositionCheckbox(positionCheckbox)
+      setPositionCheckboxSavedMovies(positionCheckboxSavedMovies)
       setSearchedSavedMovies(searchedSavedMovies);
+      setSearchActive(true)
   }
 
   useEffect(() => {
     if (searchedSavedMovies.length > 0) {
-        const searchedResult = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckbox);
+        const searchedResult = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckboxSavedMovies);
         localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies); //Запись пойска
+        localStorage.setItem("positionCheckboxSavedMovies", positionCheckboxSavedMovies);//Запись состояния чекбокса
         setSearchedSavedMovies(searchedResult);
+        setSearchActive(false)
     }
     
-    return localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies);
-}, [savedMovies, textRequestSavedMovies, positionCheckbox]);
+    return 
+}, [savedMovies, textRequestSavedMovies, positionCheckboxSavedMovies]);
 
 
 // при условии уже загруженных фильмов с Beatfilm

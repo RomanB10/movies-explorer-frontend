@@ -1,6 +1,7 @@
 import "./SavedMovies.css";
 import SearchForm from "../Movies/SearchForm";
 import MoviesCard from "../Movies/MoviesCard";
+import Preloader from "../Movies/Preloader";
 
 function SavedMovies({
   isLoading,
@@ -10,20 +11,18 @@ function SavedMovies({
   onMoviesCardDelete,
   onSearchSavedMovie,
 }) {
+  
+
+  console.log(`searchedSavedMovies.length`,searchedSavedMovies.length)
+  console.log(`savedMovies.length `,savedMovies.length )
   return (
     <section className="movies-container">
       <SearchForm onSearchSavedMovie={onSearchSavedMovie} isLoading={isLoading}/>
-      {!isLoading && searchedSavedMovies.length === 0 ? (
+      {isLoading? <Preloader/>: (searchedSavedMovies.length === 0 ) ? 
         <p className="movies-container__text-search-result">
           Ничего не найдено
         </p>
-      ) : !isLoading && savedMovies.length === 0 ? (
-        <p className="movies-container__text-search-result">
-          Ничего не найдено
-        </p>
-      ) : (
-        ""
-      )}
+       :
       <div className="contetn">
         <ul className="movie-grid">
           {searchedSavedMovies.length > 0
@@ -53,7 +52,7 @@ function SavedMovies({
         >
           Еще
         </button>
-      </div>
+      </div>}
     </section>
   );
 }

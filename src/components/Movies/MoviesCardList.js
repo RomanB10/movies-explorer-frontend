@@ -1,5 +1,6 @@
 import "./MoviesCardList.css";
 import MoviesCard from "./MoviesCard";
+import Preloader from "./Preloader";
 
 function MoviesCardList({
   isLoading,
@@ -11,13 +12,15 @@ function MoviesCardList({
   elseButton,
   onHandleLoadMoreMovies,
 }) {
+  console.log('moviesList',moviesList)
   return (
+
     <>
-      {!isLoading && moviesList.length === 0 && (
+      {isLoading? <Preloader/>: moviesList.length === 0 ? (
         <p className="movies-container__text-search-result">
           Ничего не найдено
         </p>
-      )}
+      ):
       <div className="contetn">
         <ul className="movie-grid">
           {moviesList.map((item) => (
@@ -44,7 +47,7 @@ function MoviesCardList({
         >
           Еще
         </button>
-      </div>
+      </div>}
     </>
   );
 }

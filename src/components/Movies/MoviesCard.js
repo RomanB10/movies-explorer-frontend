@@ -1,7 +1,8 @@
 import "./MoviesCard.css";
 import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import { useContext, useEffect, useState } from "react";
-import { IMAGE_URL } from "../../utils/constants";
+import { IMAGE_URL, DURATION_MIN } from "../../utils/constants";
+import ShortMoviesFilter from "../ShortMoviesFilter/ShortMoviesFilter";
 
 function MoviesCard({
   movie,
@@ -11,11 +12,12 @@ function MoviesCard({
   ...props
 }) {
   const savedMovies = useContext(SavedMoviesContext);
+
   const [isSaved, setIsSaved] = useState(false); // стейт лайка
 
   //Продолжительность фильма
-  const hours = Math.floor(movie.duration / 60);
-  const minutes = movie.duration - hours * 60;
+  const hours = Math.floor(movie.duration / DURATION_MIN);
+  const minutes = movie.duration - hours * DURATION_MIN;
   const movieDuration = hours ? `${hours}ч ${minutes}м` : `${minutes}мин`;
 
   //выполено сохранение
@@ -26,7 +28,6 @@ function MoviesCard({
     }
     if (isSaved) {
       setIsSaved(false);
-      console.log("передали на удаление movie", movie);
       onMoviesCardDelete(savedMovies.filter((i) => i.movieId === movie.id)[0]);
     } else {
       setIsSaved(true);
@@ -35,7 +36,6 @@ function MoviesCard({
 
   //выполнено удаление
   function handleDeleteClick() {
-    console.log("СРАБОТАЛ УДАЛИТЬ", movie);
     setIsSaved(false);
     onMoviesCardDelete(movie);
   }
@@ -47,6 +47,8 @@ function MoviesCard({
 
   useEffect(() => {
     const isSaved = savedMovies.some((movie) => movie.movieId === props.id);
+    console.log('movie.movieId',movie.movieId)
+    console.log('props.id',props.id)
     if (isSaved) {
       setIsSaved(true);
     }
