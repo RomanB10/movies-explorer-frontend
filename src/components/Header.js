@@ -2,22 +2,11 @@ import "./Header.css";
 import headerLogo from "../images/logo.svg";
 import Navigation from "./Navigation";
 import { Link } from "react-router-dom";
-import {SCREEN_SM, SCREEN_MD, SCREEN_LG} from '../components/const-breakpoints';
-import {useEffect,useState} from 'react';
+import { SCREEN_MD } from "../utils/constants";
+import Preloader from "./Movies/Preloader";
 
-function Header({ currentPath, onMenuClick }) {
-  const [width, setWidth] = useState(window.innerWidth);
+function Header({ loggedIn, isLoading, currentPath, onMenuClick, width }) {
 
-  useEffect(() => {
-    const handleResize = (event) => {
-      setWidth(event.target.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-console.log('width',width)
   return (
     <header
       className={
@@ -34,37 +23,51 @@ console.log('width',width)
           : currentPath === "/signup"
           ? `header header_type_dark header_type_auth`
           : ""
-      } 
+      }
     >
+      {isLoading? <Preloader />:
       <Link to="/">
         <img
           className="header__logo"
           src={headerLogo}
           alt="Здесь должно быть изображение Лого"
         />
-      </Link>
+      </Link>}
       {currentPath === "/" ? (
-        <Navigation currentPath ={currentPath} width={width}/>
+        <>
+          {width <= SCREEN_MD && loggedIn ? (
+            <button className="button-open-menu" onClick={onMenuClick} />
+          ) : (
+            <Navigation
+              currentPath={currentPath}
+              width={width}
+              loggedIn={loggedIn}
+            />
+          )}
+        </>
       ) : currentPath === "/movies" ? (
         <>
-        { width > SCREEN_MD?
-          <Navigation currentPath ={currentPath} width={width}/>:
-          <button className="button-open-menu" onClick={onMenuClick}/>
-        }
+          {width > SCREEN_MD ? (
+            <Navigation currentPath={currentPath} width={width} />
+          ) : (
+            <button className="button-open-menu" onClick={onMenuClick} />
+          )}
         </>
       ) : currentPath === "/saved-movies" ? (
         <>
-        { width > SCREEN_MD?
-          <Navigation currentPath ={currentPath} width={width}/>:
-          <button className="button-open-menu" onClick={onMenuClick}/>
-        }
+          {width > SCREEN_MD ? (
+            <Navigation currentPath={currentPath} width={width} />
+          ) : (
+            <button className="button-open-menu" onClick={onMenuClick} />
+          )}
         </>
       ) : currentPath === "/profile" ? (
         <>
-        { width > SCREEN_MD?
-          <Navigation currentPath ={currentPath}/>:
-          <button className="button-open-menu" onClick={onMenuClick}/>
-        }
+          {width > SCREEN_MD ? (
+            <Navigation currentPath={currentPath} />
+          ) : (
+            <button className="button-open-menu" onClick={onMenuClick} />
+          )}
         </>
       ) : (
         <></>

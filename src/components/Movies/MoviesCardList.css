@@ -58,7 +58,7 @@
     }
 }
 
-@media (max-width: 410px) {
+@media (max-width: 480px) {
     .contetn {
         margin-top: 46px;
         max-width: 300px;

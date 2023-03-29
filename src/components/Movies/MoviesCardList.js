@@ -1,245 +1,55 @@
 import "./MoviesCardList.css";
 import MoviesCard from "./MoviesCard";
-import image2 from "../../images/cardsMovies/2.png";
-import image3 from "../../images/cardsMovies/3.png";
-import image4 from "../../images/cardsMovies/4.png";
-import image5 from "../../images/cardsMovies/5.png";
-import image6 from "../../images/cardsMovies/6.png";
-import image7 from "../../images/cardsMovies/7.png";
-import image8 from "../../images/cardsMovies/8.png";
-import image9 from "../../images/cardsMovies/9.png";
-import image10 from "../../images/cardsMovies/10.png";
-import image11 from "../../images/cardsMovies/11.png";
-import image12 from "../../images/cardsMovies/12.png";
+import Preloader from "./Preloader";
 
-function MoviesCardList() {
+function MoviesCardList({
+  isLoading,
+  moviesList,
+  savedMovies,
+  onMoviesCardSave,
+  onMoviesCardDelete,
+  currentPath,
+  elseButton,
+  onHandleLoadMoreMovies,
+}) {
   return (
-    <div className="contetn">
-      <ul className="movie-grid">
-        <MoviesCard />
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image2}
-          />
-          <div className="movie-card__ending-container">
+    <>
+      {isLoading ? (
+        <Preloader />
+      ) : moviesList.length === 0 ? (
+        <p className="movies-container__text-search-result">
+          Ничего не найдено
+        </p>
+      ) : (
+        <div className="contetn">
+          <ul className="movie-grid">
+            {moviesList.map((item) => (
+              <MoviesCard
+                key={item.id || item._id}
+                movie={item}
+                savedMovies={savedMovies}
+                onMoviesCardSave={onMoviesCardSave}
+                onMoviesCardDelete={onMoviesCardDelete}
+                currentPath={currentPath}
+                {...item}
+              />
+            ))}
+          </ul>
           <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image3}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image4}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image5}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image6}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn movie-card__btn_type_saved"
-              type="button"
-              aria-label="Сохранить"
-            />
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image7}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn movie-card__btn_type_saved"
-              type="button"
-              aria-label="Сохранить"
-            />
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image8}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image9}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image10}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image11}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn movie-card__btn_type_saved"
-              type="button"
-              aria-label="Сохранить"
-            />
-          </div>
-        </li>
-        <li className="movie-card">
-          <div className="movie-card__heading-container">
-            <h2 className="movie-card__text">В погоне за Бенкси</h2>
-            <p className="movie-card__duration">27 минут</p>
-          </div>
-          <img
-            className="movie-card__image"
-            alt={`Здесь должно быть изображение постера к фильму`}
-            src={image12}
-          />
-          <div className="movie-card__ending-container">
-            <button
-              className="movie-card__btn"
-              type="button"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </div>
-        </li>
-      </ul>
-      <button
-        className="movie-grid__btn"
-        type="button"
-        aria-label="Еще показать фильмы"
-      >
-        Еще
-      </button>
-    </div>
+            className={
+              elseButton
+                ? `movie-grid__btn`
+                : `movie-grid__btn movie-grid__btn_type_hidden`
+            }
+            type="button"
+            aria-label="Еще показать фильмы"
+            onClick={onHandleLoadMoreMovies}
+          >
+            Еще
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 
