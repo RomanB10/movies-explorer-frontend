@@ -1,8 +1,6 @@
 import "./FilterCheckBox.css";
 
 function FilterCheckBox({ positionCheckbox, onToggleCheckbox }) {
-  console.log('чекбокс',positionCheckbox)
-  
   return (
     <div className="checkbox-conteiner">
       <label className="checkbox-ios">

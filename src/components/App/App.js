@@ -33,13 +33,14 @@ import apiMovies from "../../utils/MoviesApi";
 import {
   IMAGE_URL,
   SCREEN_SM,
-   SCREEN_MD,
+  SCREEN_MD,
   LOAD_SIZE_LG,
-   LOAD_SIZE_MD,
+  LOAD_SIZE_MD,
   LOAD_SIZE_SM,
-   LOAD_CARD_SIZE_LG,
+  LOAD_CARD_SIZE_LG,
   LOAD_CARD_SIZE_MD,
-   LOAD_CARD_SIZE_SM} from '../../utils/constants';
+  LOAD_CARD_SIZE_SM,
+} from "../../utils/constants";
 
 function App() {
   const history = useHistory();
@@ -60,7 +61,8 @@ function App() {
   const [textRequest, setTextRequest] = useState(""); // текст запроса на странице 'фильмы'
   const [textRequestSavedMovies, setTextRequestSavedMovies] = useState(""); // текст запроса на странице 'сохраненные фильмы'
   const [positionCheckbox, setPositionCheckbox] = useState(false); //Состояние чекбокса
-  const [positionCheckboxSavedMovies, setPositionCheckboxSavedMovies] = useState(false); 
+  const [positionCheckboxSavedMovies, setPositionCheckboxSavedMovies] =
+    useState(false);
 
   const [currentUser, setCurrentUser] = useState({}); // ПОЛЬЗОВАТЕЛЬ
 
@@ -70,13 +72,11 @@ function App() {
   const [searchedMovies, setSearchedMovies] = useState([]); // НАЙДЕННЫЕ ФИЛЬМЫ через поиск
   const [searchedSavedMovies, setSearchedSavedMovies] = useState([]); // НАЙДЕННЫЕ СОХРАНЕННЫЕ ФИЛЬМЫ через поиск
 
-  const [displayMovies, setDisplayMovies] = useState(0)// количество отображаемых карточек с фильмами
-  const [elseMovies, setElseMovies] = useState(0)// количество подгружаемых карточек с фильмами
+  const [displayMovies, setDisplayMovies] = useState(0); // количество отображаемых карточек с фильмами
+  const [elseMovies, setElseMovies] = useState(0); // количество подгружаемых карточек с фильмами
 
-  const [width, setWidth] = useState(window.innerWidth);// текущий размер окна
-  const [elseButton,setElseButton] = useState(false);// Стейт кнопки "Еще"
-  const [isSaved, setIsSaved] = useState(false); // стейт лайка
-  const [searchActive, setSearchActive] = useState(false); // состояние нажатия на поиск
+  const [width, setWidth] = useState(window.innerWidth); // текущий размер окна
+  const [elseButton, setElseButton] = useState(false); // Стейт кнопки "Еще"
 
   useEffect(() => {
     const handleResize = (event) => {
@@ -87,8 +87,6 @@ function App() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-
 
   // открытие/закрытие меню dropdown
   function handleMenuClick() {
@@ -152,7 +150,10 @@ function App() {
       .then((dataFromServer) => {
         const newMovie = dataFromServer;
         setSavedMovies([newMovie, ...savedMovies]); //при сеттере необходимо создавать новый массив, клонируя предыдущий ...spread
-        localStorage.setItem("savedMovieIds", JSON.stringify([newMovie, ...savedMovies]));
+        localStorage.setItem(
+          "savedMovieIds",
+          JSON.stringify([newMovie, ...savedMovies])
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -162,7 +163,7 @@ function App() {
   //УДАЛЕНИЕ СОХР.ФИЛЬМА С ОСНОВНОГО API
   function handleMoviesDelete(movie) {
     apiMain
-      .removeMoviesCard(movie._id )
+      .removeMoviesCard(movie._id)
       .then(() => {
         const updatedMoviesList = savedMovies.filter(function (savedMovie) {
           return savedMovie._id !== movie._id;
@@ -190,21 +191,22 @@ function App() {
     }
   }, [loggedIn]);
 
-
-
   useEffect(() => {
-    if (localStorage.getItem('searchedResult')) {
-      const firstSearch = JSON.parse(localStorage.getItem('searchedResult'));
-      const updateSearchResult = ShortMoviesFilter(firstSearch, textRequest, positionCheckbox);
+    if (localStorage.getItem("searchedResult")) {
+      const firstSearch = JSON.parse(localStorage.getItem("searchedResult"));
+      const updateSearchResult = ShortMoviesFilter(
+        firstSearch,
+        textRequest,
+        positionCheckbox
+      );
       setSearchedMovies(updateSearchResult);
-      console.log('updateSearchResult',updateSearchResult)
     }
-  }, [setSearchedMovies])
+  }, [setSearchedMovies]);
 
   //ПОЛУЧЕНИЕ ВСЕХ ФИЛЬМОВ ОСНОВНОГО с BeatfilmMoviesApi
   function handleGetAllMovies(textRequest, positionCheckbox) {
     setLoading(true);
-    setTimeout(() => setLoading(false), 1000)
+    setTimeout(() => setLoading(false), 1000);
     setMoviesList([]);
     setTextRequest(textRequest);
     setPositionCheckbox(positionCheckbox);
@@ -216,7 +218,10 @@ function App() {
         .getAllMovies()
         .then((dataFromServer) => {
           setAllMovies(dataFromServer);
-          localStorage.setItem("AllMovies",JSON.stringify(dataFromServer)); /*ЗАПИСЬ В СТРОКУ ПЕРВОЙ ЗАГРУЗКИ ФИЛЬМОВ*/
+          localStorage.setItem(
+            "AllMovies",
+            JSON.stringify(dataFromServer)
+          ); /*ЗАПИСЬ В СТРОКУ ПЕРВОЙ ЗАГРУЗКИ ФИЛЬМОВ*/
         })
         .catch((err) => {
           console.log(
@@ -231,77 +236,91 @@ function App() {
     }
   }
 
-//выполнение поиска по сохраненным фильмам
-  function handleSearchSavedMovie(textRequestSavedMovies, positionCheckboxSavedMovies) {
-    console.log('positionCheckboxSavedMovies',positionCheckboxSavedMovies)
+  //выполнение поиска по сохраненным фильмам
+  function handleSearchSavedMovie(
+    textRequestSavedMovies,
+    positionCheckboxSavedMovies
+  ) {
+    console.log("positionCheckboxSavedMovies", positionCheckboxSavedMovies);
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
-      const searchedSavedMovies = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckboxSavedMovies);
-      
-      setTextRequestSavedMovies(textRequestSavedMovies);
-      setPositionCheckboxSavedMovies(positionCheckboxSavedMovies)
-      setSearchedSavedMovies(searchedSavedMovies);
-      setSearchActive(true)
+    const searchedSavedMovies = ShortMoviesFilter(
+      savedMovies,
+      textRequestSavedMovies,
+      positionCheckboxSavedMovies
+    );
+
+    setTextRequestSavedMovies(textRequestSavedMovies);
+    setPositionCheckboxSavedMovies(positionCheckboxSavedMovies);
+    setSearchedSavedMovies(searchedSavedMovies);
   }
 
   useEffect(() => {
     if (searchedSavedMovies.length > 0) {
-        const searchedResult = ShortMoviesFilter(savedMovies, textRequestSavedMovies, positionCheckboxSavedMovies);
-        localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies); //Запись пойска
-        localStorage.setItem("positionCheckboxSavedMovies", positionCheckboxSavedMovies);//Запись состояния чекбокса
-        setSearchedSavedMovies(searchedResult);
-        setSearchActive(false)
+      const searchedResult = ShortMoviesFilter(
+        savedMovies,
+        textRequestSavedMovies,
+        positionCheckboxSavedMovies
+      );
+      localStorage.setItem("textRequestSavedMovies", textRequestSavedMovies); //Запись пойска
+      localStorage.setItem(
+        "positionCheckboxSavedMovies",
+        positionCheckboxSavedMovies
+      ); //Запись состояния чекбокса
+      setSearchedSavedMovies(searchedResult);
     }
-    
-    return 
-}, [savedMovies, textRequestSavedMovies, positionCheckboxSavedMovies]);
 
+    return;
+  }, [savedMovies, textRequestSavedMovies, positionCheckboxSavedMovies]);
 
-// при условии уже загруженных фильмов с Beatfilm
+  // при условии уже загруженных фильмов с Beatfilm
   useEffect(() => {
     if (allMovies.length > 0) {
-      const searchedResult = ShortMoviesFilter(allMovies, textRequest, positionCheckbox);
+      const searchedResult = ShortMoviesFilter(
+        allMovies,
+        textRequest,
+        positionCheckbox
+      );
       localStorage.setItem("textRequest", textRequest); //Запись пойска
       localStorage.setItem("positionCheckbox", positionCheckbox); //Запись положения чекбокса
-      localStorage.setItem('searchedResult', JSON.stringify(searchedResult));
+      localStorage.setItem("searchedResult", JSON.stringify(searchedResult));
 
       setSearchedMovies(searchedResult);
     }
-    return ;
+    return;
   }, [allMovies, textRequest, positionCheckbox]);
 
-
-  // количество отображаемых фильмов + количество добавляемых 
+  // количество отображаемых фильмов + количество добавляемых
   useEffect(() => {
     if (width > SCREEN_MD) {
       setDisplayMovies(LOAD_SIZE_LG);
       setElseMovies(LOAD_CARD_SIZE_LG);
-    } else if (width >SCREEN_SM) {
+    } else if (width > SCREEN_SM) {
       setDisplayMovies(LOAD_SIZE_MD);
       setElseMovies(LOAD_CARD_SIZE_MD);
     } else {
       setDisplayMovies(LOAD_SIZE_SM);
       setElseMovies(LOAD_CARD_SIZE_SM);
     }
-    return
-  }, [width])
+    return;
+  }, [width]);
 
   // при условии уже найденных фильмов по поиску
   useEffect(() => {
     if (searchedMovies.length > 0) {
-    if (searchedMovies.length > displayMovies) {
+      if (searchedMovies.length > displayMovies) {
         setMoviesList(searchedMovies.slice(0, displayMovies));
-        setElseButton(true);//кнопка 'еще' отрисовывается
+        setElseButton(true); //кнопка 'еще' отрисовывается
       } else {
         setMoviesList(searchedMovies);
       }
     }
-      },[searchedMovies,displayMovies]);
+  }, [searchedMovies, displayMovies]);
 
-    // функция добавления фильмов
-    function handleLoadMoreMovies() {
-      setDisplayMovies((prev) => prev + elseMovies);
-    }
+  // функция добавления фильмов
+  function handleLoadMoreMovies() {
+    setDisplayMovies((prev) => prev + elseMovies);
+  }
 
   //отображение карточек при невозможности загрузить больше
   //кнопка 'еще' скрывается
@@ -331,7 +350,6 @@ function App() {
     }
   }, [loggedIn]);
 
-
   //ЗАПРОС ПРОВЕРКИ ТОКЕНА
   const tokenCheck = useCallback(async () => {
     try {
@@ -353,7 +371,7 @@ function App() {
           _id: refreshUser._id,
           ...currentUser,
         }); //обновление/дублирование стэйта актуальными данными с сервера name, email
-        history.push(location)
+        history.push(location);
       }
     } catch (err) {
       if (err === 400) {
@@ -382,7 +400,7 @@ function App() {
           localStorage.setItem("jwt", data.token); // сохраняем в ключ 'jwt' значение tokena
           setTooltipStatus(`success`); // установим статус Тултипа
           setLoggedIn(true); //статус-авторизовался
-          history.push('/movies')
+          history.push("/movies");
           return data;
         }
         return data;
@@ -405,41 +423,43 @@ function App() {
   );
 
   //ЗАПРОС НА РЕГИСТРАЦИЮ
-  const cbRegister = useCallback(async (name, email, password) => {
-    try {
-      setLoading(true); //состояние загрузки (идет загрузка)
-      const data = await Auth.register(name, email, password);
-      if (!data) {
-        throw new Error("Неверные имя или пароль пользователя");
+  const cbRegister = useCallback(
+    async (name, email, password) => {
+      try {
+        setLoading(true); //состояние загрузки (идет загрузка)
+        const data = await Auth.register(name, email, password);
+        if (!data) {
+          throw new Error("Неверные имя или пароль пользователя");
+        }
+        setIsInfoToolTipOpen(true); // стейт открытого Тултипа
+        setTooltipStatus(`success`); // установим статус Тултипа
+        cbLogin(email, password); // сразу авторизуемся,чтобы рендерить 'movies'
+      } catch (err) {
+        setIsInfoToolTipOpen(true); // стейт открытого Тултипа
+        setTooltipStatus(`fail`); // установим статус Тултипа
+        if (err === 400) {
+          console.log("400 - Неккоректно заполнено одно из полей");
+        } else {
+          console.log(`Оишибка:${err}`);
+        }
+      } finally {
+        setLoading(false); // состояние загрузки (загрузка завершена)
       }
-      setIsInfoToolTipOpen(true); // стейт открытого Тултипа
-      setTooltipStatus(`success`); // установим статус Тултипа
-      cbLogin(email,password)// сразу авторизуемся,чтобы рендерить 'movies'
-    } catch (err) {
-      setIsInfoToolTipOpen(true); // стейт открытого Тултипа
-      setTooltipStatus(`fail`); // установим статус Тултипа
-      if (err === 400) {
-        console.log("400 - Неккоректно заполнено одно из полей");
-      } else {
-        console.log(`Оишибка:${err}`);
-      }
-    } finally {
-      setLoading(false); // состояние загрузки (загрузка завершена)
-    }
-  }, [setLoading, setTooltipStatus, setIsInfoToolTipOpen]);
+    },
+    [setLoading, setTooltipStatus, setIsInfoToolTipOpen]
+  );
 
   //ВЫХОД ИЗ СИСТЕМЫ (обнудение стейт-переменных и хранилища)
   const cbLogout = useCallback(() => {
     setLoggedIn(false); // статус не авторизован
     localStorage.clear();
     setCurrentUser([]);
-    currentPath('');
     setAllMovies([]);
     setSavedMovies([]);
     setMoviesList([]);
     setSearchedSavedMovies([]);
     setSearchedMovies([]);
-    history.push('/');
+    history.push("/");
   }, []);
 
   useEffect(() => {
@@ -456,17 +476,50 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <SavedMoviesContext.Provider value={savedMovies}>
             {currentPath === "/" ? (
-              <Header width={width}isLoading={loading} loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header
+                width={width}
+                isLoading={loading}
+                loggedIn={loggedIn}
+                currentPath={currentPath}
+                onMenuClick={handleMenuClick}
+              />
             ) : currentPath === "/movies" ? (
-              <Header width={width}isLoading={loading}  loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header
+                width={width}
+                isLoading={loading}
+                loggedIn={loggedIn}
+                currentPath={currentPath}
+                onMenuClick={handleMenuClick}
+              />
             ) : currentPath === "/saved-movies" ? (
-              <Header width={width}isLoading={loading}  loggedIn={loggedIn} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header
+                width={width}
+                isLoading={loading}
+                loggedIn={loggedIn}
+                currentPath={currentPath}
+                onMenuClick={handleMenuClick}
+              />
             ) : currentPath === "/signin" ? (
-              <Header width={width}isLoading={loading} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header
+                width={width}
+                isLoading={loading}
+                currentPath={currentPath}
+                onMenuClick={handleMenuClick}
+              />
             ) : currentPath === "/signup" ? (
-              <Header width={width} isLoading={loading} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header
+                width={width}
+                isLoading={loading}
+                currentPath={currentPath}
+                onMenuClick={handleMenuClick}
+              />
             ) : currentPath === "/profile" ? (
-              <Header width={width} isLoading={loading} currentPath={currentPath} onMenuClick={handleMenuClick} />
+              <Header
+                width={width}
+                isLoading={loading}
+                currentPath={currentPath}
+                onMenuClick={handleMenuClick}
+              />
             ) : (
               <></>
             )}
@@ -485,8 +538,8 @@ function App() {
                 onMoviesCardSave={handleMoviesCardSave}
                 onMoviesCardDelete={handleMoviesDelete}
                 onGetAllMovies={handleGetAllMovies}
-                elseButton = {elseButton}
-                onHandleLoadMoreMovies ={handleLoadMoreMovies}
+                elseButton={elseButton}
+                onHandleLoadMoreMovies={handleLoadMoreMovies}
               />
               <ProtectedRoute
                 path="/saved-movies"
@@ -494,10 +547,10 @@ function App() {
                 isLoading={loading}
                 component={SavedMovies}
                 savedMovies={savedMovies}
-                searchedSavedMovies ={searchedSavedMovies}
+                searchedSavedMovies={searchedSavedMovies}
                 onMoviesCardDelete={handleMoviesDelete}
                 currentPath={currentPath}
-                onSearchSavedMovie ={handleSearchSavedMovie}
+                onSearchSavedMovie={handleSearchSavedMovie}
               />
               <ProtectedRoute
                 path="/profile"
@@ -505,15 +558,29 @@ function App() {
                 loggedIn={loggedIn}
                 onLogout={cbLogout}
                 onUpdateUser={cbProfile}
-                isloading = {loading}
+                isloading={loading}
               />
               <Route path="/signin">
-              {!loggedIn ?
-                <Login handleLogin={cbLogin} isLoggedIn={loggedIn}  isloading = {loading}/>: (<Redirect exact to="/"/>)}
+                {!loggedIn ? (
+                  <Login
+                    handleLogin={cbLogin}
+                    isLoggedIn={loggedIn}
+                    isloading={loading}
+                  />
+                ) : (
+                  <Redirect exact to="/" />
+                )}
               </Route>
               <Route path="/signup">
-              {!loggedIn ?
-                <Register onRegister={cbRegister} isLoggedIn={loggedIn} isloading = {loading}/>:(<Redirect exact to="/"/>)}
+                {!loggedIn ? (
+                  <Register
+                    onRegister={cbRegister}
+                    isLoggedIn={loggedIn}
+                    isloading={loading}
+                  />
+                ) : (
+                  <Redirect exact to="/" />
+                )}
               </Route>
               <Route path="*">
                 <PageNotFound />

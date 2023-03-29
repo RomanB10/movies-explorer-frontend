@@ -2,7 +2,6 @@ import "./MoviesCard.css";
 import SavedMoviesContext from "../contexts/SavedMoviesContext";
 import { useContext, useEffect, useState } from "react";
 import { IMAGE_URL, DURATION_MIN } from "../../utils/constants";
-import ShortMoviesFilter from "../ShortMoviesFilter/ShortMoviesFilter";
 
 function MoviesCard({
   movie,
@@ -47,8 +46,6 @@ function MoviesCard({
 
   useEffect(() => {
     const isSaved = savedMovies.some((movie) => movie.movieId === props.id);
-    console.log('movie.movieId',movie.movieId)
-    console.log('props.id',props.id)
     if (isSaved) {
       setIsSaved(true);
     }

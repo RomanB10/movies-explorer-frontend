@@ -14,8 +14,6 @@ function SearchForm({
   const [positionCheckboxSavedMovies, setPositionCheckboxSavedMovies] =
     useState(false); //Состояние чекбокса
 
-console.log('JSON.parse(positionCheckbox)',JSON.parse(positionCheckbox))
-console.log('(JSON.parse(positionCheckboxSavedMovies)',JSON.parse(positionCheckboxSavedMovies))
   // вносим данные поля
   function handleChangeTextRequest(evt) {
     if (currentPath === "/movies") {
