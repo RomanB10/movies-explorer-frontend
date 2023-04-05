@@ -97,6 +97,12 @@
 - `404`
 ![image](https://user-images.githubusercontent.com/105459169/230067793-30979daa-2c85-4095-ab83-fb96b51bc262.png)
 
+- `width<768px, dropdown`
+
+  ![image](https://user-images.githubusercontent.com/105459169/230068880-91a4c020-1d71-4dda-bd61-d69ad2127c40.png)
+  ![image](https://user-images.githubusercontent.com/105459169/230069046-fbef7ee2-7d42-4239-b3d9-e21e85cda715.png)
+
+
 
 
 
