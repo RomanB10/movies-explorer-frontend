@@ -67,3 +67,34 @@
 
 ![image](https://user-images.githubusercontent.com/105459169/230018944-fd2ee4d5-d810-46f2-8ac8-26cbfa9f6cf0.png)
 
+- `/movies`
+![image](https://user-images.githubusercontent.com/105459169/230045010-c39ef61c-214c-4904-b82d-a805791fb0d5.png)
+- `/movies` фильтрация короткометражек
+![image](https://user-images.githubusercontent.com/105459169/230045384-73debaff-3c0c-4046-87b6-20275e936ac9.png)
+
+- `/saved-movies`
+![image](https://user-images.githubusercontent.com/105459169/230045589-fff07025-3ec5-4cf6-96b0-9ffd2c9b37ad.png)
+- `/saved-movies`фильтрация короткометражек
+![image](https://user-images.githubusercontent.com/105459169/230045701-1d27a5ce-e15c-40dd-a508-0f6888941479.png)
+- `/saved-movies`поиск фильмов 
+![image](https://user-images.githubusercontent.com/105459169/230045859-71911f55-dcdb-4545-b279-ebf9081cd4da.png)
+
+- `tooltipSuccess`
+![image](https://user-images.githubusercontent.com/105459169/230046519-0c704fa6-c1c2-468d-9282-0eb634c48dea.png)
+
+- `tooltipFail`
+![image](https://user-images.githubusercontent.com/105459169/230046627-9498151b-b02b-4549-b26f-8bea9701079e.png)
+
+- `/profile`
+![image](https://user-images.githubusercontent.com/105459169/230046000-d5cda9ec-dd83-41a6-b6db-279447b40ef7.png)
+
+- `/signin`
+![image](https://user-images.githubusercontent.com/105459169/230046199-93acb14a-2565-456c-9c19-8ddf05d6a4d7.png)
+
+- `/signup`
+![image](https://user-images.githubusercontent.com/105459169/230046287-718b2e69-8e7c-4bb2-8518-9c340eddd634.png)
+
+
+
+
+
