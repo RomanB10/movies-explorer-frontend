@@ -75,7 +75,7 @@
 - `/saved-movies`
 ![image](https://user-images.githubusercontent.com/105459169/230045589-fff07025-3ec5-4cf6-96b0-9ffd2c9b37ad.png)
 - `/saved-movies`фильтрация короткометражек
-![image](https://user-images.githubusercontent.com/105459169/230045701-1d27a5ce-e15c-40dd-a508-0f6888941479.png)
+![image](https://user-images.githubusercontent.com/105459169/230067330-93a15d8d-5fc5-4103-85e7-332319ebe40e.png)
 - `/saved-movies`поиск фильмов 
 ![image](https://user-images.githubusercontent.com/105459169/230045859-71911f55-dcdb-4545-b279-ebf9081cd4da.png)
 
