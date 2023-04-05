@@ -94,6 +94,8 @@
 - `/signup`
 ![image](https://user-images.githubusercontent.com/105459169/230046287-718b2e69-8e7c-4bb2-8518-9c340eddd634.png)
 
+- `404`
+![image](https://user-images.githubusercontent.com/105459169/230067793-30979daa-2c85-4095-ab83-fb96b51bc262.png)
 
 
 
