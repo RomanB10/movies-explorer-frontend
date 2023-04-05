@@ -64,3 +64,6 @@
 
 **Статус выполнения проекта**
   * Дипломный проект выполнен
+
+![image](https://user-images.githubusercontent.com/105459169/230018944-fd2ee4d5-d810-46f2-8ac8-26cbfa9f6cf0.png)
+
